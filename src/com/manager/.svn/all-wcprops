@@ -1,0 +1,89 @@
+K 25
+svn:wc:ra_dav:version-url
+V 53
+/svn/g2w12/!svn/ver/435/SeedBookStore/src/com/manager
+END
+AdminShowAddBookForm.java
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svn/g2w12/!svn/ver/303/SeedBookStore/src/com/manager/AdminShowAddBookForm.java
+END
+AdminEditClientServlet.java
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/g2w12/!svn/ver/338/SeedBookStore/src/com/manager/AdminEditClientServlet.java
+END
+DefaultReportResults.java
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svn/g2w12/!svn/ver/353/SeedBookStore/src/com/manager/DefaultReportResults.java
+END
+AdminShowReviewsServlet.java
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svn/g2w12/!svn/ver/417/SeedBookStore/src/com/manager/AdminShowReviewsServlet.java
+END
+AlterSalesServlet.java
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/svn/g2w12/!svn/ver/418/SeedBookStore/src/com/manager/AlterSalesServlet.java
+END
+SearchBookServlet.java
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/svn/g2w12/!svn/ver/303/SeedBookStore/src/com/manager/SearchBookServlet.java
+END
+EditBookServlet.java
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/svn/g2w12/!svn/ver/303/SeedBookStore/src/com/manager/EditBookServlet.java
+END
+AdminSearchClientsServlet.java
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/g2w12/!svn/ver/339/SeedBookStore/src/com/manager/AdminSearchClientsServlet.java
+END
+AdminShowSalesServlet.java
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/svn/g2w12/!svn/ver/303/SeedBookStore/src/com/manager/AdminShowSalesServlet.java
+END
+AddBookServlet.java
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/svn/g2w12/!svn/ver/435/SeedBookStore/src/com/manager/AddBookServlet.java
+END
+AdminShowBookServlet.java
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svn/g2w12/!svn/ver/406/SeedBookStore/src/com/manager/AdminShowBookServlet.java
+END
+AdminDecideReviewServlet.java
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svn/g2w12/!svn/ver/418/SeedBookStore/src/com/manager/AdminDecideReviewServlet.java
+END
+AdminShowClientServlet.java
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/g2w12/!svn/ver/390/SeedBookStore/src/com/manager/AdminShowClientServlet.java
+END
+AdminEditBookServlet.java
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svn/g2w12/!svn/ver/435/SeedBookStore/src/com/manager/AdminEditBookServlet.java
+END

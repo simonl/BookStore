@@ -1,0 +1,1137 @@
+package com.dataClasses;
+
+import java.math.BigDecimal;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Set;
+
+<<<<<<< .mine
+import javax.naming.Context;
+import javax.naming.InitialContext;
+import javax.sql.DataSource;
+
+=======
+import javax.naming.Context;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
+import javax.sql.DataSource;
+
+>>>>>>> .r181
+import com.dataAccess.tables.Address;
+import com.dataAccess.tables.Book;
+import com.dataAccess.tables.Client;
+import com.dataAccess.tables.EBook;
+import com.dataAccess.tables.Purchase;
+import com.dataAccess.tables.Review;
+import com.dataAccess.tables.User;
+import com.dataAccess.tables.Review.Id;
+import com.dataAccess.tables.Survey;
+import com.dataAccess.tables.Tables;
+import com.sun.xml.internal.bind.v2.model.core.ID;
+
+/**
+ * To use a Database, there are two methods:
+ *   1. Database db = Database.connect(); Value value = doSomething(db); db.close(); ...
+ *   2. Value value = Database.using(..boilerplate.. doSomething); ...
+ *
+ * The database contains the following tables:
+ *   Address, Book, Client, EBook, Purchase, Review, Survey
+ * Each of them has its corresponding class in dataAccess.tables
+ * 
+ * The Database object contains the following methods:
+ *   get = Convert an ID into the corresponding table row
+ *   fromISBN = Get the internal ID corresponding to a book's ISBN
+ *   getAllGenres
+ *   getAllEFormats
+ *   put = Insert new row in the database
+ *   
+ *   allBooks
+ *   getClientReviews
+ *   getBookReviews
+ *   getTextReviews
+ *   getClientPurchases
+ *   getBookPurchases
+ *   
+ *   login = Convert a username and password into a capability to act on a user's behalf
+ *   currentSurvey = Get the survey selected by the manager to be displayed on the front page
+ *   lastBooks = Get the books that were most recently added to the database
+ *   booksOnSale = Get the books whose sale price is lower than usual
+ *   booksWhere = Retrieve the set of books satisfying a condition
+ *   vote = Increment the count of the survey option being voted for
+ *   review = make a review that will have to be approved by a manager
+ *   checkout = Commit the purchase of a whole set of books in whatever formats
+ *   
+ *   Manager side:
+ *   restricted = Get a capability to act as a manager, from a client capability
+ *   promote = Grant manager privileges to a client account
+ *   approve = Makes a book review visible on the book's page
+ *   setCurrentSurvey = Change the survey being displayed on the main page
+ *   
+ * Also, since the class is still in development and not all features are currently implemented,
+ *   methods are available to query the database yourself using any SQL statement (query, command).
+ *   If you do so, it should only be temporary, and you should also tell me to make 
+ *   a specialized method for it, so that we don't end up with SQL all over the codebase.
+ *    
+ */
+public final class Database {
+
+	private static Connection connection;
+	
+	private Database(final Connection connection) {
+		this.connection = connection;
+	}
+	
+	public final void close() {
+		try {
+			connection.close();
+		} catch(final SQLException ex) {
+			ex.printStackTrace();
+		}
+	}
+
+	public static final class CouldNotConnect extends SQLException { public CouldNotConnect(final Exception ex) { super(ex); } }
+	
+	public static final Database connect() throws CouldNotConnect {
+		try {
+<<<<<<< .mine
+		// Obtain environment naming context
+		   Context initCtx = new InitialContext();
+		   Context envCtx = (Context) initCtx.lookup("java:comp/env");
+		// Look up data source
+		   DataSource ds = (DataSource) envCtx.lookup("jdbc/ci665");
+		// Allocate and use a connection from the pool
+		   return new Database(ds.getConnection());
+		} catch (Exception sqlex) {
+			throw new CouldNotConnect(sqlex);
+		}
+	}
+	
+	private static final Database connectOld() throws CouldNotConnect {			
+		try {
+			
+=======
+			/*
+>>>>>>> .r181
+			Class.forName("com.mysql.jdbc.Driver").newInstance();
+		
+			final Connection connection = DriverManager.getConnection(
+					"jdbc:mysql://waldo.dawsoncollege.qc.ca:3306",
+					"g2w12",
+					"bird3table");
+			
+			final Statement statement = connection.createStatement();
+			
+			statement.execute("USE g2w12;");
+			*/
+			if(connection == null){
+				Context initCtx = null;
+				try {
+					initCtx = new InitialContext();
+				} catch (NamingException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+	            Context envCtx = null;
+				try {
+					envCtx = (Context) initCtx.lookup("java:comp/env");
+				} catch (NamingException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+	
+	            // Look up our data source
+	            DataSource ds = null;
+				try {
+					ds = (DataSource) envCtx.lookup("jdbc/g2w12");
+				} catch (NamingException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+	
+	            // Allocate and use a connection from the pool
+	            connection = ds.getConnection();
+			}
+			return new Database(connection);
+			
+		} catch(final SQLException ex) {
+			throw new CouldNotConnect(ex);
+		}
+	
+	}
+	
+	public static interface Action<R, E extends Throwable> { public R perform(final Database db) throws E; }
+	
+	public static final <R, E extends Throwable> R using(final Action<R, E> action) throws CouldNotConnect, E {
+		
+		final Database db = connect();
+		
+		try {
+			return action.perform(db);
+		} finally {
+			db.close();
+		}
+	}
+
+	
+	
+	
+	
+	
+	
+	// Abstract types
+	public static final class Manager {
+		private Manager() {}
+		
+		private static final Manager token = new Manager();
+	}
+	
+	public static final class Authority {
+		private Authority() {}
+		
+		private static final Authority token = new Authority();
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+
+	// Each dereference of a primary key gets data from the database
+	
+	private final ResultSet getData(final Tables table, final Key id) throws SQLException {
+		try {
+			return queryUnique("SELECT * FROM " + table.name + " WHERE id = " + id.value + ";");
+		} catch (final ResultNotUnique e) {
+			throw new RuntimeException(e);
+		}
+	}
+	
+	private final ResultSet getWhere(final Tables table, final String key, final Key id) throws SQLException {
+		return query("SELECT * FROM " + table.name + " WHERE " + key + " = " + id.value + ";");
+	}
+	
+	
+	
+
+	private static final Address.Data loadAddress(final ResultSet row) throws SQLException {
+		return new Address.Data(
+			Address.City.parse(row.getString("city")).value(),
+			Address.Province.parse(row.getString("province")).value(),
+			Address.PostalCode.parse(row.getString("postal_code")).value(),
+			Address.Location.parse(row.getString("address")).value()
+		);
+	}
+	
+	private static final Book.Data loadBook(final ResultSet row) throws SQLException {
+		return new Book.Data(
+			row.getTimestamp("date_entered"),
+			Book.Title.parse(row.getString("title")).value(),
+			Book.Author.parse(row.getString("author")).value(),
+			Book.Publisher.parse(row.getString("publisher")).value(),
+			Book.Isbn10.parse(row.getString("isbn_10")).value(),
+			Book.Isbn13.parse(row.getString("isbn_13")).value(),
+			Book.Genre.parse(row.getString("genre")).value(),
+			Book.Description.parse(row.getString("description")).value(),
+			Nat.from(row.getInt("number_of_pages")).value(),
+			Nat.from(row.getInt("weight")).value(),
+			Book.Dimensions.parse(row.getString("dimensions")).value(),
+			Book.Thumbnail.parse(row.getString("thumbnail")).value(),
+			Book.Cover.parse(row.getString("cover")).value(),
+			Money.from(row.getBigDecimal("list_price")).value(),
+			Money.from(row.getBigDecimal("sale_price")).value(),
+			Money.from(row.getBigDecimal("wholesale_price")).value(),
+			Nat.from(row.getInt("number_of_books")).value()
+		);
+	}
+
+	private static final Client.Data loadClient(final ResultSet row) throws SQLException {
+		final String lastG = row.getString("last_genre");
+		
+		return new Client.Data(
+			new Address.Id(Authority.token, row.getInt("shipping_address_id")),
+			new Address.Id(Authority.token, row.getInt("billing_address_id")),
+			Client.FirstName.parse(row.getString("first_name")).value(),
+			Client.LastName.parse(row.getString("last_name")).value(),
+			Client.PhoneNumber.parse(row.getString("home_phone")).value(),
+			Client.PhoneNumber.parse(row.getString("cell_phone")).value(),
+			Client.Email.parse(row.getString("email")).value(),
+			lastG == null ? Maybe.<Book.Genre>nothing() : Maybe.just(Book.Genre.parse(lastG).value())
+		);
+	}
+	
+	private static final User.Data loadUser(final ResultSet row) throws SQLException {
+		final Integer id = row.getInt("client_id");
+		
+		return new User.Data(
+			id == 0 ? Maybe.<Client.Id>nothing() : Maybe.just(new Client.Id(Authority.token, id)),
+			User.Login.parse(row.getString("login")).value(),
+			User.Password.parse(row.getString("password")).value(),
+			row.getBoolean("manager")
+		);
+	}
+
+	private static final EBook.Data loadEBook(final ResultSet row) throws SQLException {
+		return new EBook.Data(
+			new Book.Id(Authority.token, row.getInt("book_id")),
+			EBook.EFormat.parse(row.getString("eformat_id")).value()
+		);
+	}
+
+	private static final Purchase.Data loadPurchase(final ResultSet row) throws SQLException {
+		return new Purchase.Data(
+			new User.Id(Authority.token, row.getInt("client_id")),
+			new Book.Id(Authority.token, row.getInt("book_id")),
+			Money.from(row.getBigDecimal("price")).value(),
+			row.getTimestamp("purchased_on"),
+			Nat.from(row.getInt("number_of_copies")).value(),
+			row.getBoolean("electronic")
+		);
+	}
+
+	private static final Review.Data loadReview(final ResultSet row) throws SQLException {
+		final Maybe<String> text = Maybe.from(row.getString("review_text"));
+		final Maybe<Review.Text> mtext = text.isNull() ? 
+				Maybe.<Review.Text>nothing() : 
+				Review.Text.parse(text.value());
+		
+		return new Review.Data(
+			new User.Id(Authority.token, row.getInt("client_id")),
+			new Book.Id(Authority.token, row.getInt("book_id")),
+			row.getTimestamp("created_at"),
+			Review.Rating.from(row.getInt("rating")).value(),
+			text.isNull() ? mtext : Maybe.just(mtext.value()),
+			row.getBoolean("approved")
+		);
+	}
+
+	private static final Survey.Data loadSurvey(final ResultSet surveyRow, final ResultSet choiceRows) throws SQLException {
+		final Set<Survey.Choice> choices = new HashSet<Survey.Choice>();
+		final Map<Survey.Choice, Nat> votes = new HashMap<Survey.Choice, Nat>();
+		
+		while(choiceRows.next()) {
+			final Survey.Choice choice = Survey.Choice.parse(choiceRows.getString("choice")).value();
+			final Nat numVotes = Nat.from(choiceRows.getInt("votes")).value();
+			
+			choices.add(choice);
+			votes.put(choice, numVotes);
+		}
+		
+		return new Survey.Data(
+			Authority.token,
+			Survey.Question.parse(surveyRow.getString("question")).value(),
+			Survey.Choices.from(choices).value(),
+			new Survey.Votes(Authority.token, votes)
+		);
+	}
+	
+	
+	
+	
+	
+	
+
+	public final Address.Data get(final Address.Id address) throws SQLException { 
+		final ResultSet result = getData(Tables.ADDRESS, address);
+		
+		return loadAddress(result);
+	}
+	
+	public final Book.Data get(final Book.Id book) throws SQLException { 
+		return loadBook(getData(Tables.BOOK, book));
+	}
+	
+	public final Client.Data get(final Client.Id client) throws SQLException {
+		return loadClient(getData(Tables.CLIENT, client));
+	}
+
+	public final User.Login get(final User.Id user) throws SQLException {
+		return get(peek(Manager.token, user)).login;
+	}
+	
+	public final User.Data get(final User.Authority user) throws SQLException {
+		return loadUser(getData(Tables.USER, user));
+	}
+	
+	public final EBook.Data get(final EBook.Id ebook) throws SQLException {
+		return loadEBook(getData(Tables.EBOOK, ebook));
+	}
+	
+	public final Purchase.Data get(final Purchase.Id purchase) throws SQLException { 
+		return loadPurchase(getData(Tables.PURCHASE, purchase));
+	}
+	
+	public final Review.Data get(final Review.Id review) throws SQLException {
+		return loadReview(getData(Tables.REVIEW, review));
+	}
+	
+	public final Survey.Data get(final Survey.Id survey) throws SQLException {
+		return loadSurvey(
+			getData(Tables.SURVEY, survey), 
+			getWhere(Tables.SURVEY_CHOICE, "survey_id", survey)
+		);
+	}
+		
+	
+	
+	
+	
+	
+	
+	
+	public final Maybe<Book.Id> fromIsbn(final Book.Isbn13 isbn) throws SQLException {
+		final Set<Book.Id> result = booksWhere("isbn_13 = '" + isbn.value + "'");
+		
+		for(final Book.Id id : result) {
+			return Maybe.just(id);
+		}
+		
+		return Maybe.nothing();
+	}
+	
+	public final Set<Book.Genre> getAllGenres() throws SQLException {
+		final ResultSet result = query("SELECT genre FROM book;");
+		
+		final Set<Book.Genre> genres = new HashSet<Book.Genre>();
+		final Set<String> names = new HashSet<String>();
+		
+		while(result.next()) {
+			final String name = result.getString("genre");
+			
+			if(names.contains(name)) continue;
+			
+			names.add(name);
+			genres.add(Book.Genre.parse(name).value());
+		}
+
+		return Collections.unmodifiableSet(genres);
+	}
+	
+	public final Set<EBook.EFormat> getAllEFormats() throws SQLException {
+		final ResultSet result = query("SELECT eformat FROM ebook;");
+		
+		final Set<EBook.EFormat> eformats = new HashSet<EBook.EFormat>();
+		final Set<String> names = new HashSet<String>();
+		
+		while(result.next()) {
+			final String name = result.getString("eformat");
+			
+			if(names.contains(name)) continue;
+			
+			names.add(name);
+			eformats.add(EBook.EFormat.parse(name).value());
+		}
+
+		return Collections.unmodifiableSet(eformats);
+	}
+
+	public final List<Review.Data> getTextReviews(final Book.Id book) throws SQLException {
+		final ResultSet result = 
+			query("SELECT id FROM review WHERE book_id = " + book
+					+ " AND review_text IS NOT NULL AND approved = 1"
+					+ " ORDER BY created_at DESCENDING;");
+		
+		final List<Review.Data> reviews = new ArrayList<Review.Data>();
+		
+		while(result.next()) {
+			final Review.Id id = new Review.Id(Authority.token, result.getInt("id"));
+			reviews.add(get(id));
+		}
+
+		return Collections.unmodifiableList(reviews);
+	}
+	
+	public static final class RatingStats {
+		public final BigDecimal average;
+		public final int count;
+		
+		private RatingStats(final BigDecimal average, final int count) {
+			this.average = average;
+			this.count = count;
+		}
+	}
+	
+	public final RatingStats getRatingStats(final Book.Id book) throws SQLException {
+		final ResultSet result = query("SELECT ROUND(AVG(rating), 1) AS \"average\", COUNT(*) AS \"count\" FROM review;");
+		
+		while(result.next()) {
+			final BigDecimal average = result.getBigDecimal("average");
+			final int count = result.getInt("count");
+			
+			return new RatingStats(average, count);
+		}
+
+		throw new SQLException();
+	}
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+
+	public final Set<Address.Data> getAddresses(final Set<Address.Id> ids) throws SQLException {
+		final Set<Address.Data> datas = new HashSet<Address.Data>();
+		
+		for(final Address.Id id : ids) {
+			datas.add(get(id));
+		}
+		
+		return Collections.unmodifiableSet(datas);
+	}
+
+<<<<<<< .mine
+	public final Set<Book.Data> getBooks(final Set<Book.Id> ids) throws SQLException {
+		final Set<Book.Data> datas = new HashSet<Book.Data>();
+		
+		for(final Book.Id id : ids) {
+			datas.add(get(id));
+		}
+		
+		return Collections.unmodifiableSet(datas);
+=======
+		if(ids.size() > 0)
+			return new BigDecimal(sum).divide(new BigDecimal(ids.size()), 1, BigDecimal.ROUND_FLOOR);
+		else
+			return new BigDecimal("0");
+>>>>>>> .r181
+	}
+
+	public final Set<Client.Data> getClients(final Set<Client.Id> ids) throws SQLException {
+		final Set<Client.Data> datas = new HashSet<Client.Data>();
+		
+		for(final Client.Id id : ids) {
+			datas.add(get(id));
+		}
+		
+		return Collections.unmodifiableSet(datas);
+	}
+
+	public final Set<User.Login> getUsers(final Set<User.Id> ids) throws SQLException {
+		final Set<User.Login> datas = new HashSet<User.Login>();
+		
+		for(final User.Id id : ids) {
+			datas.add(get(peek(Manager.token, id)).login);
+		}
+		
+		return Collections.unmodifiableSet(datas);
+	}
+
+	public final Set<EBook.Data> getEBooks(final Set<EBook.Id> ids) throws SQLException {
+		final Set<EBook.Data> datas = new HashSet<EBook.Data>();
+		
+		for(final EBook.Id id : ids) {
+			datas.add(get(id));
+		}
+		
+		return Collections.unmodifiableSet(datas);
+	}
+
+	public final Set<Purchase.Data> getPurchases(final Set<Purchase.Id> ids) throws SQLException {
+		final Set<Purchase.Data> datas = new HashSet<Purchase.Data>();
+		
+		for(final Purchase.Id id : ids) {
+			datas.add(get(id));
+		}
+		
+		return Collections.unmodifiableSet(datas);
+	}
+
+	public final Set<Review.Data> getReviews(final Set<Review.Id> ids) throws SQLException {
+		final Set<Review.Data> datas = new HashSet<Review.Data>();
+		
+		for(final Review.Id id : ids) {
+			datas.add(get(id));
+		}
+		
+		return Collections.unmodifiableSet(datas);
+	}
+	
+	public final Set<Survey.Data> getSurveys(final Set<Survey.Id> ids) throws SQLException {
+		final Set<Survey.Data> datas = new HashSet<Survey.Data>();
+		
+		for(final Survey.Id id : ids) {
+			datas.add(get(id));
+		}
+		
+		return Collections.unmodifiableSet(datas);
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+
+
+	
+	/**
+	 * Inserts a new Address into the database and returns an address object
+	 * @param data
+	 * @return
+	 * 		An address object. If an exception was created, or if no data was stored into the database, null is returned.
+	 * @throws SQLException 
+	 */
+	public Address.Id put(final Address.Data data) throws SQLException {
+		final int id = usingPreparedInsert(Tables.ADDRESS, new Preparer() {
+			@Override
+			public void prepare(final PreparedStatement statement) throws SQLException {
+				int i = 1;
+				statement.setString(i++, data.city.value); 
+				statement.setString(i++, data.province.value);
+				statement.setString(i++, data.postalCode.value);
+				statement.setString(i++, data.address.value);
+			}
+		});
+		
+		return new Address.Id(Authority.token, id);
+	}
+
+	public final Book.Id put(final Book.Data data) throws SQLException {
+		final int id = usingPreparedInsert(Tables.BOOK, new Preparer() {
+			@Override
+			public void prepare(final PreparedStatement statement) throws SQLException {
+				int i = 1;
+				statement.setTimestamp(i++, data.dateEntered);
+				statement.setString(i++, data.title.value);
+				statement.setString(i++, data.author.value);
+				statement.setString(i++, data.publisher.value);
+				statement.setString(i++, data.isbn10.value);
+				statement.setString(i++, data.isbn13.value);
+				statement.setString(i++, data.genre.value);
+				statement.setString(i++, data.description.value);
+				statement.setInt(i++, data.numberOfPages.value);
+				statement.setInt(i++, data.weight.value);
+				statement.setString(i++, data.dimensions.toString());
+				statement.setString(i++, data.thumbnail.value);
+				statement.setString(i++, data.cover.value);
+				statement.setBigDecimal(i++, data.listPrice.value);
+				statement.setBigDecimal(i++, data.salePrice.value);
+				statement.setBigDecimal(i++, data.wholesalePrice.value);
+				statement.setInt(i++, data.numberOfBooks.value);
+			}
+		});
+		
+		return new Book.Id(Authority.token, id);
+	}
+	
+	/**
+	 * Inserts a new Address into the database and returns an address object
+	 * @param addressData
+	 * @return
+	 * 		An address object. If an exception was created, or if no data was stored into the database, null is returned.
+	 */
+	public Client.Id put(final Client.Data data) throws SQLException {
+		final int id = usingPreparedInsert(Tables.CLIENT, new Preparer() {
+			@Override
+			public void prepare(final PreparedStatement statement) throws SQLException {
+				int i = 1;
+				statement.setInt(i++, data.shippingAddressID.value);
+				statement.setInt(i++, data.billingAddressID.value);
+				statement.setString(i++, data.firstName.value);
+				statement.setString(i++, data.lastName.value);
+				statement.setString(i++, data.homePhoneNumber.value);
+				statement.setString(i++, data.cellPhoneNumber.value);
+				statement.setString(i++, data.email.value);
+			} 			
+		});
+		
+		return new Client.Id(Authority.token, id);
+	}
+	
+	public User.Authority put(final User.Data data) throws SQLException {
+		final int id = usingPreparedInsert(Tables.USER, new Preparer() {
+			@Override
+			public void prepare(final PreparedStatement statement) throws SQLException {
+				int i = 1;
+				statement.setInt(i++, data.clientID.isNull() ? 0 : data.clientID.value().value);
+				statement.setString(i++, data.login.value);
+				statement.setString(i++, data.password.value);
+				statement.setBoolean(i++, data.manager);
+			} 			
+		});
+		
+		return new User.Authority(Authority.token, id);
+	}
+
+	public EBook.Id put(final Manager authority, final EBook.Data data) throws SQLException {
+		final int id = usingPreparedInsert(Tables.EBOOK, new Preparer() {
+			@Override
+			public void prepare(final PreparedStatement statement) throws SQLException {
+				int i = 1;
+				statement.setInt(i++, data.book.value);
+				statement.setString(i++, data.eformat.value);
+			} 
+		});
+		
+		return new EBook.Id(Authority.token, id);
+	}
+	
+	private Purchase.Id put(final Purchase.Data data) throws SQLException {
+		final int id = usingPreparedInsert(Tables.PURCHASE, new Preparer() {
+			@Override
+			public void prepare(final PreparedStatement statement) throws SQLException {
+				int i = 1;
+				statement.setInt(i++, data.user.value);
+				statement.setInt(i++, data.book.value);
+				statement.setBigDecimal(i++, data.price.value);
+				statement.setTimestamp(i++, data.purchasedOn);
+				statement.setInt(i++, data.numberOfCopies.value);
+				statement.setInt(i++, data.electronic ? 1 : 0);
+			}
+		});
+		
+		return new Purchase.Id(Authority.token, id);
+	}
+
+	private Review.Id put(final Review.Data data) throws SQLException {
+		final int id = usingPreparedInsert(Tables.REVIEW, new Preparer() {
+			@Override
+			public void prepare(final PreparedStatement statement) throws SQLException {
+				int i = 1;
+				statement.setInt(i++, data.user.value);
+				statement.setInt(i++, data.book.value);
+				statement.setTimestamp(i++, data.createdAt);
+				statement.setInt(i++, data.rating.value);
+				statement.setString(i++, data.reviewText.isNull() ? null : data.reviewText.value().value);
+				statement.setInt(i++, data.approved ? 1 : 0);
+			}
+		});
+		
+		return new Review.Id(Authority.token, id);
+	}
+	
+	public Survey.Id put(final Manager authority, final Survey.Data data) throws SQLException {
+		final int id = usingPreparedInsert(Tables.SURVEY, new Preparer() {
+			@Override
+			public void prepare(final PreparedStatement statement) throws SQLException {
+				int i = 1;
+				statement.setString(i++, data.question.value);
+			}
+		});
+		
+		for(final Survey.Choice choice : data.choices.values) {
+			usingPreparedInsert(Tables.SURVEY_CHOICE, new Preparer() {
+				@Override
+				public void prepare(final PreparedStatement statement) throws SQLException {
+					int i = 1;
+					statement.setInt(i++, id);
+					statement.setString(i++, choice.value);
+				}
+			});
+		}
+		
+		return new Survey.Id(Authority.token, id);
+	}
+
+	private final PreparedStatement preparedInsert(final Tables table) throws SQLException {
+		return connection.prepareStatement(
+				"INSERT INTO " + table.name + stringTuple(table.fields) + " VALUES " + stringTuple(Arrays.asList(repeat("?", table.fields.size()))) + ";", Statement.RETURN_GENERATED_KEYS);
+	}
+	
+	private static interface Preparer {	public void prepare(final PreparedStatement statement) throws SQLException; }
+	
+	private final int usingPreparedInsert(final Tables table, final Preparer preparer) throws SQLException {
+		final PreparedStatement statement = preparedInsert(table);
+		
+		preparer.prepare(statement);
+		
+		statement.executeUpdate();
+		final ResultSet result = statement.getGeneratedKeys();
+		
+		result.next();
+		return result.getInt(1);
+	}
+	
+	private static final String stringTuple(final List<String> fields) {
+		String tuple = "(";
+		
+		int i = 0;
+		if(i < fields.size()) {
+			tuple += fields.get(i);
+			i++;
+			
+			while(i < fields.size()) {
+				tuple += ", " + fields.get(i);
+				i++;
+			}
+		}
+		
+		tuple += ")";
+		
+		return tuple;
+	}
+	
+	private static final String[] repeat(final String x, final int n) {
+		final String[] xs = new String[n];
+		for(int i = 0; i < n; i++)
+			xs[i] = x;
+		return xs;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	public static final class ResultNotUnique extends Exception { }
+	
+	public final ResultSet queryUnique(final String queryString) throws SQLException, ResultNotUnique {
+		final ResultSet result = query(queryString);
+		
+		if(!result.next()) throw new ResultNotUnique();
+		if(!result.isLast()) throw new ResultNotUnique();
+		
+		return result;
+	};
+	
+	public final ResultSet query(final String queryString) throws SQLException {
+		final Statement statement = connection.createStatement();
+		
+		return statement.executeQuery(queryString);
+	}
+	
+	public final boolean command(final String commandString) throws SQLException {
+		final Statement statement = connection.createStatement();
+		
+		return statement.execute(commandString);
+	}
+
+
+
+	
+	
+	
+	
+	
+	
+	
+	
+	/*
+	 * Website stuff
+	 */
+	
+	public final Maybe<Survey.Id> currentSurvey() throws SQLException {
+		try {
+			final ResultSet globalRows = queryUnique("SELECT current_survey FROM global_data;");
+			final Integer currentSurveyId = (Integer) globalRows.getObject("current_survey");
+			
+			if(currentSurveyId == null) return Maybe.nothing();
+			
+			final Survey.Id currentSurvey = new Survey.Id(Authority.token, currentSurveyId);
+			return Maybe.just(currentSurvey);
+			
+		} catch (final ResultNotUnique e) {
+			throw new SQLException(e);
+		}
+	}
+
+	public final List<Book.Id> lastBooks(final int n) throws SQLException {
+		final ResultSet result = query("SELECT id FROM book ORDER BY date_entered DESCENDING LIMIT " + n + ";");
+		
+		final List<Book.Id> books = new ArrayList<Book.Id>(n);
+		
+		for(int i = 0; i < n; i++) {
+			if(!result.next()) break;
+			
+			books.add(new Book.Id(Authority.token, result.getInt("id")));
+		}
+		
+		return Collections.unmodifiableList(books);
+	}
+	
+	public final Set<Book.Id> booksOnSale() throws SQLException {
+		final ResultSet result = query("SELECT id FROM book WHERE list_price > sale_price;");
+		
+		final Set<Book.Id> books = new HashSet<Book.Id>(); 
+		
+		while(result.next()) {
+			books.add(new Book.Id(Authority.token, result.getInt("id")));
+		}
+		
+		return Collections.unmodifiableSet(books);
+	}
+	
+	/**
+	 * Risk of SQL injection 
+	 */
+	public final Set<Book.Id> booksWhere(final String condition) throws SQLException {
+		final ResultSet result = query("SELECT id FROM book WHERE " + condition + ";");
+		
+		final Set<Book.Id> books = new HashSet<Book.Id>();
+		while(result.next()) {
+			books.add(new Book.Id(Authority.token, result.getInt("id")));
+		}
+		
+		return Collections.unmodifiableSet(books);
+	}
+	
+	public final void vote(final Survey.Id survey, final int choice) throws SQLException {
+		final PreparedStatement statement = connection.prepareStatement("UPDATE survey_choice SET votes = votes + 1 WHERE survey_id = ? AND id = ?;");
+		statement.setInt(1, survey.value);
+		statement.setInt(2, choice);
+		
+		statement.executeUpdate();
+	}
+	
+	public final Review.Id review(final Client.Id client, final Book.Id book, final Review.Rating rating, final Maybe<Review.Text> text) throws SQLException {
+		final PreparedStatement statement = connection.prepareStatement("INSERT INTO review(client_id, book_id, rating, review_text, approved) VALUE(?, ?, ?, ?, 0);", Statement.RETURN_GENERATED_KEYS);
+		statement.setInt(1, client.value);
+		statement.setInt(2, book.value);
+		statement.setInt(3, rating.value);
+		statement.setString(4, text.isNull() ? null : text.value().value);
+		
+		statement.executeUpdate();
+
+		final ResultSet result = statement.getGeneratedKeys();
+		
+		result.next();
+		final int id = result.getInt(1);
+		
+		return new Review.Id(Authority.token, id);
+	}
+	
+	public final Set<Book.Id> allBooks() throws SQLException {
+		final ResultSet result = query("SELECT id FROM book;");
+		
+		final Set<Book.Id> books = new HashSet<Book.Id>();
+		
+		while(result.next()) {
+			books.add(new Book.Id(Authority.token, result.getInt("id")));
+		}
+		
+		return Collections.unmodifiableSet(books);
+	}
+	
+	public final Set<Review.Id> getBookReviews(final Book.Id book) throws SQLException {
+		final ResultSet result = getWhere(Tables.REVIEW, "book_id", book);
+		
+		final Set<Review.Id> reviews = new HashSet<Review.Id>();
+		
+		while(result.next()) {
+			reviews.add(new Review.Id(Authority.token, result.getInt("id")));
+		}
+
+		return Collections.unmodifiableSet(reviews);
+	}
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	/*
+	 * User section
+	 */
+
+	public final Maybe<User.Id> fromUsername(final User.Login username) throws SQLException {
+		try {
+			final ResultSet result = 
+				queryUnique("SELECT id FROM user WHERE login = '" + username + "';");
+			final User.Id client =
+				new User.Id(Authority.token, result.getInt("id"));
+			return Maybe.just(client);
+		} catch (final ResultNotUnique e) {
+			return Maybe.nothing();
+		}		
+	}
+	
+	public static final class BadUsername extends Exception { }
+	public static final class BadPassword extends Exception { }
+	
+	public final User.Authority login(final User.Login username, final User.Password password) throws SQLException, BadPassword, BadUsername {
+		final Maybe<User.Id> user = fromUsername(username);
+		
+		if(user.isNull()) throw new BadUsername();
+		
+		final User.Authority userAuth = peek(Manager.token, user.value());
+		
+		if(get(userAuth).password.equals(password)) 
+			return userAuth;
+		
+		throw new BadPassword();
+	}
+	
+	public final void changePassword(final User.Authority user, final User.Password newPassword) throws SQLException {
+		final PreparedStatement statement = connection.prepareStatement("UPDATE user SET password = ? WHERE id = ?;");
+		statement.setString(1, newPassword.value);
+		statement.setInt(2, user.value);
+		
+		statement.executeUpdate();
+	}
+
+	public final void changeProfile(final User.Authority user, final Client.Id newProfile) throws SQLException {
+		final PreparedStatement statement = connection.prepareStatement("UPDATE user SET client_id = ? WHERE id = ?;");
+		statement.setInt(1, newProfile.value);
+		statement.setInt(2, user.value);
+		
+		statement.executeUpdate();
+	}
+	
+	public final void visit(final Client.Id client, final Book.Id book) throws SQLException {
+		final Book.Genre genre = get(book).genre;
+		
+		final PreparedStatement statement = connection.prepareStatement("UPDATE client SET last_genre = ? WHERE id = ?;");
+		statement.setString(1, genre.value);
+		statement.setInt(2, client.value);
+		
+		statement.executeUpdate();
+	}
+
+	public static interface Item { Nat number(); boolean electronic(); }
+	public static interface Cart { Map<Book.Id, Item> items(); }
+	
+	public final Set<Purchase.Id> checkout(final User.Authority client, final Cart cart) throws SQLException {
+		
+		final Set<Purchase.Id> purchases = new HashSet<Purchase.Id>();
+		
+		for(final Entry<Book.Id, Item> entry : cart.items().entrySet()) {
+			final PreparedStatement statement = connection.prepareStatement("INSERT INTO purchase(client_id, book_id, price, number_of_copies, electronic) VALUE(?, ?, ?, ?, ?)", Statement.RETURN_GENERATED_KEYS);
+			final Book.Data data = get(entry.getKey());
+			
+			statement.setInt(1, client.value);
+			statement.setInt(2, entry.getKey().value);
+			statement.setBigDecimal(3, data.salePrice.value);
+			statement.setInt(4, entry.getValue().number().value);
+			statement.setInt(5, entry.getValue().electronic() ? 1 : 0);
+
+
+			final ResultSet result = statement.getGeneratedKeys();
+			
+			result.next();
+			final int id = result.getInt(1);
+			
+			purchases.add(new Purchase.Id(Authority.token, id));
+		}
+		
+		return Collections.unmodifiableSet(purchases);
+	}
+	
+	public final Set<Review.Id> getClientReviews(final User.Authority client) throws SQLException {
+		final ResultSet result = getWhere(Tables.REVIEW, "client_id", client);
+		final Set<Review.Id> reviews = new HashSet<Review.Id>();
+		
+		while(result.next()) {
+			reviews.add(new Review.Id(Authority.token, result.getInt("id")));
+		}
+
+		return Collections.unmodifiableSet(reviews);
+	}
+	
+	public final Set<Purchase.Id> getClientPurchases(final User.Authority client) throws SQLException {
+		final ResultSet result = getWhere(Tables.CLIENT, "client_id", client);
+		
+		final Set<Purchase.Id> purchases = new HashSet<Purchase.Id>();
+		
+		while(result.next()) {
+			purchases.add(new Purchase.Id(Authority.token, result.getInt("id")));
+		}
+
+		return Collections.unmodifiableSet(purchases);
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	/*
+	 * Manager section
+	 * 
+	 */
+	
+	public final Maybe<Manager> restricted(final User.Authority user) throws SQLException {
+		final User.Data data = get(user);
+		return data.manager ? Maybe.just(Manager.token) : Maybe.<Manager>nothing();
+	}
+	
+	public final User.Authority peek(final Manager authority, final User.Id id) {
+		return new User.Authority(Authority.token, id.value);
+	}
+
+	public final void promote(final Manager authority, final User.Id newManager) throws SQLException {
+		final PreparedStatement statement = 
+			connection.prepareStatement("UPDATE user SET manager = 1 WHERE id = ?;");
+		statement.setInt(1, newManager.value);
+		
+		statement.executeUpdate();
+	}
+	
+	public final void approve(final Manager authority, final Review.Id review) throws SQLException {
+		final PreparedStatement statement =
+			connection.prepareStatement("UPDATE review SET approved = 1 WHERE id = ?;");
+		statement.setInt(1, review.value);
+		
+		statement.executeUpdate();
+	}
+	
+	public final void setCurrentSurvey(final Manager authority, final Survey.Id survey) throws SQLException {
+		final PreparedStatement statement =
+			connection.prepareStatement("UPDATE global_data SET current_survey = ? WHERE id = 1;");
+		statement.setInt(1, survey.value);
+		
+		statement.executeUpdate();
+	}
+	
+	public final Set<Purchase.Id> getBookPurchases(final Manager authority, final Book.Id book) throws SQLException {
+		final ResultSet result = getWhere(Tables.BOOK, "book_id", book);
+		
+		final Set<Purchase.Id> purchases = new HashSet<Purchase.Id>();
+		
+		while(result.next()) {
+			purchases.add(new Purchase.Id(Authority.token, result.getInt("id")));
+		}
+
+		return Collections.unmodifiableSet(purchases);
+	}
+}

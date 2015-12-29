@@ -1,0 +1,108 @@
+package com.survey;
+
+import java.io.IOException;
+import java.util.*;
+import java.sql.SQLException;
+
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import com.dataAccess.tables.Survey;
+import com.dataAccess.tables.Survey.Choice;
+import com.dataAccess.tables.Survey.Choices;
+import com.dataClasses.Database;
+import com.dataClasses.Database.CouldNotConnect;
+import com.dataClasses.Maybe;
+import com.dataClasses.Nat;
+
+/**
+ * Servlet implementation class SurveyResultServlet
+ */
+public class SurveyResultServlet extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+       
+    /**
+     * @see HttpServlet#HttpServlet()
+     */
+    public SurveyResultServlet() {
+        super();
+        // TODO Auto-generated constructor stub
+    }
+
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+	}
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		//Include the results of the NavigationServlet
+		this.getServletContext().getRequestDispatcher("/NavigationServlet").include(request, response);
+		// TODO Auto-generated method stub
+		String surveyMessage = "";
+
+        final String answer = request.getParameter("answer");
+       /* final String currentUrl = request.getParameter("currentUrl");
+        String url = currentUrl.substring(15);
+        System.out.println(url);
+        
+       if (url == "/")
+    	   url = "/jsp/index.jsp";*/
+       
+       if (answer == null)
+		    surveyMessage = "Please make a choice.";
+		else
+		{
+			try {
+				//HttpSession aSession = request.getSession();
+				final int answerId = Integer.parseInt(answer); 
+		        final Database db = Database.connect(); //connection to the Database
+		        final Maybe<Survey.Id> currentSurvey = db.currentSurvey(); //get the current survey
+		        final Survey.Id currentSurveyId = currentSurvey.value(); // get the current survey id
+		        final Survey.Data sData = db.get(currentSurveyId); // get the survey: question and choices
+		        db.vote(currentSurveyId, answerId); //vote
+		        
+		        final Survey.Data surveyData = db.get(currentSurveyId);
+		        final Map<Survey.Choice, Nat> votes = surveyData.votes.values;
+		        
+		        int sumVotes = 0;		      
+		        for(final Survey.Choice choice : surveyData.choices.values) // on crée un Iterator pour parcourir notre Set
+		        {
+		        	sumVotes = sumVotes + votes.get(choice).value;	
+		        }
+		        
+		        final Map<Survey.Choice, Double> percentages = new HashMap<Survey.Choice, Double>();
+		        
+		        for(final Survey.Choice choice : surveyData.choices.values) {
+		        	double  vote = Math.round(votes.get(choice).value * 100.0 / sumVotes * 100.0) / 100.0;
+		        	percentages.put(choice, vote);
+		        }
+			        
+		        request.getSession().setAttribute("surveyData", surveyData);
+		        request.getSession().setAttribute("votes", percentages);
+		        request.getSession().setAttribute("sumVotes", sumVotes);
+		        request.getSession().setAttribute("answer", answer);
+			    
+		        db.close();	
+		        
+			} catch (final CouldNotConnect e) {
+				e.printStackTrace();
+			} catch (final SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		
+		request.setAttribute("surveyMessage", surveyMessage);
+		
+        getServletContext().getRequestDispatcher("/jsp/index.jsp").forward(request, response);
+	}
+
+}

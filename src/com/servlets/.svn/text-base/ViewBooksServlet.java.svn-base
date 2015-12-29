@@ -1,0 +1,71 @@
+package com.view.book;
+
+import java.io.IOException;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.Set;
+
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.jsp.jstl.sql.ResultSupport;
+
+import com.dataAccess.tables.Book;
+import com.dataClasses.Database;
+
+/**
+ * Servlet implementation class ViewBooksServlet
+ */
+public class ViewBooksServlet extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+       
+    /**
+     * @see HttpServlet#HttpServlet()
+     */
+    public ViewBooksServlet() {
+        super();
+        // TODO Auto-generated constructor stub
+    }
+
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		doPost(request, response);
+	}
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		//Include the results of the NavigationServlet
+		this.getServletContext().getRequestDispatcher("/NavigationServlet").include(request, response);
+		
+		Database db = null;
+		
+		final String genre = request.getParameter("genre");
+		
+		try {
+			db = Database.connect();
+			if(genre == null || 
+			   genre.trim().length() == 0 || 
+			   genre.toLowerCase().trim().equals("all")) {
+				
+				final Set<Book.Data> books =  db.getBooks(db.allBooks());
+				request.setAttribute("books", books);
+			} else {
+				final Set<Book.Data> books =  db.getBooks(db.booksWhere("genre = '" + genre + "'"));
+				request.setAttribute("books", books);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			if(db != null)
+				db.close();
+		}
+		
+		getServletContext().getRequestDispatcher("/jsp/viewbooks.jsp").forward(request, response);
+	}
+
+}

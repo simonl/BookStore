@@ -1,0 +1,83 @@
+package com.search;
+
+import java.io.IOException;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.HashSet;
+import java.util.Set;
+
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.jsp.jstl.sql.Result;
+import javax.servlet.jsp.jstl.sql.ResultSupport;
+
+import com.dataAccess.tables.Book;
+import com.dataClasses.Database;
+import com.dataClasses.Database.CouldNotConnect;
+
+/**
+ * Servlet implementation class Login
+ */
+public class SearchResultServlet extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+       
+    /**
+     * @see HttpServlet#HttpServlet()
+     */
+    public SearchResultServlet() {
+        super();
+    }
+
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		doPost(request, response);
+	}
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+		//Include the results of the NavigationServlet
+		this.getServletContext().getRequestDispatcher("/NavigationServlet").include(request, response);
+		
+		String query = request.getParameter("searchquery");
+		String title = request.getParameter("bookTitle");
+		String author = request.getParameter("bookAuthor");
+		String publisher = request.getParameter("bookPublisher");
+		String isbn = request.getParameter("bookISBN");
+		
+		if(query == null || query.equals("")) query = null;
+		if(title == null || title.equals("")) title = null;
+		if(author == null || author.equals("")) author = null;
+		if(publisher == null || publisher.equals("")) publisher = null;
+		if(isbn == null || isbn.equals("")) isbn = null;
+		
+		final String condition =
+			(query == null ? "" : "description like '%" + query + "%' AND ") +
+            (title == null ? "" : "title like '%" + title + "%' AND ") +
+            (author == null ? "" : "author like '%" + author + "%' AND ") +
+            (publisher == null ? "" : "publisher like '%" + publisher + "%' AND ") +
+            (isbn == null ? "" : "isbn_13 like '%" + isbn + "%' AND ") +
+            "true"; 
+		
+		Database db = null;
+		
+		try {
+			db = Database.connect();
+			final Set<Book.Data> books  = db.getBooks(db.booksWhere(condition));
+			request.setAttribute("books", books);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			if(db != null)
+				db.close();
+		}
+		
+		getServletContext().getRequestDispatcher("/jsp/search.jsp").forward(request, response);
+	}
+}

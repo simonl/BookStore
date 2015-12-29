@@ -1,0 +1,143 @@
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/svn/g2w12/!svn/ver/436/SeedBookStore/src/com/dataClasses
+END
+TextReviewData.java
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/svn/g2w12/!svn/ver/226/SeedBookStore/src/com/dataClasses/TextReviewData.java
+END
+CouldNotConnect.java
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svn/g2w12/!svn/ver/303/SeedBookStore/src/com/dataClasses/CouldNotConnect.java
+END
+RatingStats.java
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/svn/g2w12/!svn/ver/226/SeedBookStore/src/com/dataClasses/RatingStats.java
+END
+Preparers.java
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/svn/g2w12/!svn/ver/397/SeedBookStore/src/com/dataClasses/Preparers.java
+END
+Database.java
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/svn/g2w12/!svn/ver/436/SeedBookStore/src/com/dataClasses/Database.java
+END
+Loader.java
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/g2w12/!svn/ver/340/SeedBookStore/src/com/dataClasses/Loader.java
+END
+CreditCardType.java
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/svn/g2w12/!svn/ver/390/SeedBookStore/src/com/dataClasses/CreditCardType.java
+END
+MaybeNullException.java
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/g2w12/!svn/ver/316/SeedBookStore/src/com/dataClasses/MaybeNullException.java
+END
+Funcs.java
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn/g2w12/!svn/ver/395/SeedBookStore/src/com/dataClasses/Funcs.java
+END
+Wrapper.java
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svn/g2w12/!svn/ver/303/SeedBookStore/src/com/dataClasses/Wrapper.java
+END
+Preparer.java
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/svn/g2w12/!svn/ver/340/SeedBookStore/src/com/dataClasses/Preparer.java
+END
+Nat.java
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svn/g2w12/!svn/ver/182/SeedBookStore/src/com/dataClasses/Nat.java
+END
+SearchInput.java
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/svn/g2w12/!svn/ver/375/SeedBookStore/src/com/dataClasses/SearchInput.java
+END
+Month.java
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn/g2w12/!svn/ver/389/SeedBookStore/src/com/dataClasses/Month.java
+END
+Throws.java
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/g2w12/!svn/ver/303/SeedBookStore/src/com/dataClasses/Throws.java
+END
+ResultNotUnique.java
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svn/g2w12/!svn/ver/329/SeedBookStore/src/com/dataClasses/ResultNotUnique.java
+END
+Money.java
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn/g2w12/!svn/ver/182/SeedBookStore/src/com/dataClasses/Money.java
+END
+Backend.java
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svn/g2w12/!svn/ver/422/SeedBookStore/src/com/dataClasses/Backend.java
+END
+Key.java
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svn/g2w12/!svn/ver/329/SeedBookStore/src/com/dataClasses/Key.java
+END
+Cart.java
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svn/g2w12/!svn/ver/366/SeedBookStore/src/com/dataClasses/Cart.java
+END
+Func.java
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svn/g2w12/!svn/ver/303/SeedBookStore/src/com/dataClasses/Func.java
+END
+Maybe.java
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn/g2w12/!svn/ver/303/SeedBookStore/src/com/dataClasses/Maybe.java
+END
+Item.java
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svn/g2w12/!svn/ver/372/SeedBookStore/src/com/dataClasses/Item.java
+END

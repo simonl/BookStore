@@ -1,0 +1,89 @@
+K 25
+svn:wc:ra_dav:version-url
+V 54
+/svn/g2w12/!svn/ver/438/SeedBookStore/src/com/servlets
+END
+Closures.java
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn/g2w12/!svn/ver/371/SeedBookStore/src/com/servlets/Closures.java
+END
+PageServlet.java
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/svn/g2w12/!svn/ver/438/SeedBookStore/src/com/servlets/PageServlet.java
+END
+ProcessingServlet.java
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/svn/g2w12/!svn/ver/424/SeedBookStore/src/com/servlets/ProcessingServlet.java
+END
+Parameters.java
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svn/g2w12/!svn/ver/411/SeedBookStore/src/com/servlets/Parameters.java
+END
+Session.java
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svn/g2w12/!svn/ver/377/SeedBookStore/src/com/servlets/Session.java
+END
+CookieManager.java
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/svn/g2w12/!svn/ver/281/SeedBookStore/src/com/servlets/CookieManager.java
+END
+MainPageServlet.java
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/svn/g2w12/!svn/ver/379/SeedBookStore/src/com/servlets/MainPageServlet.java
+END
+Conts.java
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/svn/g2w12/!svn/ver/377/SeedBookStore/src/com/servlets/Conts.java
+END
+ProcessingError.java
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/svn/g2w12/!svn/ver/410/SeedBookStore/src/com/servlets/ProcessingError.java
+END
+Attributes.java
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svn/g2w12/!svn/ver/303/SeedBookStore/src/com/servlets/Attributes.java
+END
+ManagerPageServlet.java
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svn/g2w12/!svn/ver/303/SeedBookStore/src/com/servlets/ManagerPageServlet.java
+END
+ManagerProcessingServlet.java
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/g2w12/!svn/ver/410/SeedBookStore/src/com/servlets/ManagerProcessingServlet.java
+END
+ReportPageServlet.java
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/svn/g2w12/!svn/ver/378/SeedBookStore/src/com/servlets/ReportPageServlet.java
+END
+ClosedServlet.java
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/svn/g2w12/!svn/ver/377/SeedBookStore/src/com/servlets/ClosedServlet.java
+END

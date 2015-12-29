@@ -1,0 +1,85 @@
+package com.xml;
+
+import java.sql.SQLException;
+import com.dataAccess.tables.Book;
+import java.util.Set;
+import com.dataClasses.Maybe;
+import com.dataClasses.Database;
+import org.w3c.dom.Document;
+
+public final class Converters {
+	private Converters() { }
+	
+	
+	public static final void main(final String... args) throws SQLException  {
+		final Database db = Database.connectOld();
+		final Maybe<Book.Isbn13> isbn = Book.Isbn13.parse("978-0722538616");
+		final Maybe<Book.Id> book = db.fromIsbn(isbn.value());
+		
+		final XML.Node xmlBook = fromBook(db.get(book.value()));
+		
+		final Document document = XML.createDocument(xmlBook);
+		
+		System.out.println(xmlBook);
+		System.out.println(document);
+		System.out.println(XmlFactory.convertToXML(document));
+	}
+	
+	public static final XML.Node fromBooks(final Set<Book.Data> books) {
+		final XML.Node element = <% <BOOKS> </BOOKS> %>;
+		
+		for(final Book.Data book : books) {
+			element.add(fromBook(book));
+		}
+		
+		return element;
+	}
+	
+	public static final XML.Node fromBook(final Book.Data data) {
+		return <%
+			<BOOK>
+				<TITLE> {% data.title %} </TITLE>
+				<COVER> {% data.cover %} </COVER>
+				<GENRE> {% data.genre %} </GENRE>
+				<THUMBNAIL> {% data.thumbnail %} </THUMBNAIL>
+				<AUTHOR> {% data.author %} </AUTHOR>
+				<DATE_ENTERED> {% data.dateEntered %} </DATE_ENTERED>
+				<DESCRIPTION> {% data.description %} </DESCRIPTION>
+				{% fromDimensions(data.dimensions) %}
+				<TITLE> {% data.title %} </TITLE>
+				<LIST_PRICE> {% data.listPrice %} </LIST_PRICE>
+				<SALE_PRICE> {% data.salePrice %} </SALE_PRICE>
+				<WHOLESALE_PRICE> {% data.wholesalePrice %} </WHOLESALE_PRICE>
+				<ISBN10> {% data.isbn10 %} </ISBN10>
+				<ISBN13> {% data.isbn13 %} </ISBN13>
+				{% fromEFormats(data.eformats) %}
+				<PUBLISHER> {% data.publisher %} </PUBLISHER>
+				<NUMBER_OF_BOOKS> {% data.numberOfBooks %} </NUMBER_OF_BOOKS>
+				<NUMBER_OF_PAGES> {% data.numberOfPages %} </NUMBER_OF_PAGES>
+				<WEIGHT> {% data.weight %} </WEIGHT>
+			</BOOK>
+		%>;
+	}
+	
+	public static final XML.Node fromDimensions(final Book.Dimensions dimensions) {
+		return <%
+			<DIMENSIONS>
+				<HEIGHT> {% dimensions.height %} </HEIGHT>
+				<LENGTH> {% dimensions.length %} </LENGTH>
+				<WIDTH> {% dimensions.width %} </WIDTH>
+			</DIMENSIONS>
+		%>;
+	}
+	
+	public static final XML.Node fromEFormats(final Set<Book.EFormat> eformats) {
+		final XML.Node element = <% <EFORMATS> </EFORMATS> %>;
+	
+		for(final Book.EFormat eformat : eformats) {
+			element.add(<% 
+				<EFORMAT> {% eformat %} </EFORMAT>	
+			%>);
+		}
+		
+		return element;
+	}
+}

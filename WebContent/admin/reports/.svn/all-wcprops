@@ -1,0 +1,29 @@
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/svn/g2w12/!svn/ver/400/SeedBookStore/WebContent/admin/reports
+END
+template.jsp
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/svn/g2w12/!svn/ver/371/SeedBookStore/WebContent/admin/reports/template.jsp
+END
+totalSales.jsp
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/svn/g2w12/!svn/ver/400/SeedBookStore/WebContent/admin/reports/totalSales.jsp
+END
+dateChooser.jsp
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svn/g2w12/!svn/ver/400/SeedBookStore/WebContent/admin/reports/dateChooser.jsp
+END
+reorder.jsp
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/svn/g2w12/!svn/ver/371/SeedBookStore/WebContent/admin/reports/reorder.jsp
+END

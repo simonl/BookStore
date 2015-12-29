@@ -1,0 +1,26 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+ <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+ <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<div class="contentbox ui-corner-ll">
+    <div class="contentheaders ui-corner-ll">
+        ${displayString}
+	</div>
+	<jsp:include page="/admin/adminReportDisplayRequiredInfoPanel.jsp" />
+
+
+	<table border="1" style="width: 100%;" >
+		<tr><td>Book&nbsp;Title</td><td>Quantity</td><td>Isbn&nbsp;13</td><td>Author</td><td>Publisher</td></tr>
+	<c:forEach var="row" items="${reorder.rows}" varStatus="status" >
+
+		<tr><td>${row.title}</td><td>${row.totalQuantity }</td><td>${row.isbn_13 }</td><td>${row.author }</td><td>${row.publisher }</td></tr>
+
+	</c:forEach> 
+	</table>
+
+	
+	<form method="get" action="<c:url  value="/ShowReportMenuServlet" />" >
+		<input type="submit" name="submit" value="Go to Main Menu" class="" />
+	</form>
+	
+</div>

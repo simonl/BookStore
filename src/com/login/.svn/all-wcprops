@@ -1,0 +1,41 @@
+K 25
+svn:wc:ra_dav:version-url
+V 51
+/svn/g2w12/!svn/ver/424/SeedBookStore/src/com/login
+END
+RegistrationServlet.java
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/svn/g2w12/!svn/ver/340/SeedBookStore/src/com/login/RegistrationServlet.java
+END
+EBookDownloadPageServlet.java
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/g2w12/!svn/ver/343/SeedBookStore/src/com/login/EBookDownloadPageServlet.java
+END
+NewUserInputs.java
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svn/g2w12/!svn/ver/303/SeedBookStore/src/com/login/NewUserInputs.java
+END
+DownloadEBookServlet.java
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/svn/g2w12/!svn/ver/343/SeedBookStore/src/com/login/DownloadEBookServlet.java
+END
+LoginServlet.java
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/g2w12/!svn/ver/424/SeedBookStore/src/com/login/LoginServlet.java
+END
+LogoutServlet.java
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svn/g2w12/!svn/ver/410/SeedBookStore/src/com/login/LogoutServlet.java
+END

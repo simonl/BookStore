@@ -1,0 +1,47 @@
+K 25
+svn:wc:ra_dav:version-url
+V 46
+/svn/g2w12/!svn/ver/345/SeedBookStore/database
+END
+tables.hs
+K 25
+svn:wc:ra_dav:version-url
+V 56
+/svn/g2w12/!svn/ver/319/SeedBookStore/database/tables.hs
+END
+books.hs
+K 25
+svn:wc:ra_dav:version-url
+V 55
+/svn/g2w12/!svn/ver/111/SeedBookStore/database/books.hs
+END
+data.sql
+K 25
+svn:wc:ra_dav:version-url
+V 55
+/svn/g2w12/!svn/ver/345/SeedBookStore/database/data.sql
+END
+tables.sql
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/svn/g2w12/!svn/ver/345/SeedBookStore/database/tables.sql
+END
+surveys.hs
+K 25
+svn:wc:ra_dav:version-url
+V 56
+/svn/g2w12/!svn/ver/30/SeedBookStore/database/surveys.hs
+END
+books.sql
+K 25
+svn:wc:ra_dav:version-url
+V 56
+/svn/g2w12/!svn/ver/220/SeedBookStore/database/books.sql
+END
+surveys.sql
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/svn/g2w12/!svn/ver/256/SeedBookStore/database/surveys.sql
+END

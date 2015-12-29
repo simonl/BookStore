@@ -1,0 +1,1061 @@
+@font-face {
+	font-family: minecraft;
+	src: url('minecraft.ttf');
+}
+
+body {
+	color: white;
+	text-align: center;
+	background-image: url('../imgs/bgk.jpg');
+	background-repeat: no-repeat;
+	background-attachment: fixed;
+	background-size: 100% 100%;
+}
+
+#container {
+	margin: 0 auto;
+	width: 1024px;
+	background-color: #254394;
+	border: 2px black solid;
+	height: 80%;
+}
+
+#header {
+	width: 100%;
+	height: 30%;
+	margin-top: 4px;
+}
+
+#searchbar {
+	width: 500px;
+	height: 45px;
+	float: right;
+	position: relative;
+	margin-right: 7px;
+}
+
+#searchbarTop {
+	text-align: right;
+	font-family: Verdana;
+	font-size: 12px;
+}
+
+#advancedSearch {
+	position: absolute;
+	border-left: 2px solid black;
+	border-right: 2px solid black;
+	border-bottom: 2px solid black;
+	top: 44px;
+	font-family: Lucida Sans Unicode;
+	right: 0;
+	width: 367px;
+	background-color: #3561BA;
+	min-height: 150px;
+	font-size: 12px;
+	text-align: center;
+	z-index: 7;
+	visibility: hidden; /*creates problems if using jQuery and search is invisible from the start*/
+}
+
+p {
+	margin-left: 4px;
+}
+
+#leftpanel-container {
+	height: 100%;
+	float: left;
+	/*border: 2px black solid;*/
+	width: 205px;
+	position: relative;
+	margin-left: 4px;
+	clear: both;
+}
+
+#rightpanel-container {
+	height: 100%;
+	float: right;
+	/*border: 2px black solid;*/
+	width: 205px;
+	margin-right: 4px;
+	position: relative;
+	margin-bottom: 6px;
+}
+
+#middle-container {
+	height: auto;
+	float: left;
+	/*border: 2px black solid;*/
+	width: 605px;
+	position: relative;
+	margin-top: 0px;
+}
+
+.viewbookFields {
+	font-weight: bold;
+	margin-left: 6px;
+	font-size: 14px;
+}
+
+.viewbookDescription {
+	text-indent: 40px;
+	text-align: justify;
+	margin-right: 8px;
+	margin-left: 8px;
+}
+
+.reviewBox {
+	width: 96%;
+	min-height: 100px;
+	border: 1px solid black;
+	font-family: Arial;
+	font-size: 14px;
+	background-color: #4161BA;
+	text-align: left;
+	margin: 2px auto;
+}
+
+.box {
+	width: 200px;
+	min-height: 100px;
+	border: 1px solid black;
+	font-family: Lucida Sans Unicode;
+	font-size: 14px;
+	background-color: #4161BA;
+	text-align: center;
+	margin: 2px auto;
+}
+
+.boxNoHeight {
+	width: 200px;
+	min-height: 0px;
+	border: 1px solid black;
+	font-family: Lucida Sans Unicode;
+	font-size: 14px;
+	background-color: #4161BA;
+	text-align: center;
+	margin: 2px auto;
+}
+
+.boxheaders {
+	width: 200px;
+	height: 35px;
+	border-bottom: 1px solid black;
+}
+
+.contentbox {
+	width: 96%;
+	min-height: 100px;
+	border: 1px solid black;
+	font-family: Arial;
+	font-size: 14px;
+	background-color: #4161BA;
+	text-align: left;
+	margin: 2px auto;
+}
+
+.contentheaders {
+	width: 100%;
+	height: 35px;
+	background-image: url('../imgs/emptyheader.png');
+	background-repeat: repeat-x;
+	border-bottom: 2px solid black;
+	font-family: minecraft;
+	line-height: 2;
+	background-color: #4269C4;
+	font-size: 20px;
+	font-weight: bold;
+	text-align: center;
+	text-shadow: -2px 0 black, 0 2px black, 2px 0 black, 0 -2px black;
+}
+
+.reviewheaders {
+	width: 100%;
+	height: 35px;
+	background-image: url('../imgs/emptyheader.png');
+	background-repeat: repeat-x;
+	border-bottom: 2px solid black;
+	font-family: Tahoma;
+	line-height: 2;
+	background-color: #4269C4;
+	font-size: 17px;
+	font-weight: bold;
+	text-align: center;
+	text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+}
+
+.rssFeed {
+	width: 100%;
+	display: block;
+	font-size: 0.75em;
+	border: medium;
+	border-color: #3A0020;
+	background-color: #4161BA;
+}
+
+a {
+	color: white;
+	text-decoration: none;
+	/*vertical-align:super;*/
+}
+
+a:hover {
+	font-weight: bold;
+	text-decoration: underline;
+}
+
+#banner-footer {
+	text-align: center;
+	width: 100%;
+	height: 92px;
+	clear: both;
+}
+
+#footer {
+	width: 85%;
+	margin: 0 auto;
+	line-height: 2;
+	height: 30px;
+	font-family: Century Gothic;
+	border-top: 3px solid black;
+	clear: both;
+}
+
+/**************************************
+ *                                    *
+ *    -->: Global text field and      *
+ *         button look-&-feel         *
+ *                                    *
+ * Author: Edward Gagnon              *
+ *                                    *
+ **************************************/
+input[type=button],input[type=submit],submit,input[type=reset],reset, input[type=file] {
+	border: hidden #FFFBF0;
+	color: white;
+	background-color: black;
+	-moz-border-radius: 5px 20px 5px 20px;
+	-webkit-border-radius: 5px 20px 5px 20px;
+	border-radius: 5px 20px 5px 20px;
+	cursor: pointer;
+	background: #4161ba; /* Old browsers */
+	/* IE9 SVG, needs conditional override of 'filter' to 'none' */
+	background:
+		url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPHJhZGlhbEdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgY3g9IjUwJSIgY3k9IjUwJSIgcj0iNzUlIj4KICAgIDxzdG9wIG9mZnNldD0iMCUiIHN0b3AtY29sb3I9IiM0MTYxYmEiIHN0b3Atb3BhY2l0eT0iMSIvPgogICAgPHN0b3Agb2Zmc2V0PSI3OSUiIHN0b3AtY29sb3I9IiMwMDAwMDAiIHN0b3Atb3BhY2l0eT0iMSIvPgogIDwvcmFkaWFsR3JhZGllbnQ+CiAgPHJlY3QgeD0iLTUwIiB5PSItNTAiIHdpZHRoPSIxMDEiIGhlaWdodD0iMTAxIiBmaWxsPSJ1cmwoI2dyYWQtdWNnZy1nZW5lcmF0ZWQpIiAvPgo8L3N2Zz4=);
+	background: -moz-radial-gradient(center, ellipse cover, #4161ba 0%, #000000 79%);
+	/* FF3.6+ */
+	background: -webkit-gradient(radial, center center, 0px, center center, 100%,
+		color-stop(0%, #4161ba), color-stop(79%, #000000) );
+	/* Chrome,Safari4+ */
+	background: -webkit-radial-gradient(center, ellipse cover, #4161ba 0%, #000000 79%);
+	/* Chrome10+,Safari5.1+ */
+	background: -o-radial-gradient(center, ellipse cover, #4161ba 0%, #000000 79%);
+	/* Opera 12+ */
+	background: -ms-radial-gradient(center, ellipse cover, #4161ba 0%, #000000 79%);
+	/* IE10+ */
+	background: radial-gradient(center, ellipse cover, #4161ba 0%, #000000 79%);
+	/* W3C */
+	filter: progid : DXImageTransform.Microsoft.gradient (   startColorstr =
+		'#4161ba', endColorstr = '#000000', GradientType = 1 );
+	/* IE6-8 fallback on horizontal gradient */
+}
+
+input[type=button]:hover,input[type=submit]:hover,submit:hover,input[type=reset]:hover,reset:hover, input[type=file]:hover
+	{ /*color:black;
+	background-color:orange;*/
+	background: #4161ba; /* Old browsers */
+	/* IE9 SVG, needs conditional override of 'filter' to 'none' */
+	background:
+		url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPHJhZGlhbEdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgY3g9IjUwJSIgY3k9IjUwJSIgcj0iNzUlIj4KICAgIDxzdG9wIG9mZnNldD0iMjklIiBzdG9wLWNvbG9yPSIjNDE2MWJhIiBzdG9wLW9wYWNpdHk9IjEiLz4KICAgIDxzdG9wIG9mZnNldD0iMTAwJSIgc3RvcC1jb2xvcj0iIzAwMDAwMCIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgPC9yYWRpYWxHcmFkaWVudD4KICA8cmVjdCB4PSItNTAiIHk9Ii01MCIgd2lkdGg9IjEwMSIgaGVpZ2h0PSIxMDEiIGZpbGw9InVybCgjZ3JhZC11Y2dnLWdlbmVyYXRlZCkiIC8+Cjwvc3ZnPg==);
+	background: -moz-radial-gradient(center, ellipse cover, #4161ba 29%, #000000 100%);
+	/* FF3.6+ */
+	background: -webkit-gradient(radial, center center, 0px, center center, 100%,
+		color-stop(29%, #4161ba), color-stop(100%, #000000) );
+	/* Chrome,Safari4+ */
+	background: -webkit-radial-gradient(center, ellipse cover, #4161ba 29%, #000000 100%
+		); /* Chrome10+,Safari5.1+ */
+	background: -o-radial-gradient(center, ellipse cover, #4161ba 29%, #000000 100%);
+	/* Opera 12+ */
+	background: -ms-radial-gradient(center, ellipse cover, #4161ba 29%, #000000 100%);
+	/* IE10+ */
+	background: radial-gradient(center, ellipse cover, #4161ba 29%, #000000 100%);
+	/* W3C */
+	filter: progid : DXImageTransform.Microsoft.gradient (   startColorstr =
+		'#4161ba', endColorstr = '#000000', GradientType = 1 );
+	/* IE6-8 fallback on horizontal gradient */
+	text-shadow: -1px 0 yellow, 0 1px yellow, 1px 0 yellow, 0 -1px yellow;
+	border: thick;
+	border: #white;
+}
+
+input[type=button]:active,input[type=submit]:active,submit:active,input[type=reset]:active,reset:active, input[type=file]:active
+	{ /*color:orange;
+	background-color:black;*/
+	background: #4161ba; /* Old browsers */
+	/* IE9 SVG, needs conditional override of 'filter' to 'none' */
+	background:
+		url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPHJhZGlhbEdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgY3g9IjUwJSIgY3k9IjUwJSIgcj0iNzUlIj4KICAgIDxzdG9wIG9mZnNldD0iMjklIiBzdG9wLWNvbG9yPSIjNDE2MWJhIiBzdG9wLW9wYWNpdHk9IjEiLz4KICAgIDxzdG9wIG9mZnNldD0iMTAwJSIgc3RvcC1jb2xvcj0iIzAwMDAwMCIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgPC9yYWRpYWxHcmFkaWVudD4KICA8cmVjdCB4PSItNTAiIHk9Ii01MCIgd2lkdGg9IjEwMSIgaGVpZ2h0PSIxMDEiIGZpbGw9InVybCgjZ3JhZC11Y2dnLWdlbmVyYXRlZCkiIC8+Cjwvc3ZnPg==);
+	background: -moz-radial-gradient(center, ellipse cover, #4161ba 29%, #000000 100%);
+	/* FF3.6+ */
+	background: -webkit-gradient(radial, center center, 0px, center center, 100%,
+		color-stop(29%, #4161ba), color-stop(100%, #000000) );
+	/* Chrome,Safari4+ */
+	background: -webkit-radial-gradient(center, ellipse cover, #4161ba 29%, #000000 100%
+		); /* Chrome10+,Safari5.1+ */
+	background: -o-radial-gradient(center, ellipse cover, #4161ba 29%, #000000 100%);
+	/* Opera 12+ */
+	background: -ms-radial-gradient(center, ellipse cover, #4161ba 29%, #000000 100%);
+	/* IE10+ */
+	background: radial-gradient(center, ellipse cover, #4161ba 29%, #000000 100%);
+	/* W3C */
+	filter: progid : DXImageTransform.Microsoft.gradient (   startColorstr =
+		'#4161ba', endColorstr = '#000000', GradientType = 1 );
+	/* IE6-8 fallback on horizontal gradient */
+	text-shadow: -1px 0 yellow, 0 1px yellow, 1px 0 yellow, 0 -1px yellow;
+	border: thick;
+	border: #white;
+}
+
+input[type=text],input[type=password], select {
+	border: 1px solid #222;
+	-moz-box-shadow: 1px 1px 4px #444 inset, -1px -1px 0 #ccc;
+	-moz-border-radius: 4px;
+	-webkit-border-radius: 5px;
+	-moz-box-shadow: inset 1px 1px 2px 2px #AADFFF;
+	-webkit-box-shadow: inset 1px 1px 2px 2px #AADFFF;
+	box-shadow: inset 1px 1px 2px 2px #AADFFF;
+	margin: 5px;
+	padding: 5px;
+}
+
+input[type=text]:hover, input[type=password]:hover, select:hover {
+	background-color: #AADFFF;
+}
+
+input[type=text]:active, input[type=password]:active, select:active {
+	background-color: #AADFFF;
+}
+
+.centered{
+	width: 1px;
+	margin: 0 auto;
+	text-align: center;
+}
+
+.rightified{
+	clear:both;
+	display: inline;
+	margin-left: auto;
+	margin-right: auto;
+	float:right;
+	text-align: right;
+}
+
+.inputError{
+		border: 1px solid red;
+	-moz-box-shadow: 1px 1px 4px #444 inset, -1px -1px 0 red;
+	-moz-border-radius: 4px;
+	-webkit-border-radius: 5px;
+	-moz-box-shadow: inset 1px 1px 2px 2px red;
+	-webkit-box-shadow: inset 1px 1px 2px 2px red;
+	box-shadow: inset 1px 1px 2px 2px red;
+}
+
+
+/**************************************
+ *                                    *
+ *    -->: Welcome - Sales page       *
+ *                                    *
+ * Author: Edward Gagnon              *
+ *                                    *
+ **************************************/
+.thumbContainer {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	outline: 0;
+	width: 100%;
+	font-weight: inherit;
+	font-style: inherit;
+	font-size: 100%;
+	font-family: inherit;
+	background-color: #4161BA;
+	/*background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#4161BA), to(#000));
+	background-image: -webkit-linear-gradient(top, #4161BA, #000);
+	background-image:    -moz-linear-gradient(top, #4161BA, #000);
+	background-image:     -ms-linear-gradient(top, #4161BA, #000);
+	background-image:      -o-linear-gradient(top, #4161BA, #000);*/
+}
+
+#sales {
+	clear: both;
+	float: none;
+	width: 96%;
+	min-height: 50px;
+}
+
+#sales:hover {
+	background-color: #254394;
+}
+
+#navagationButtonPanel {
+	height: 50px;
+	width: 100%;
+}
+
+#prev2,#next2 {
+	font-size: 2em;
+	width: 20%;
+	height: 100%;
+	padding: 3px;
+	margin: 5px;
+}
+
+#prev2 {
+	float: left;
+}
+
+#next2 {
+	float: right;
+}
+
+#bookScroll {
+	clear: both;
+	float: left;
+	margin: 4px;
+	padding: 5px;
+	height: 130px;
+	width: 110px;
+}
+
+#bookInfo {
+	position: relative;
+	width: 587px;
+	margin: 4px;
+	padding: 5px;
+	height: 130px;
+/* 	text-align: left; */
+/* 	text-indent: 5px; */
+}
+
+#sales p h3 h1 h2 span {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	outline: 0;
+	font-weight: inherit;
+	font-style: inherit;
+	font-size: 100%;
+	font-family: inherit;
+	vertical-align: baseline;
+}
+
+
+.noUnderline:hover {
+	text-transform: none;
+	text-decoration: none;
+	font-size: inherit;
+	font-style: inherit;
+	font-family: inherit;
+	font-size-adjust: none;
+	font-stretch: inherit;
+	font-variant: inherit;
+	font-weight: inherit;
+	text-transform: inherit;
+}
+
+#thumbBookTitle {
+	width: 96%;
+	margin: 0;
+	padding: 0;
+	border: 0;
+	outline: 0;
+	font-weight: inherit;
+	font-style: inherit;
+	font-size: 100%;
+	font-family: inherit;
+	vertical-align: baseline;
+	color: white;
+	font-weight: bold;
+	text-decoration: underline;
+	text-align: center;
+}
+
+#thumbBookAuthor,#thumbBookPublisher {
+	color: grey;
+	font-size: 0.8em;
+	text-align: center;
+}
+
+#thumbBookOriginalPrice {
+	text-decoration: line-through;
+	color: red;
+	font-size: 1em;
+	text-align: center;
+}
+
+#thumbBookSalePrice {
+	color: yellow;
+	font-size: 1.4em;
+	text-align: center;
+}
+
+/**************************************
+ *                                    *
+ *    -->: Menu/Navigation Section    *
+ *                                    *
+ * Author: Edward Gagnon              *
+ *                                    *
+ **************************************/
+
+
+#menu ul {
+	list-style: none;
+	font-color: white;
+	margin: 0;
+	padding: 0;
+}
+
+#menu img {
+	border: none;
+}
+
+#menu li a {
+	width: 190px;
+	height: 32px;
+	height: 24px;
+	text-indent: 32px;
+	text-decoration: none;
+}
+
+#menu li a:link,#menu li a:visited {
+	display: block;
+	background: url('../imgs/menu.jpg');
+	padding: 8px 0 0 10px;
+}
+
+#menu li a:hover {
+	background: url('../imgs/menu.jpg') 0 -32px;
+	padding: 8px 0 0 10px;
+}
+
+ul.makeMenu,ul.makeMenu ul {
+	width: 190px;
+}
+
+ul.makeMenu ul {
+	width: 200px;
+	border: 1px solid #000;
+	background-color: #4161ba;
+}
+
+ul.makeMenu li {
+	margin: 0px;
+	position: relative;
+	color: #fff;
+}
+
+ul.makeMenu li>ul {
+	display: none;
+	position: absolute;
+	top: 2px;
+	left: 196px;
+	z-index: 10000;
+}
+
+ul.makeMenu ul.CSStoShow {
+	display: block;
+}
+
+ul.makeMenu li:hover>ul {
+	display: block;
+}
+
+.hasSubLevel {
+	display: block;
+	background: url('../imgs/menu2.jpg');
+	padding: 8px 0 0 10px;
+}
+
+.hasSubLevel:hover {
+	background: url('../imgs/menu2.jpg') 0 -32px;
+	padding: 8px 0 0 10px;
+}
+
+
+/**************************************
+ *                                    *
+ *    -->: Registration Form section  *
+ *                                    *
+ * Author: Edward Gagnon              *
+ *                                    *
+ **************************************/
+#registrationForm #pageForm {
+	width: 100%;
+	text-align: left;
+	font-size: 10px;
+	border: hidden;
+}
+
+#registrationForm .button {
+	width: 20%;
+}
+
+#registrationForm #reset {
+	float: right;
+	margin: 5px;
+	padding: 5px;
+}
+
+#registrationForm fieldset {
+	-webkit-border-radius: 5px 5px 5px 5px; /* 10px 10px 10px 10px; */
+	-moz-border-radius: 5px;
+	border: 1px solid #000;
+	margin: 1px;
+	clear: both;
+}
+
+#registrationForm legend {
+	font-weight: bold;
+}
+
+#registrationForm input[type=text],registrationForm input[type=password]
+	{
+	border: 1px solid #222;
+	-moz-box-shadow: 1px 1px 4px #444 inset, -1px -1px 0 #ccc;
+	-webkit-border-radius: 4px;
+	margin: 5px;
+	padding: 5px;
+	float: left;
+}
+
+#registrationForm input[type=text]:hover,#registrationForm input[type=password]:hover
+	{
+	background-color: #AADFFF;
+}
+
+#registrationForm input[type=text]:active,#registrationForm input[type=password]:active
+	{
+	background-color: #AADFFF;
+}
+
+#registrationForm .smallField {
+	width: 200px;
+}
+
+#registrationForm .regularLabel {
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	margin: 5px;
+	float: left;
+}
+
+#registrationForm .largerLabel {
+	clear: both;
+	margin: 5px;
+	font-size: 0.9em;
+	width: 20%;
+	float: left;
+}
+
+#registrationForm .largerText {
+	width: 50%;
+}
+
+#registrationForm submitArea {
+	margin: auto;
+}
+
+#registrationForm .errorLabel {
+	margin: 5px;
+	color: red; width 20%;
+	float: left;
+}
+
+#registrationForm select {
+	border: 1px solid #222;
+	-moz-box-shadow: 1px 1px 4px #444 inset, -1px -1px 0 #ccc;
+	-moz-border-radius: 4px;
+	-webkit-border-radius: 4px;
+	margin: 5px;
+	padding: 5px;
+	float: left;
+}
+
+#registrationForm table {
+	border-spacing: 0px;
+	border-collapse: collapse;
+	empty-cells: show;
+}
+
+#registrationForm .label {
+	padding-top: 2px;
+	padding-right: 8px;
+	vertical-align: top;
+	text-align: right;
+	width: 125px;
+	white-space: nowrap;
+}
+
+#registrationForm .field {
+	white-space: nowrap;
+}
+
+#registrationForm .status {
+	padding-top: 2px;
+	padding-left: 8px;
+	vertical-align: top;
+	width: 246px;
+	white-space: nowrap;
+}
+
+#registrationForm label.error {
+	background: url('../imgs/unchecked.gif') no-repeat 0px 0px;
+	padding-left: 16px;
+	padding-bottom: 2px;
+	font-size: x-small;
+	font-weight: bold;
+	color: #FF3300;
+}
+
+#registrationForm label.checked {
+	background: url('../imgs/checked.gif') no-repeat 0px 0px;
+}
+
+#registrationForm .success_msg {
+	font-weight: bold;
+	color: #be9545;
+	margin-left: 19px;
+}
+
+/* Important - hides the tabs in the registration accordion. */
+#registrationForm ul,#registrationForm li {
+	list-style: none;
+	height: 0px;
+	margin: 0px;
+	padding: 0px;
+}
+
+/* Important - hides the tabs in the registration accordion. */
+#registrationForm h3 {
+	height: 0px;
+	margin: 0px;
+	padding: 0px;
+	border-width: 0px;
+	max-height: 0px;
+	text-decoration: none;
+	outline-width: 0px;
+	display: none;
+	visibility: hidden;
+}
+
+div.buttonWrapper {
+	margin: 28px 0 14px 0;
+	clear: both;
+	text-align: center;
+}
+
+.prevbutton {
+	float: left;
+}
+
+.nextbutton {
+	float: right;
+}
+
+#slidingWindow { /*width: 100%	*/
+	
+}
+/* ===================== Survey ============================= */
+#surveyBar {
+	background-color: red;
+	text-align: center;
+	font-family: tahoma;
+	font-size: 12px;
+	color: white;
+	border: 1px solid black;
+	margin-bottom: 3px;
+	padding-bottom: 3px;
+}
+
+#surveyContainer {
+	width: 190px;
+}
+
+/**************************************
+ *                                    *
+ *    -->: Tooltips                   *
+ *                                    *
+ * Author: Edward Gagnon              *
+ *                                    *
+ **************************************/
+:focus {
+	outline: 0;
+}
+
+#tooltip {
+	z-index: 20001;
+}
+
+#tooltip h3 {
+	font-size: 110%;
+	font-weight: bold;
+	margin: .2em 0 .5em 0;
+}
+
+#tooltip p {
+	margin: 1em 0;
+}
+
+#tooltip.fancy h3 {
+	margin-bottom: 0.75em;
+	font-size: 12pt;
+	text-align: center;
+	z-index: 20002;
+}
+
+#tooltip.fancy {
+	border: none;
+	text-align: center;
+	color: black;
+	background: url('../imgs/bubble1.png');
+	padding-top: 5em;
+	width: 240px;
+	height: 100px;
+	z-index: 20002;
+}
+
+#tooltip.fancy.viewport-right {
+	background: url('../imgs/bubble2.png');
+}
+
+/**************************************
+ *                                    *
+ *    -->: adminSetSales              *
+ *                                    *
+ * Author: Edward Gagnon              *
+ *                                    *
+ **************************************/
+
+.searchPanel fieldset {
+	-webkit-border-radius: 5px 5px 5px 5px; /* 10px 10px 10px 10px; */
+	-moz-border-radius: 5px;
+	border: 1px solid #000;
+	margin: 1px;
+	clear: both;
+}
+
+.searchPanel legend {
+	font-weight: bold;
+}
+
+/*      booksOfInterestDisplay and bestSellersDisplay        */
+
+#booksofInterestDisplay, #bestSellersDisplay, #relatedBooksDisplay{
+	text-align: center;
+	width: 100%;	
+}
+
+#booksofInterestDisplay table, #bestSellersDisplay table, #relatedBooksDisplay table{
+	width: 100%;
+	padding: 5px;	
+}
+
+#booksofInterestDisplay td, #bestSellersDisplay td, #relatedBooksDisplay td{
+	width: 20%;
+	text-align: center;	
+}
+
+/* admin css*/
+#adminHeader {
+	text-align: center;
+}
+
+#adminMenu {
+	text-align: center;
+}
+
+/* Drop down menu */
+#drop_down_menu {
+	width: 1000px;
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+	border: 0;
+	position: absolute;
+	top: 0;
+	left: 0;
+}
+
+#drop_down_menu li {
+	width: 150px;
+	float: left;
+	margin: 0;
+	padding: 0;
+	border: 0;
+}
+
+#drop_down_menu .submenu {
+	display: none;
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+	border: 0;
+}
+
+#drop_down_menu .submenu li {
+	float: none;
+	margin: 0;
+	padding: 0;
+	border: 0;
+	width: 149px;
+	border-top: 1px solid transparent;
+	border-right: 1px solid transparent;
+}
+
+#drop_down_menu li a:link,#drop_down_menu li a:visited {
+	display: block;
+	height: 1%;
+	color: #FFF;
+	background: #3B4E77;
+	margin: 0;
+	padding: 4px 8px;
+	border-right: 1px solid #fff;
+	text-decoration: none;
+}
+
+#drop_down_menu li a:hover {
+	background-color: #F2462E;
+}
+
+#drop_down_menu li a:active {
+	background-color: #5F879D;
+}
+
+#drop_down_menu .submenu li a:link,#drop_down_menu .submenu li a:visited
+	{
+	display: block;
+	color: #FFF;
+	margin: 0;
+	border: 0;
+	text-decoration: none;
+}
+
+#drop_down_menu .submenu li a:hover {
+	background-image: none;
+	background-color: #F2462E;
+}
+
+#drop_down_menu li:hover>.submenu {
+	display: block;
+}
+
+
+/* ==================  mobile css ========================== */
+
+#thumbContainerMobile{
+}
+
+#containerMobile {
+	float:left;
+	padding: 0;
+	margin: 0 auto;
+	width: 320px;
+	height: 480px;
+	background-color: #254394;
+	border: 2px black solid;
+	overflow:hidden;
+}
+
+
+#salesMobile {
+	
+	clear: both;
+	float: none;
+	width: 96%;
+	min-height: 50px;
+}
+
+#bookScrollMobile {
+	clear: both;
+	float: left;
+	margin: 4px;
+	padding: 5px;
+	height: 45px;
+	width: 50px;
+}
+
+#bookInfoMobile {
+	position: relative;
+	width: 250px;
+	margin: 2px;
+	padding: 2px;
+	height: 45px;
+/* 	text-align: left; */
+/* 	text-indent: 5px; */
+}
+
+#thumbBookSalePriceMobile {
+	color: yellow;
+	font-size: 0.8em;
+	text-align: left;
+}
+
+#thumbBookOriginalPriceMobile {
+	text-decoration: line-through;
+	color: red;
+	font-size: 0.5em;
+	text-align: left;
+}
+
+#navigationButtonPanelMobile{
+	width: 100%
+
+}
+
+.thumbMobile {
+	width: 45px;
+	height: 45px;	
+}
+
+#mobile: hover{
+	
+}
+
+/* ==================  help css ========================== */
+
+
+
+.helpImage{
+	clear:both;
+	float: left; padding: 5px; margin: 5px;	
+}
+
+.paragraph{
+	display: inline;
+	text-align: center;
+	text-indent: 30pt;
+
+
+}
+.paragraphStarter{font-size: 110%;font-style: italic;
+padding: 7px;
+font-family: Arial, sans-serif;
+line-height: 1em;
+color: #ffffff;
+font-weight:bold;
+font-size: 24px;
+text-shadow:0px 0px 0 rgb(187,187,187),1px 1px 0 rgb(145,145,145),2px 2px 0 rgb(102,102,102),3px 3px 0 rgb(60,60,60), 4px 4px 0 rgb(18,18,18),5px 5px 4px rgba(0,0,0,0.6),5px 5px 1px rgba(0,0,0,0.5),0px 0px 4px rgba(0,0,0,.2);}
+}
+.rightSubmit{font-size: 130%; float: right;}
+
+/* ============== header image ===================== */
+#header{
+	text-align: center;	
+	height: 160px;
+	width: 1013px;
+	overflow: hidden;
+}
+#headerGif{
+	position: relative;
+	top: -160px;
+	display: none;	
+}

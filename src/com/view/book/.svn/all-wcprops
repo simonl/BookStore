@@ -1,0 +1,23 @@
+K 25
+svn:wc:ra_dav:version-url
+V 55
+/svn/g2w12/!svn/ver/437/SeedBookStore/src/com/view/book
+END
+ViewBookServlet.java
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/svn/g2w12/!svn/ver/437/SeedBookStore/src/com/view/book/ViewBookServlet.java
+END
+PostReviewServlet.java
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svn/g2w12/!svn/ver/410/SeedBookStore/src/com/view/book/PostReviewServlet.java
+END
+ViewBooksServlet.java
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/svn/g2w12/!svn/ver/303/SeedBookStore/src/com/view/book/ViewBooksServlet.java
+END

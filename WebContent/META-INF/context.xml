@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Context path="g2w12BookStore">
+ 	<Resource name="jdbc/g2w12" auth="Container" driverClassName="com.mysql.jdbc.Driver" type="javax.sql.DataSource" maxActive="20" maxIdle="30" maxWait="10000" username="g2w12" password="bird3table" url="jdbc:mysql://waldo.dawsoncollege.qc.ca:3306/g2w12?autoReconnect=true" />
+<!-- 	<Resource name="jdbc/g2w12" auth="Container" driverClassName="com.mysql.jdbc.Driver" type="javax.sql.DataSource" maxActive="20" maxIdle="30" maxWait="10000" username="root" password="" url="jdbc:mysql://localhost:3306/g2w12?autoReconnect=true" /> -->
+</Context>

@@ -1,0 +1,125 @@
+package com.welcome;
+
+import java.io.IOException;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.HashSet;
+import java.util.Set;
+import java.util.TreeSet;
+
+import javax.servlet.ServletException;
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.jsp.jstl.sql.ResultSupport;
+
+import com.dataAccess.tables.Book;
+import com.dataAccess.tables.Book.Id;
+import com.dataClasses.Database;
+import com.dataClasses.Database.CouldNotConnect;
+
+/**
+ * Servlet implementation class WelcomeServlet
+ */
+public class WelcomeServlet extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+       
+    /**
+     * @see HttpServlet#HttpServlet()
+     */
+    public WelcomeServlet() {
+        super();
+        // TODO Auto-generated constructor stub
+    }
+
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		doPost(request, response);
+	}
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		//Include the results of the NavigationServlet
+		this.getServletContext().getRequestDispatcher("/NavigationServlet").include(request, response);
+		this.getServletContext().getRequestDispatcher("/TopBooksServelt").include(request, response);
+		this.getServletContext().getRequestDispatcher("/SurveyServelt").include(request, response);
+		System.out.println(request.getAttribute("recentBooks"));
+		
+		Database db = null;
+		String currentCategory = (String) request.getAttribute("currGenre");
+		
+		try {
+			db = Database.connect();
+			request.setAttribute("booksOfInterest", db.booksWhere("genre = " + currentCategory));
+			request.setAttribute("booksOnSale", db.getBooks(db.booksOnSale()));
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			if(db != null)
+				db.close();
+		}
+
+		
+		/*
+		
+		
+		final String condition = "genre = " + currentCategory;
+	
+		try {
+			final Set<Book.Data> booksTheUserMightLike = Database.using(new Database.Action<Set<Book.Data>, SQLException>() {
+				@Override
+				public Set<Book.Data> perform(final Database db) throws SQLException {
+					final Set<Book.Id> ids = db.booksWhere(condition); 
+					
+					final Set<Book.Data> datas = new HashSet<Book.Data>();
+					
+					for(final Book.Id id : ids) {
+						datas.add(db.get(id));
+					}
+					
+					return datas;
+				}		
+			});
+			
+			System.out.println("Finished settings booksTheUserMightLike");
+			System.out.println(booksTheUserMightLike.size());
+			final String conditionBooksOnSale = "list_price > sale_price";
+			final Set<Book.Data> bookSales = Database.using(new Database.Action<Set<Book.Data>, SQLException>() {
+				@Override
+				public Set<Book.Data> perform(final Database db) throws SQLException {
+					final Set<Book.Id> ids1 = db.booksWhere(conditionBooksOnSale); 
+					
+					final Set<Book.Data> datas1 = new HashSet<Book.Data>();
+					
+					for(final Book.Id id : ids1) {
+						datas1.add(db.get(id));
+					}
+					
+					return datas1;
+				}		
+			});
+
+			//Set a random book
+			if(booksTheUserMightLike.size() > 0)
+				request.setAttribute("bookTheUserMightLike", (Book.Data) booksTheUserMightLike.toArray()[(int) (Math.random() * (booksTheUserMightLike.size()))] );
+			request.setAttribute("bookSales", bookSales);
+				
+			} catch (CouldNotConnect e) {
+				e.printStackTrace();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			*/
+			//System.out.println(this.getServletName());
+			
+			getServletContext().getRequestDispatcher("/jsp/index.jsp").forward(request, response);
+			
+	}
+
+}

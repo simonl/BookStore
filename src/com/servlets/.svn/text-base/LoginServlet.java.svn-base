@@ -1,0 +1,96 @@
+package com.login;
+
+import java.io.IOException;
+import java.sql.SQLException;
+
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import com.dataAccess.tables.Client;
+import com.dataAccess.tables.User;
+import com.dataClasses.Database;
+import com.dataClasses.Maybe;
+import com.prezzo.testing.TESTClientBean;
+import com.prezzo.testing.TESTClientDataDBAccess;
+
+/**
+ * Servlet implementation class Login
+ */
+public class LoginServlet extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+       
+    /**
+     * @see HttpServlet#HttpServlet()
+     */
+    public LoginServlet() {
+        super();
+    }
+
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		//Do nothing, we don't want GET enabled.
+	}
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		//Include the results of the NavigationServlet
+		this.getServletContext().getRequestDispatcher("/NavigationServlet").include(request, response);
+
+		String message = "";
+
+		final Maybe<String> usernameInput = Maybe.from(request.getParameter("username"));
+		final Maybe<String> passwordInput = Maybe.from(request.getParameter("password"));
+
+		final Maybe<User.Login> username =
+			usernameInput.isNull() ?
+				Maybe.<User.Login>nothing() :
+				User.Login.parse(usernameInput.value());
+
+		final Maybe<User.Password> password =
+			passwordInput.isNull() ?
+				Maybe.<User.Password>nothing() :
+				User.Password.parse(passwordInput.value());
+										
+		if (username.isNull())
+			message = "Please provide a valid username."; 
+		else if (password.isNull())
+			message = "Please provide a valid password."; 
+		else
+		{
+			try {
+				final User.Authority user = Database.using(new Database.Action<User.Authority, Exception>() {
+					@Override
+					public User.Authority perform(final Database db) throws Exception {
+						final Maybe<User.Id> id = db.fromUsername(username.value());
+						
+						if(id.isNull()) {
+							throw new Database.BadUsername();
+						} else {
+							return db.login(id.value(), password.value());
+						}
+					}
+				});
+				
+				request.getSession().setAttribute("user", user);
+			} catch (Database.BadUsername e) {
+				message = "Username does not exist";
+			} catch (Database.BadPassword e) {
+				message = "Incorrect Password";
+			} catch (final Exception e) {
+				e.printStackTrace();
+			}
+		}
+		
+		request.setAttribute("message", message);
+		System.out.println(request.getAttribute("currURL"));
+		getServletContext().getRequestDispatcher("/WelcomeServlet").forward(request, response);
+	}
+}

@@ -1,0 +1,167 @@
+K 25
+svn:wc:ra_dav:version-url
+V 54
+/svn/g2w12/!svn/ver/436/SeedBookStore/WebContent/admin
+END
+adminSalesByAuthorDisplay.jsp
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/g2w12/!svn/ver/354/SeedBookStore/WebContent/admin/adminSalesByAuthorDisplay.jsp
+END
+adminTotalSalesDateChooserPanel.jsp
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/g2w12/!svn/ver/352/SeedBookStore/WebContent/admin/adminTotalSalesDateChooserPanel.jsp
+END
+adminTopSellersDateChooser.jsp
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/g2w12/!svn/ver/357/SeedBookStore/WebContent/admin/adminTopSellersDateChooser.jsp
+END
+adminShowClient.jsp
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/svn/g2w12/!svn/ver/338/SeedBookStore/WebContent/admin/adminShowClient.jsp
+END
+manageSurveys.jsp
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/svn/g2w12/!svn/ver/426/SeedBookStore/WebContent/admin/manageSurveys.jsp
+END
+adminSalesByClientDateChooser.jsp
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/svn/g2w12/!svn/ver/355/SeedBookStore/WebContent/admin/adminSalesByClientDateChooser.jsp
+END
+adminTopSellersDisplay.jsp
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/g2w12/!svn/ver/357/SeedBookStore/WebContent/admin/adminTopSellersDisplay.jsp
+END
+adminViewBook.jsp
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/svn/g2w12/!svn/ver/435/SeedBookStore/WebContent/admin/adminViewBook.jsp
+END
+manageFeeds.jsp
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svn/g2w12/!svn/ver/284/SeedBookStore/WebContent/admin/manageFeeds.jsp
+END
+adminSalesByClientDisplay.jsp
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/g2w12/!svn/ver/357/SeedBookStore/WebContent/admin/adminSalesByClientDisplay.jsp
+END
+adminZeroSalesDateChooser.jsp
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/g2w12/!svn/ver/359/SeedBookStore/WebContent/admin/adminZeroSalesDateChooser.jsp
+END
+addBook.jsp
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svn/g2w12/!svn/ver/436/SeedBookStore/WebContent/admin/addBook.jsp
+END
+changeCurrentSurvey.jsp
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svn/g2w12/!svn/ver/214/SeedBookStore/WebContent/admin/changeCurrentSurvey.jsp
+END
+adminZeroSalesDisplay.jsp
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/svn/g2w12/!svn/ver/359/SeedBookStore/WebContent/admin/adminZeroSalesDisplay.jsp
+END
+manageOrders.jsp
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/svn/g2w12/!svn/ver/371/SeedBookStore/WebContent/admin/manageOrders.jsp
+END
+adminReportDisplayRequiredInfoPanel.jsp
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/svn/g2w12/!svn/ver/351/SeedBookStore/WebContent/admin/adminReportDisplayRequiredInfoPanel.jsp
+END
+adminEditBook.jsp
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/svn/g2w12/!svn/ver/436/SeedBookStore/WebContent/admin/adminEditBook.jsp
+END
+adminSalesByPublisherDateChooser.jsp
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svn/g2w12/!svn/ver/356/SeedBookStore/WebContent/admin/adminSalesByPublisherDateChooser.jsp
+END
+adminShowClients.jsp
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/svn/g2w12/!svn/ver/338/SeedBookStore/WebContent/admin/adminShowClients.jsp
+END
+adminTopClientsDateChooser.jsp
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/g2w12/!svn/ver/358/SeedBookStore/WebContent/admin/adminTopClientsDateChooser.jsp
+END
+adminStockReportDisplay.jsp
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svn/g2w12/!svn/ver/360/SeedBookStore/WebContent/admin/adminStockReportDisplay.jsp
+END
+adminSalesByAuthorDateChooser.jsp
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/svn/g2w12/!svn/ver/354/SeedBookStore/WebContent/admin/adminSalesByAuthorDateChooser.jsp
+END
+adminMainReportDisplay.jsp
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/g2w12/!svn/ver/351/SeedBookStore/WebContent/admin/adminMainReportDisplay.jsp
+END
+adminSalesByPublisherDisplay.jsp
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svn/g2w12/!svn/ver/356/SeedBookStore/WebContent/admin/adminSalesByPublisherDisplay.jsp
+END
+manageAds.jsp
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn/g2w12/!svn/ver/317/SeedBookStore/WebContent/admin/manageAds.jsp
+END
+searchBook.jsp
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/g2w12/!svn/ver/435/SeedBookStore/WebContent/admin/searchBook.jsp
+END
+adminTopClientsDisplay.jsp
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/g2w12/!svn/ver/358/SeedBookStore/WebContent/admin/adminTopClientsDisplay.jsp
+END

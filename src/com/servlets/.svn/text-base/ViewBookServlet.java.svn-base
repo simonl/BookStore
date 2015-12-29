@@ -1,0 +1,115 @@
+package com.view.book;
+
+import java.io.IOException;
+import java.math.BigDecimal;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+
+import javax.servlet.ServletException;
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.jsp.jstl.sql.Result;
+import javax.servlet.jsp.jstl.sql.ResultSupport;
+
+import com.dataAccess.tables.Book;
+import com.dataAccess.tables.Client;
+import com.dataAccess.tables.Client.Data;
+import com.dataAccess.tables.Review;
+import com.dataAccess.tables.User;
+import com.dataClasses.Database;
+import com.dataClasses.Database.CouldNotConnect;
+import com.dataClasses.Maybe;
+
+/**
+ * Servlet implementation class ViewBookServlet
+ */
+public class ViewBookServlet extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+       
+    /**
+     * @see HttpServlet#HttpServlet()
+     */
+    public ViewBookServlet() {
+        super();
+        // TODO Auto-generated constructor stub
+    }
+
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		//Include the results of the NavigationServlet
+		this.getServletContext().getRequestDispatcher("/NavigationServlet").include(request, response);
+		this.getServletContext().getRequestDispatcher("/TopBooksServelt").include(request, response);
+
+		Database db = null;
+		
+		try {
+			db = Database.connect();
+			
+			// id = getParameter "isbn" >>= Book.Isbn13.parse >>= db.fromIsbn
+			final Maybe<String> input = 
+				Maybe.from(request.getParameter("isbn"));
+			
+			final Maybe<Book.Isbn13> isbn = 
+				input.isNull() ? 
+					Maybe.<Book.Isbn13>nothing() : 
+					Book.Isbn13.parse(input.value());
+
+			final Maybe<Book.Id> id =
+				isbn.isNull() ?
+					Maybe.<Book.Id>nothing() :
+					db.fromIsbn(isbn.value());
+					
+			if(isbn.isNull()) {
+				// Handle invalid isbn here
+				// possibly redirect to other JSP 
+				throw new RuntimeException("Not yet implemented!");
+			}
+			
+			final Book.Id book = id.value();
+			final Book.Data bookData = db.get(book);
+			final List<Review.Data> textReviews = db.getTextReviews(book);
+			final Database.RatingStats ratings = db.getRatingStats(book);
+
+			request.setAttribute("book", bookData);
+			request.setAttribute("reviews", textReviews);
+			request.setAttribute("averageRating", ratings.average);
+			request.setAttribute("totalReviews", textReviews.size());
+			request.setAttribute("totalRatings", ratings.count);
+
+			final Maybe<User.Authority> user = Maybe.from((User.Authority) request.getAttribute("user"));
+			if(!user.isNull())
+				db.visit(user.value(), book);
+			
+			final Cookie cookie = new Cookie("currGenre",bookData.genre.value);
+			cookie.setMaxAge(60*60*24*365);
+			response.addCookie(cookie);
+		
+			//request.setAttribute("currURL", "ViewBook?id=" + request.getParameter("id"));
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			if(db != null) 
+				db.close();
+		}
+		
+		getServletContext().getRequestDispatcher("/jsp/viewbook.jsp").forward(request, response);
+	}
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+	}
+
+}

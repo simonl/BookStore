@@ -1,0 +1,204 @@
+package com.login;
+
+import java.io.IOException;
+import java.sql.SQLException;
+
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import com.dataAccess.tables.Address;
+import com.dataAccess.tables.Client;
+import com.dataAccess.tables.User;
+import com.dataAccess.tables.User.Data;
+import com.dataClasses.Database;
+import com.dataClasses.Database.Action;
+import com.dataClasses.Maybe;
+
+/**
+ * Servlet implementation class RegistrationServlet
+ */
+public class RegistrationServlet extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+
+	/**
+	 * @see HttpServlet#HttpServlet()
+	 */
+	public RegistrationServlet() {
+		super();
+	}
+
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+	 *      response)
+	 */
+	protected void doGet(HttpServletRequest request,
+			HttpServletResponse response) throws ServletException, IOException {
+		doPost(request, response);
+	}
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
+	 */
+	protected void doPost(
+			final HttpServletRequest request,
+			final HttpServletResponse response) throws ServletException, IOException {
+		System.out.println("ENTERED REGISTRATION!!!");
+		//Include the results of the NavigationServlet
+		this.getServletContext().getRequestDispatcher("/NavigationServlet").include(request, response);
+		
+		final User.Input userInput =
+			new User.Input(
+				Maybe.from(request.getParameter("loginName")),
+				Maybe.from(request.getParameter("password"))
+			);
+		
+		final Client.Input clientInput =
+			new Client.Input(
+				Maybe.from(request.getParameter("firstName")),
+				Maybe.from(request.getParameter("lastName")),
+				Maybe.from(request.getParameter("homePhoneNumber")),
+				Maybe.from(request.getParameter("cellPhoneNumber")),
+				Maybe.from(request.getParameter("email"))
+			);		
+		
+		System.out.println("Created Client: " + clientInput);
+		final Address.Input billingInput = 
+			new  Address.Input(
+				Maybe.from(request.getParameter("billingCity")),
+				Maybe.from(request.getParameter("billingProvince")),
+				Maybe.from(request.getParameter("billingPostalCode")),
+				Maybe.from(request.getParameter("billingAddress"))
+			);
+
+		System.out.println("Created billingAddress: " + billingInput);
+		final boolean same = !Maybe.from(request.getParameter("same")).isNull();
+		System.out.println("Checked for same: " + same);
+		final Address.Input shippingInput = 
+			same ? billingInput : new Address.Input(
+				Maybe.from(request.getParameter("shippingCity")),
+				Maybe.from(request.getParameter("shippingProvince")),
+				Maybe.from(request.getParameter("shippingPostalCode")),
+				Maybe.from(request.getParameter("shippingAddress"))
+			);
+ 
+		System.out.println("Created shipping: " + shippingInput);
+		final User.Builder userParsed = userInput.parseFields();
+		final Client.Builder clientParsed = clientInput.parseFields();
+		final Address.Builder billingParsed = billingInput.parseFields();
+		final Address.Builder shippingParsed = shippingInput.parseFields();
+
+		System.out.println("Parsed fields: ");
+		System.out.println("\t" + clientParsed);
+		System.out.println("\t" + billingParsed);
+		System.out.println("\t" + shippingParsed);
+		final Maybe<Address.Data> billingData = billingParsed.build();
+		final Maybe<Address.Data> shippingData = shippingParsed.build();
+
+		System.out.println("Validating addresses: ");
+		System.out.println("\t" + billingData);
+		System.out.println("\t" + shippingData);
+		if(!billingData.isNull())
+			clientParsed.billingAddressID = perform(insert(billingData.value()));
+		if(!shippingData.isNull())
+			clientParsed.shippingAddressID = perform(insert(shippingData.value()));
+		
+		System.out.println("Shipping ID: " + clientParsed.shippingAddressID);
+		System.out.println("Billing ID: " + clientParsed.billingAddressID);
+
+		final Maybe<Client.Data> clientData = clientParsed.build();
+		
+		//System.out.println(clientData.getValue().toString());
+		System.out.println("Client data: " + clientData);
+		final Maybe<Client.Id> client = clientData.isNull() ? 
+				Maybe.<Client.Id>nothing() : 
+				perform(insert(clientData.value()));
+
+		System.out.println("Client ID: " + client);
+		
+		if(!client.isNull())
+			userParsed.clientID = Maybe.just(client);
+		
+		final Maybe<User.Data> userData = userParsed.build();
+		
+		final Maybe<User.Authority> user = userData.isNull() ?
+				Maybe.<User.Authority>nothing() :
+				perform(insert(userData.value()));
+		
+		System.out.println("User ID: " + user);
+		
+		if(user.isNull()) {
+
+			request.setAttribute("userInput", userInput);
+			request.setAttribute("clientInput", clientInput);
+			request.setAttribute("shippingInput", shippingInput);
+			request.setAttribute("billingInput", billingInput);
+			request.setAttribute("userParsed", userParsed);
+			request.setAttribute("clientParsed", clientParsed);
+			request.setAttribute("shippingParsed", shippingParsed);
+			request.setAttribute("billingParsed", billingParsed);
+			
+			System.out.println("Returned to registration form");
+			getServletContext().getRequestDispatcher(
+					response.encodeURL("/jsp/registrationForm.jsp")).forward(
+					request, response);
+		} else {
+			
+			request.getSession().setAttribute("user", user.value());
+
+			System.out.println("Returned to success");
+			getServletContext().getRequestDispatcher(
+					response.encodeURL("/WelcomeServlet")).forward(
+					request, response);
+		}
+	}
+
+	private static <R> Maybe<R> perform(final Database.Action<R, SQLException> action) {
+		try {
+			return Maybe.just(Database.using(action));
+		} catch(final SQLException ex) {
+			ex.printStackTrace();
+			return Maybe.nothing();
+		}
+	}
+
+	private static Database.Action<Address.Id, SQLException> insert(final Address.Data data) {
+		return new Database.Action<Address.Id, SQLException>() {
+			@Override
+			public Address.Id perform(final Database db) throws SQLException {
+				return db.put(data);
+			}
+		};
+	}
+	
+	private static Database.Action<Client.Id, SQLException> insert(final Client.Data data) {
+		
+		return new Database.Action<Client.Id, SQLException>() {
+			@Override
+			public Client.Id perform(final Database db) throws SQLException {
+				return db.put(data);
+			}
+		};
+	}
+
+	private static Database.Action<User.Authority, SQLException> insert(final User.Data data) {
+		return new Database.Action<User.Authority, SQLException>() {
+			@Override
+			public User.Authority perform(final Database db) throws SQLException {
+				return db.put(data);
+			}
+		};
+	}
+	
+	private static Database.Action<Client.Data, SQLException> getting(final Client.Id id) {
+		
+		return new Database.Action<Client.Data, SQLException>() {
+			@Override
+			public Client.Data perform(final Database db) throws SQLException {
+				return db.get(id);
+			}
+		};
+	}
+}

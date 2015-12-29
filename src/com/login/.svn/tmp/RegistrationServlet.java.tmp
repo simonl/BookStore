@@ -1,0 +1,192 @@
+package com.login;
+
+import java.io.IOException;
+import java.sql.SQLException;
+
+import javax.servlet.ServletException;
+
+import com.dataAccess.tables.Address;
+import com.dataAccess.tables.Client;
+import com.dataAccess.tables.User;
+import com.dataClasses.Database;
+import com.dataClasses.Maybe;
+import com.servlets.Attributes;
+import com.servlets.Conts;
+import com.servlets.MainPageServlet;
+import com.servlets.Parameters;
+import com.servlets.Session;
+
+/**
+ * Servlet implementation class RegistrationServlet
+ */
+public class RegistrationServlet extends MainPageServlet {
+	private static final long serialVersionUID = 1L;
+
+	public RegistrationServlet() { super(); }
+
+    @Override
+	public Conts.Cont body(
+			final Database db,
+			final Session session,
+			final Parameters parameters) 
+    		throws ServletException, IOException, SQLException {
+		
+		
+		final User.Input userInput =
+			new User.Input(
+				parameters.get("loginName"),
+				parameters.get("password")
+			);
+		
+		final Client.Input clientInput =
+			new Client.Input(
+				parameters.get("firstName"),
+				parameters.get("lastName"),
+				parameters.get("homePhoneNumber"),
+				parameters.get("cellPhoneNumber"),
+				parameters.get("email")
+			);		
+		
+		final Address.Input billingInput = 
+			new  Address.Input(
+				parameters.get("billingCity"),
+				parameters.get("billingProvince"),
+				parameters.get("billingPostalCode"),
+				parameters.get("billingAddress")
+			);
+		
+		final boolean same = !Maybe.from(parameters.get("same")).isNull();
+		System.out.println("Checked for same: " + same);
+		
+		final Address.Input shippingInput = 
+			same ? billingInput : new Address.Input(
+				parameters.get("shippingCity"),
+				parameters.get("shippingProvince"),
+				parameters.get("shippingPostalCode"),
+				parameters.get("shippingAddress")
+			);
+
+		System.out.println("Gathered input: ");
+		System.out.println("\t" + userInput);
+		System.out.println("\t" + clientInput);
+		System.out.println("\t" + billingInput);
+		System.out.println("\t" + (same ? "same: " : "") + shippingInput);
+		
+		final User.Builder userParsed = userInput.parseFields();
+		final Client.Builder clientParsed = clientInput.parseFields();
+		final Address.Builder billingParsed = billingInput.parseFields();
+		final Address.Builder shippingParsed = shippingInput.parseFields();
+
+		System.out.println("Parsed fields: ");
+		System.out.println("\t" + clientParsed);
+		System.out.println("\t" + billingParsed);
+		System.out.println("\t" + shippingParsed);
+		
+		final Maybe<Address.Data> billingData = billingParsed.build();
+		final Maybe<Address.Data> shippingData = shippingParsed.build();
+
+		System.out.println("Validating addresses: ");
+		System.out.println("\t" + billingData);
+		System.out.println("\t" + shippingData);
+		
+		if(!billingData.isNull())
+			clientParsed.billingAddressID = perform(insert(billingData.value()));
+		if(!shippingData.isNull())
+			clientParsed.shippingAddressID = perform(insert(shippingData.value()));
+		
+		System.out.println("Shipping ID: " + clientParsed.shippingAddressID);
+		System.out.println("Billing ID: " + clientParsed.billingAddressID);
+
+		final Maybe<Client.Data> clientData = clientParsed.build();
+		
+		System.out.println("Validating client data: ");
+		System.out.println("\t" + clientData);
+		
+		final Maybe<Client.Id> client = clientData.isNull() ? 
+				Maybe.<Client.Id>nothing() : 
+				perform(insert(clientData.value()));
+
+		if(!client.isNull())
+			userParsed.clientID = Maybe.just(client);
+		
+		System.out.println("Client ID: " + userParsed.clientID);
+		
+		final Maybe<User.NewData> userData = userParsed.build();
+
+		System.out.println("Validating user data: ");
+		System.out.println("\t" + userData);
+		
+		final Maybe<User.Id> user = userData.isNull() ?
+				Maybe.<User.Id>nothing() :
+				perform(insert(userData.value()));
+		
+		System.out.println("User ID: " + user);
+		
+		if(user.isNull()) {
+
+			final Attributes attributes = new Attributes();
+			attributes.set("userInput", userInput);
+			attributes.set("clientInput", clientInput);
+			attributes.set("shippingInput", shippingInput);
+			attributes.set("billingInput", billingInput);
+			attributes.set("userParsed", userParsed);
+			attributes.set("clientParsed", clientParsed);
+			attributes.set("shippingParsed", shippingParsed);
+			attributes.set("billingParsed", billingParsed);
+			
+			System.out.println("Returned to registration form");
+			
+			attributes.set("displayString", "Registration");
+			return Conts.display("/jsp/registrationpanel.jsp", attributes);
+			
+		} else {
+			final User.Id id = user.value();
+			final User.NewData data = userData.value();
+			
+			final User.Authority auth = db.login(id, data.password).value();
+			
+			session.loggedOnUser = Maybe.just(auth);
+
+			System.out.println("Returned to success");
+			
+			return Conts.redirect(session.lastPage);
+		}
+	}
+
+	private static <R> Maybe<R> perform(final Database.Action<R, SQLException> action) {
+		try {
+			return Maybe.just(Database.using(action));
+		} catch(final SQLException ex) {
+			ex.printStackTrace();
+			return Maybe.nothing();
+		}
+	}
+
+	private static Database.Action<Address.Id, SQLException> insert(final Address.Data data) {
+		return new Database.Action<Address.Id, SQLException>() {
+			@Override
+			public Address.Id perform(final Database db) throws SQLException {
+				return db.put(data);
+			}
+		};
+	}
+	
+	private static Database.Action<Client.Id, SQLException> insert(final Client.Data data) {
+		
+		return new Database.Action<Client.Id, SQLException>() {
+			@Override
+			public Client.Id perform(final Database db) throws SQLException {
+				return db.put(data);
+			}
+		};
+	}
+
+	private static Database.Action<User.Id, SQLException> insert(final User.NewData data) {
+		return new Database.Action<User.Id, SQLException>() {
+			@Override
+			public User.Id perform(final Database db) throws SQLException {
+				return db.put(data);
+			}
+		};
+	}
+}
