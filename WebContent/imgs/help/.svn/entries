@@ -1,7 +1,7 @@
 10
 
 dir
-438
+453
 https://waldo.dawsoncollege.qc.ca/svn/g2w12/SeedBookStore/WebContent/imgs/help
 https://waldo.dawsoncollege.qc.ca/svn/g2w12
 
@@ -94,40 +94,6 @@ has-props
 
 8956
 
-helpSearch2.png
-file
-
-
-
-
-2012-03-29T00:54:00.388244Z
-1c8be9c80d678ae90105576ac88a6efe
-2012-03-29T00:48:55.045865Z
-392
-9731965
-has-props
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-22901
-
 helpNewBooks.png
 file
 
@@ -161,6 +127,40 @@ has-props
 
 
 50433
+
+helpSearch2.png
+file
+
+
+
+
+2012-03-29T00:54:00.388244Z
+1c8be9c80d678ae90105576ac88a6efe
+2012-03-29T00:48:55.045865Z
+392
+9731965
+has-props
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+22901
 
 helpLoggedIn.png
 file
@@ -400,48 +400,14 @@ has-props
 
 93082
 
-helpDownload.png
+helpAds.png
 file
 
 
 
 
-2012-03-29T02:40:59.464394Z
-ff820e5a353420640d00c9196123134c
-2012-03-29T02:50:52.373618Z
-398
-0933125
-has-props
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-17663
-
-helpViewBook2.png
-file
-
-
-
-
-2012-03-29T00:54:00.397244Z
-94aa0c26c3adc0c5c73ffb82eaab0aaf
+2012-03-29T00:54:00.363242Z
+ead766c36cd248b6076e71f3614405dc
 2012-03-29T00:48:55.045865Z
 392
 9731965
@@ -466,7 +432,7 @@ has-props
 
 
 
-26564
+31911
 
 helpRss.png
 file
@@ -502,14 +468,14 @@ has-props
 
 13014
 
-helpAds.png
+helpViewBook2.png
 file
 
 
 
 
-2012-03-29T00:54:00.363242Z
-ead766c36cd248b6076e71f3614405dc
+2012-03-29T00:54:00.397244Z
+94aa0c26c3adc0c5c73ffb82eaab0aaf
 2012-03-29T00:48:55.045865Z
 392
 9731965
@@ -534,7 +500,41 @@ has-props
 
 
 
-31911
+26564
+
+helpDownload.png
+file
+
+
+
+
+2012-03-29T02:40:59.464394Z
+ff820e5a353420640d00c9196123134c
+2012-03-29T02:50:52.373618Z
+398
+0933125
+has-props
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+17663
 
 helpLogin.png
 file

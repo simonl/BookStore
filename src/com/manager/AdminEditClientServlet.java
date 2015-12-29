@@ -3,9 +3,6 @@ package com.manager;
 import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Set;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -14,8 +11,6 @@ import javax.servlet.jsp.jstl.sql.ResultSupport;
 import com.dataAccess.tables.Client;
 import com.dataAccess.tables.Client.Data;
 import com.dataAccess.tables.Client.Id;
-import com.dataAccess.tables.Province;
-import com.dataAccess.tables.Province.Name;
 import com.dataAccess.tables.User;
 import com.dataAccess.tables.UserBean;
 import com.dataClasses.Database;
@@ -34,6 +29,7 @@ import com.servlets.Session;
 
 /**
  * Servlet implementation class AdminEditClientServlet
+ * @author Edward Gagnon
  */
 public class AdminEditClientServlet extends ManagerPageServlet {
 	private static final long serialVersionUID = 1L;

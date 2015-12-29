@@ -1,20 +1,17 @@
 package com.manager;
 
 import java.io.IOException;
-import java.math.BigDecimal;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Set;
 
 import javax.servlet.ServletException;
 
-import com.cart.CheckoutCartServlet;
 import com.cart.ConfirmCheckoutServlet;
-import com.dataAccess.tables.Book;
+import com.dataAccess.tables.Address;
 import com.dataAccess.tables.Client;
 import com.dataAccess.tables.Client.Data;
 import com.dataAccess.tables.Client.Id;
-import com.dataAccess.tables.Address;
 import com.dataAccess.tables.Province;
 import com.dataAccess.tables.Purchase;
 import com.dataAccess.tables.User;
@@ -34,6 +31,7 @@ import com.servlets.Session;
 
 /**
  * Servlet implementation class AdminShowClientServlet
+ * @author Edward Gagnon
  */
 public class AdminShowClientServlet extends ManagerPageServlet {
 	private static final long serialVersionUID = 1L;

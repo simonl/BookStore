@@ -5,6 +5,9 @@ import java.util.Map;
 
 import com.dataAccess.tables.Book;
 
+/**
+ * @author Simon Langlois
+ */
 public final class Cart extends Wrapper<Map<Book.Id, Item>> {
 	public Cart() {
 		super(new HashMap<Book.Id, Item>());

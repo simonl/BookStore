@@ -1,7 +1,7 @@
 10
 
 dir
-438
+453
 https://waldo.dawsoncollege.qc.ca/svn/g2w12/SeedBookStore/WebContent/css/images
 https://waldo.dawsoncollege.qc.ca/svn/g2w12
 
@@ -264,40 +264,6 @@ has-props
 
 180
 
-ui-bg_glass_75_046fca_1x400.png
-file
-
-
-
-
-2012-02-19T00:18:22.782099Z
-676b16c37814ffc8032680c7ff33287b
-2012-02-08T00:48:54.349125Z
-62
-9731965
-has-props
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-143
-
 ui-icons_f7a50d_256x240.png
 file
 
@@ -332,16 +298,50 @@ has-props
 
 4369
 
-ui-icons_056b93_256x240.png
+ui-bg_glass_75_046fca_1x400.png
 file
 
 
 
 
-2012-02-19T00:18:22.829102Z
-d0fb060e3b5d8415966c38b8959613e5
-2012-01-31T17:53:16.359375Z
-28
+2012-02-19T00:18:22.782099Z
+676b16c37814ffc8032680c7ff33287b
+2012-02-08T00:48:54.349125Z
+62
+9731965
+has-props
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+143
+
+ui-icons_cd0a0a_256x240.png
+file
+
+
+
+
+2012-02-19T00:18:22.803100Z
+3e450c2a2c66328d9498e7001ad7197c
+2012-02-08T00:48:54.349125Z
+62
 9731965
 has-props
 
@@ -366,16 +366,16 @@ has-props
 
 4369
 
-ui-icons_cd0a0a_256x240.png
+ui-icons_056b93_256x240.png
 file
 
 
 
 
-2012-02-19T00:18:22.803100Z
-3e450c2a2c66328d9498e7001ad7197c
-2012-02-08T00:48:54.349125Z
-62
+2012-02-19T00:18:22.829102Z
+d0fb060e3b5d8415966c38b8959613e5
+2012-01-31T17:53:16.359375Z
+28
 9731965
 has-props
 

@@ -5,8 +5,6 @@ import java.sql.SQLException;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 import com.dataClasses.Database;
 import com.dataClasses.Database.Manager;
@@ -18,7 +16,7 @@ import com.servlets.Parameters;
 import com.servlets.Session;
 
 /**
- * Servlet implementation class TotalSalesDateChooser
+ * @author Edward Gagnon
  */
 public class TotalSalesDateChooser extends ManagerPageServlet {
 	private static final long serialVersionUID = 1L;

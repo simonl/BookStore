@@ -17,6 +17,7 @@ import com.view.book.ViewBookServlet;
 
 /**
  * Servlet implementation class EditBookServlet
+ * @author Evgeniy Li
  */
 public class EditBookServlet extends ManagerPageServlet{
 	private static final long serialVersionUID = 1L;
@@ -29,6 +30,7 @@ public class EditBookServlet extends ManagerPageServlet{
 			final Parameters parameters) 
 			throws ServletException, IOException, SQLException {
 		
+		//get book's information from the database and display it on the adminEditBook.jsp in purpose to edit it 
 		for(final Book.Id id : ViewBookServlet.validate(db, parameters)) {			
 			final Attributes attributes = ViewBookServlet.known(db, session, id);
 			return Conts.display("/admin/adminEditBook.jsp", attributes);

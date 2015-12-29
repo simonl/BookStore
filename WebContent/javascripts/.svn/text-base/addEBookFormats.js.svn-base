@@ -1,5 +1,8 @@
 /**
  * Author: David Preseault
+ * 
+ * Used in dynamically adding/removing ebook formats 
+ * text fields in add/edit book in Manager
  */
 function addEBook()
 {

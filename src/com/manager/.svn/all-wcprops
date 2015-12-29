@@ -1,7 +1,7 @@
 K 25
 svn:wc:ra_dav:version-url
 V 53
-/svn/g2w12/!svn/ver/435/SeedBookStore/src/com/manager
+/svn/g2w12/!svn/ver/451/SeedBookStore/src/com/manager
 END
 AdminShowAddBookForm.java
 K 25
@@ -13,7 +13,7 @@ AdminEditClientServlet.java
 K 25
 svn:wc:ra_dav:version-url
 V 81
-/svn/g2w12/!svn/ver/338/SeedBookStore/src/com/manager/AdminEditClientServlet.java
+/svn/g2w12/!svn/ver/454/SeedBookStore/src/com/manager/AdminEditClientServlet.java
 END
 DefaultReportResults.java
 K 25
@@ -31,25 +31,25 @@ AlterSalesServlet.java
 K 25
 svn:wc:ra_dav:version-url
 V 76
-/svn/g2w12/!svn/ver/418/SeedBookStore/src/com/manager/AlterSalesServlet.java
+/svn/g2w12/!svn/ver/444/SeedBookStore/src/com/manager/AlterSalesServlet.java
 END
 SearchBookServlet.java
 K 25
 svn:wc:ra_dav:version-url
 V 76
-/svn/g2w12/!svn/ver/303/SeedBookStore/src/com/manager/SearchBookServlet.java
+/svn/g2w12/!svn/ver/451/SeedBookStore/src/com/manager/SearchBookServlet.java
 END
 EditBookServlet.java
 K 25
 svn:wc:ra_dav:version-url
 V 74
-/svn/g2w12/!svn/ver/303/SeedBookStore/src/com/manager/EditBookServlet.java
+/svn/g2w12/!svn/ver/451/SeedBookStore/src/com/manager/EditBookServlet.java
 END
 AdminSearchClientsServlet.java
 K 25
 svn:wc:ra_dav:version-url
 V 84
-/svn/g2w12/!svn/ver/339/SeedBookStore/src/com/manager/AdminSearchClientsServlet.java
+/svn/g2w12/!svn/ver/442/SeedBookStore/src/com/manager/AdminSearchClientsServlet.java
 END
 AdminShowSalesServlet.java
 K 25
@@ -61,29 +61,29 @@ AddBookServlet.java
 K 25
 svn:wc:ra_dav:version-url
 V 73
-/svn/g2w12/!svn/ver/435/SeedBookStore/src/com/manager/AddBookServlet.java
+/svn/g2w12/!svn/ver/454/SeedBookStore/src/com/manager/AddBookServlet.java
 END
 AdminShowBookServlet.java
 K 25
 svn:wc:ra_dav:version-url
 V 79
-/svn/g2w12/!svn/ver/406/SeedBookStore/src/com/manager/AdminShowBookServlet.java
+/svn/g2w12/!svn/ver/454/SeedBookStore/src/com/manager/AdminShowBookServlet.java
 END
 AdminDecideReviewServlet.java
 K 25
 svn:wc:ra_dav:version-url
 V 83
-/svn/g2w12/!svn/ver/418/SeedBookStore/src/com/manager/AdminDecideReviewServlet.java
+/svn/g2w12/!svn/ver/442/SeedBookStore/src/com/manager/AdminDecideReviewServlet.java
 END
 AdminShowClientServlet.java
 K 25
 svn:wc:ra_dav:version-url
 V 81
-/svn/g2w12/!svn/ver/390/SeedBookStore/src/com/manager/AdminShowClientServlet.java
+/svn/g2w12/!svn/ver/454/SeedBookStore/src/com/manager/AdminShowClientServlet.java
 END
 AdminEditBookServlet.java
 K 25
 svn:wc:ra_dav:version-url
 V 79
-/svn/g2w12/!svn/ver/435/SeedBookStore/src/com/manager/AdminEditBookServlet.java
+/svn/g2w12/!svn/ver/454/SeedBookStore/src/com/manager/AdminEditBookServlet.java
 END

@@ -1,5 +1,10 @@
 package com.dataAccess.tables;
 
+/**
+ * When you don't need the full capacity of User.Data
+ * 
+ * @author Edward Gagnon
+ */
 public class UserBean {
 	
 	public UserBean(){}

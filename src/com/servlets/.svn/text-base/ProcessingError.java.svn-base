@@ -5,6 +5,7 @@ package com.servlets;
  *   so some servlets just immediately throw this exception
  *   and handle all of them in one place
  * 
+ * @author Simon Langlois
  */
 public final class ProcessingError extends Exception { 
 	private static final long serialVersionUID = 1L;

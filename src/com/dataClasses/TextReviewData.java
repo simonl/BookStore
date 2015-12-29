@@ -6,6 +6,9 @@ import java.sql.Timestamp;
 import com.dataAccess.tables.Review;
 import com.dataAccess.tables.User;
 
+/**
+ * @author Simon Langlois
+ */
 public final class TextReviewData {
 	public final User.Login username;
 	public final Timestamp createdAt;

@@ -1,34 +1,15 @@
 package com.servlets;
 
-import com.servlets.Conts.Cont;
 
 /**
 
-	Servlets return an instance of type Conts.Cont to either
+	PageServlets return an instance of type Conts.Cont to either
 	  - Display an JSP
 	  - Redirect to another servlet
 	  - Indicate an error in processing, which will return to the last page
 	  - Initiate the download of a file
 	
-    Using an Abstract Data Type =>
-
-	exists cont : *. {
-	  Display : string -> attributes -> cont
-	  Error : string -> string -> cont
-	  Redirect : closedServlet -> cont
-	  Download : string -> cont
-	  ...
-	}
-	
-	To represent the type =>
-	
-	<
-	  Display : (string, attributes)
-	  Error : (string, string)
-	  Redirect : closedServlet
-	  Download : string
-	>
-	
+  @author Simon Langlois
 */
 public final class Conts {
 	public static enum Type { REDIRECT, DISPLAY, ERROR, DOWNLOAD };

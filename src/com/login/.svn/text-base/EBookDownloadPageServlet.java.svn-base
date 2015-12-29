@@ -8,19 +8,19 @@ import java.util.Set;
 import javax.servlet.ServletException;
 
 import com.dataAccess.tables.Book;
-import com.dataAccess.tables.Book.EFormat;
-import com.dataAccess.tables.Book.Id;
 import com.dataAccess.tables.User;
 import com.dataClasses.Database;
-import com.dataClasses.Func;
 import com.dataClasses.Funcs;
 import com.servlets.Attributes;
 import com.servlets.Conts;
+import com.servlets.Conts.Cont;
 import com.servlets.MainPageServlet;
 import com.servlets.Parameters;
 import com.servlets.Session;
-import com.servlets.Conts.Cont;
 
+/**
+ * @author Simon Langlois
+ */
 public class EBookDownloadPageServlet extends MainPageServlet {
 	private static final long serialVersionUID = 1L;
 

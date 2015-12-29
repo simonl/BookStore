@@ -2,9 +2,7 @@ package com.cart;
 
 import java.io.IOException;
 import java.math.BigDecimal;
-import java.math.MathContext;
 import java.sql.SQLException;
-import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
@@ -18,7 +16,6 @@ import com.dataAccess.tables.Book;
 import com.dataAccess.tables.Client;
 import com.dataAccess.tables.Province;
 import com.dataAccess.tables.Purchase;
-import com.dataAccess.tables.Purchase.Id;
 import com.dataAccess.tables.User;
 import com.dataClasses.CreditCardType;
 import com.dataClasses.Database;
@@ -39,6 +36,13 @@ import com.servlets.MainPageServlet;
 import com.servlets.Parameters;
 import com.servlets.Session;
 
+/**
+ * 
+ * Confirm Checkout Servlet
+ * 
+ * @author David Preseault
+ * @author Simon Langlois
+ */
 public class ConfirmCheckoutServlet extends MainPageServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -109,6 +113,7 @@ public class ConfirmCheckoutServlet extends MainPageServlet {
 		}
 
 		//-----------------------------------------EMAIL INVOICE-----------------------------------------
+		//Prepare the body
 		
 		String messageBody = "***********************\nMineBooks Book Store\n***********************\n\n";
 		Client.Data clientData = db.get(client.value());
@@ -170,6 +175,12 @@ public class ConfirmCheckoutServlet extends MainPageServlet {
 		return Conts.display("/jsp/invoice.jsp", attributes);
 	}
 	
+	/**
+	 * Sends the prepared e-mail to the supplied email address.
+	 * 
+	 * @param messageBody The Email Body Text
+	 * @param emailAddr Recipient
+	 */
 	private void sendMail(String messageBody, String emailAddr) {
 
 		// Create object to manage properties
@@ -216,7 +227,12 @@ public class ConfirmCheckoutServlet extends MainPageServlet {
 		
 		return false;
 	}
-	
+
+	/** 
+	 * Number as in array of digits, not an int
+	 * 
+	 * @author Simon Langlois
+	 */
 	public static final Maybe<byte[]> parseNumber(final String numberInput) {
 		final byte[] number = new byte[numberInput.length()];
 		

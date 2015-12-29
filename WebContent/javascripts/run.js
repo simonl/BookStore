@@ -5,6 +5,7 @@
 //*                                      *
 //****************************************
 
+//Variable declarations
 var loggedin = false;
 var timestamp = 0;
 var t = 0;
@@ -13,13 +14,17 @@ var mouseLeaveTimer;
 var imageTimer;
 var imagePath = '';
 
+//Start only when the document is ready.
 $(document).ready(
 		function() {
 			
+			//Create a button from the achor on the mobile.
 			$('.homeButton').button();
 			
+			//Create datepickers
 			$( ".uiDateChooser" ).datepicker();
 
+			//Posting of the Approve/Deny function
 			$('#Approving, #Deny').click(function(e){
 				//alert('clicked');
 				var $parent = $(this).parent().parent();
@@ -56,17 +61,11 @@ $(document).ready(
 				return false;
 			});
 			
- 
-			//reload the image every minute
-			//imageTimer = setInterval(function(){reloadImage($('#headerGif'));},60000);
-//			$('#headerImage').click(function(){
-//				reloadImage($('#headerGif'));
-//			});
-			
+			//The header image animation starting function
 			$('#headerImage').mousedown(function(){
 				$('#headerGif').css('display', 'inherit');
 			});
-			
+			//Occurs automatically after the mousedown event is fired.
 			$('#headerImage').mouseleave(function(){
 				
 				if(imagePath.length == 0){
@@ -84,43 +83,8 @@ $(document).ready(
 					 $('#headerGif').css('display', 'none'); 
 					},4000);
 			});
-			
 
-
-//			/*
-//			//Create the sub menu
-//			$('.hasSubLevel').mouseover(function(e){
-//				//http://api.jquery.com/toggle/
-//				clearTimeout(mouseLeaveTimer);
-//				mouseLeaveTimer = null;
-//				if($('.sub-level').css('display') == 'none'){
-//					$('.sub-level').css("position", 'absolute');
-//					$('.sub-level').css("left", e.pageX - 10);
-//					$('.sub-level').css("top", e.pageY - 10);
-//					$('.sub-level').toggle();
-//					$('.sub-level').css('z-index', "10000");
-//				}
-//				return false;
-//		
-//			});
-//			//Clear display-leave timer
-//			$('.sub-level').mouseenter(function(){
-//				clearTimeout(mouseLeaveTimer);
-//				mouseLeaveTimer = null;
-//			});
-//			//Add a leave timer so that the menu doesn't disappear when other Dom objects get focus.
-//			$('.sub-level').mouseleave(function(){
-//				removeMenu($(this));
-//			});
-//			
-//			//Detach the sublevel menu and attach it to the main body. Allows to place relative to the window pane.
-//			hiddenMenu = $('.sub-level').detach();
-//			hiddenMenu.appendTo('body');
-//			hiddenMenu.hide();
-//			hiddenMenu = null;
-//
-//			*/
-
+			//Create an accordion for the registration form
 			var accordion = $('.accordion').accordion({
 				icons : false,
 				header : 'h3'
@@ -138,6 +102,7 @@ $(document).ready(
 			$('.uiDateChooser').mask('99/99/9999');
 
 
+			//Validation of the regristration page
 			$("#same").click(
 					function(e) {
 
@@ -163,8 +128,10 @@ $(document).ready(
 
 			});
 
+			
 			var current = 0;
 
+			//More validation for the registration page
 			$.validator.addMethod("pageRequired", function(value, element) {
 				function match(index) {
 					return current == index
@@ -249,6 +216,7 @@ $(document).ready(
 				});
 			}
 			
+			//The cycling of the books on sale display
 			$('#bookSalesDisplay').cycle({
 				fx:     'fade',
 				speed:  'fast',
@@ -258,6 +226,7 @@ $(document).ready(
 				pause : 1
 			});
 			
+			//The cycling of the books display
 			$('#booksDisplay').cycle({
 				fx:     'scrollVert',
 				speed:  'slow',
@@ -276,26 +245,8 @@ $(document).ready(
 				random : true,
 				pause : 1
 			});
-			
-			//Display default image if images weren't loaded correctly
-//			$('.thumb').load(function(){	
-//			}).error(function(){
-//				var path = window.location.pathname.replace(/\/[^\/]*$/, '');
-//				//alert(path);
-//				var index = path.indexOf('/', 1);
-//				//alert(index);
-//				if(index <= 0){
-//					path = path + "/";
-//				}
-//				else
-//					path = path.substring(0, index) + '/';
-//				//alert(path + 'bookImages/thumbnails/noImage.jpg');
-//				var image = new Image();
-//				image.src = path + 'bookImages/thumbnails/noImage.jpg';
-//				$(this).attr('src', image.src);
-//				image = null;
-//			});
 			 
+			//Functionality for reset sales price button.
 			$('.buttonResetSalesPrice').click(function(e){
 				var $parent = $(this).parent();
 				var isbn13 = $parent.find( '#isbn' ).val();
@@ -333,7 +284,7 @@ $(document).ready(
 				return false;
 			});
 			
-			//$("#salePriceInput").mask("[0-9]");
+			//Function for the set sales button
 			$('.buttonSetSalesPrice').click(function(e){
 				var $parent = $(this).parent();
 				var isbn13 = $parent.find( '#isbn' ).val();
@@ -370,7 +321,7 @@ $(document).ready(
 			});
 			 
 			
-			
+			//A function that trims. Useless with jQuery
 			function etrim(x) {
 				return x.replace(/^\s*/, "").replace(/\s*$/, "");
 			}
@@ -450,6 +401,7 @@ $(document).ready(
 					},4100);
 			}
 			
+			//Gets the root path of the web page
 			function getRootWebPath(){
 				var newURL = window.location.protocol + "//" + window.location.host; //+ window.location.pathname;
 				var path = window.location.pathname.replace(/\/[^\/]*$/, '');
@@ -465,6 +417,7 @@ $(document).ready(
 				return newURL;
 			}
 			
+			//A function that is suppose to preload images. An experiment.
 			function preload(images) {
 			    if (document.images) {
 			        var i = 0;

@@ -6,6 +6,16 @@ import com.dataClasses.Backend;
 import com.dataClasses.Key;
 import com.dataClasses.Nat;
 
+/**  
+ * Defines types and classes related to the database table with the same name
+ * There is a separation between the ID, which refers to a row, and the other fields in a row
+ * Each database field get its own abstract data type and parsing/validating constructor
+ * 
+ * The Global.Data objects have a field that contains a set of small ads, 
+ *   which differs from the database representation
+ *   
+ * @author Simon Langlois
+ */
 public class Global {
 	
 	public static final class Id extends Key {

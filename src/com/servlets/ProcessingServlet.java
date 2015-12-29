@@ -2,9 +2,14 @@ package com.servlets;
 
 import java.io.IOException;
 import java.sql.SQLException;
+
 import javax.servlet.ServletException;
+
 import com.dataClasses.Database;
 
+/**
+ * @author Simon Langlois
+ */
 public abstract class ProcessingServlet extends PageServlet {
 	private static final long serialVersionUID = 1L;
 

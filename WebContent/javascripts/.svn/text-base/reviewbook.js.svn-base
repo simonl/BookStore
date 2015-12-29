@@ -1,5 +1,11 @@
 /**
- * Author: David Preseault
+ * @author David Preseault
+ * 
+ * This javascript will allow hovering effects on post review box
+ */
+
+/**
+ * Adds hovering effcts over images when rating a book.
  */
 function hoverRating(ratingNum){
 	var pickaxeArray = new Array("imgs/woodpickaxe.png","imgs/stonepickaxe.png","imgs/ironpickaxe.png","imgs/goldpickaxe.png","imgs/diamondpickaxe.png");
@@ -11,6 +17,9 @@ function hoverRating(ratingNum){
 	}
 	document.reviewForm.rating.value=ratingNum;
 }
+/**
+ * Makes sure the first rating possible is 1 (wood image).
+ */
 function firstPickaxeWood()
 {
 	if (document.getElementById("ratingImage1"))

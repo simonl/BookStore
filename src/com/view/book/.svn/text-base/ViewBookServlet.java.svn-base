@@ -4,15 +4,11 @@ import java.io.IOException;
 import java.io.StringWriter;
 import java.math.BigDecimal;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.FactoryConfigurationError;
@@ -41,10 +37,13 @@ import com.servlets.Conts;
 import com.servlets.MainPageServlet;
 import com.servlets.Parameters;
 import com.servlets.Session;
-import com.xml.XML;
 
 /**
- * Servlet implementation class ViewBookServlet
+ * Servlet that creates an XML document by fetching requested book data.
+ * It generates an XML document and converts it to JSP and uses the book.xsl
+ * template.
+ * 
+ * @author David Preseault
  */
 public class ViewBookServlet extends MainPageServlet {
 	private static final long serialVersionUID = 1L;
@@ -102,7 +101,8 @@ public class ViewBookServlet extends MainPageServlet {
 		final Maybe<User.Authority> user = session.loggedOnUser;
 		if(!user.isNull())
 			db.visit(user.value(), book);
-		
+
+		//Keep track of user's last viewed genre.
 		final Cookie cookie = new Cookie("lastGenre", bookData.genre.value);
 		cookie.setMaxAge(60*60*24*365);
 		session.addCookie(cookie);
@@ -112,11 +112,12 @@ public class ViewBookServlet extends MainPageServlet {
 	}
 	
 	/**
-     * Convert the ArrayList of fish objects to a DOM Document
-     *
-     * @param rows
-     * @return
-     */
+	 *	Converts book information to an XML document.
+	 * @author David Preseault
+	 * @param bookData
+	 * @param ratings
+	 * @return Document
+	 */
     private static Document convertBookDataToDocument(Book.Data bookData, RatingStats ratings) {
 
         Document xmldoc = null;

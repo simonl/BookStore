@@ -1,47 +1,61 @@
+<%-- ************************************************************************ --%>
+<%-- *                                     			 						* --%>
+<%-- * Author: David Préseault		        								* --%>
+<%-- *                                      								* --%>
+<%-- * This JSP page displays the information on a specific book.			* --%>
+<%-- * Information will be generated from XML-to-JSP conversion depending	* --%>
+<%-- * on the book requested by user. Depending on if book is available as	* --%>
+<%-- * an ebook, paper, or both types, checkboxes allowing selecting		* --%>
+<%-- * between will be displayed, or else a box to add number of copies for	* --%>
+<%-- * paper books. This will be followed by a Add To Cart button to allow	* --%>
+<%-- * user to add to his/her cart if not out of stock.						* --%>
+<%-- *                                      								* --%>
+<%-- ************************************************************************ --%>
+
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
     <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
     <%@ taglib uri="http://java.sun.com/jsp/jstl/xml" prefix="x" %>
-	  <div id="viewbook" class="contentbox ui-corner-ll">
-	<c:import var="xslSheet" url="book.xsl"/>
-	<x:transform doc="${xmlString}" xslt="${xslSheet}"/>
+<div id="viewbook" class="contentbox ui-corner-ll">
 
+<%-- Import the XML-to-JSP generated page --%>
+	<c:import var="xslSheet" url="book.xsl" />
+	<x:transform doc="${xmlString}" xslt="${xslSheet}" />
+
+<%-- Show the related books portion --%>
 	<div id="relatedBooksDisplay">
-		<p><span class="viewbookFields">Related Books:</span></p>
-		<TABLE style="padding:5px; width:100%">
-		<TR>
-			<c:forEach var="recentBook" items="${ relatedBooks }">
-				<TD style="text-align:center">
-				<a href="<c:url  value="ViewBook?isbn=" />${recentBook.isbn13}" class="noUnderline" >
-					<img src="<c:url  value="/bookImages/" />${recentBook.thumbnail}" title="${recentBook.title} by ${recentBook.author}" width=60 height=70/><BR>
-<%-- 					${recentBook.title}<BR> --%>
-<%-- 					<span id ="thumbBookAuthor">${recentBook.author}</span><BR> --%>
-<%-- 					<c:choose> --%>
-<%-- 						<c:when test="${recentBook.listPrice.value == recentBook.salePrice.value}"> --%>
-<!-- 							$${recentBook.listPrice} -->
-<%-- 						</c:when> --%>
-<%-- 						<c:otherwise> --%>
-<!-- 							<span style="text-decoration:line-through;color:red"> -->
-<!-- 								$${recentBook.listPrice} -->
-<!-- 							</span> $${recentBook.salePrice} -->
-<%-- 						</c:otherwise> --%>
-<%-- 					</c:choose> --%>
-				</a>
-				</TD>
-			</c:forEach>
-			</TR> </TABLE>
-			</div>
+		<p>
+			<span class="viewbookFields">Related Books:</span>
+		</p>
+		<TABLE style="padding: 5px; width: 100%">
+			<TR>
+				<c:forEach var="recentBook" items="${ relatedBooks }">
+					<TD style="text-align: center"><a
+						href="<c:url  value="ViewBook?isbn=" />${recentBook.isbn13}"
+						class="noUnderline"> <img
+							src="<c:url  value="/bookImages/" />${recentBook.thumbnail}"
+							title="${recentBook.title} by ${recentBook.author}" width=60
+							height=70 /><BR> </a></TD>
+				</c:forEach>
+			</TR>
+		</TABLE>
+	</div>
 </div>
-<p style="font-family:verdana;font-size:16px;text-decoration:underline;">Reviews</p>
+
+<%-- Display the reviews (if any) for this book, paginated --%>
+
+<p style="font-family: verdana; font-size: 16px; text-decoration: underline;">Reviews</p>
 <c:forEach var="r" items="${reviews}" varStatus="reviewCycle">
-<c:if test="${(reviewCycle.count%3)==0}">
-<c:set var="numOfPages" value="${numOfPages+1}"></c:set></c:if>
-	<div id="review${reviewCycle.count}" style="margin-bottom:20px;<c:choose><c:when test="${reviewCycle.count > 3}">display:none;</c:when></c:choose>"
+	<c:if test="${(reviewCycle.count%3)==0}">
+		<c:set var="numOfPages" value="${numOfPages+1}"></c:set>
+	</c:if>
+	<div id="review${reviewCycle.count}"
+		style="margin-bottom:20px;<c:choose><c:when test="${reviewCycle.count > 3}">display:none;</c:when></c:choose>"
 		class="reviewBox ui-corner-ll">
 		<div id="reviewHeader" class="reviewheaders ui-corner-ll">
-			<div style="float:left; margin-left: 6px;">${r.username}</div>
-			<div style="float:right; margin-right: 6px;">
+			<div style="float: left; margin-left: 6px;">${r.username}</div>
+			<div style="float: right; margin-right: 6px;">
 				<c:choose>
 					<c:when test="${r.rating.value=='1'}">
 						<c:set var="imgSrc" value="/imgs/woodpickaxe.png" scope="page" />
@@ -69,19 +83,25 @@
 		<p style="margin-left: 8px;">${r.text}</p>
 		<p align="right" style="margin-right: 8px;">
 			<span class="viewbookFields">Reviewed on:</span> ${r.createdAt}
-			</p>
+		</p>
 	</div>
 </c:forEach>
-<c:if test="${totalReviews>0}"> 
-<p style="font-family: verdana; font-size: 16px;">«<a href="javascript:void(0)" onclick="prevDiv();">Previouis Page</a>
- <c:forEach var="i" begin="1" end="${numOfPages}" step="1">
- | <a id="numOfPage${i}" href="javascript:void(0)" onclick="goToPage(${i});">${i}</a>
- </c:forEach>
-  | <a href="javascript:void(0)" onclick="nextDiv();">Next Page</a>»</p>
-  </c:if>
+<c:if test="${totalReviews>0}">
+	<p style="font-family: verdana; font-size: 16px;">
+		«<a href="javascript:void(0)" onclick="prevDiv();">Previouis Page</a>
+		<c:forEach var="i" begin="1" end="${numOfPages}" step="1">
+ | <a id="numOfPage${i}" href="javascript:void(0)"
+				onclick="goToPage(${i});">${i}</a>
+		</c:forEach>
+		| <a href="javascript:void(0)" onclick="nextDiv();">Next Page</a>»
+	</p>
+</c:if>
+
+<%-- Show the Post Review section to a logged-in user only --%>
 <c:choose>
 	<c:when test="${ !session.loggedOnUser.isNull}">
-		<br><p style="font-family: verdana; font-size: 16px;">Would you like
+		<br>
+		<p style="font-family: verdana; font-size: 16px;">Would you like
 			to review this book?</p>
 		<div id="review" style="text-align: center;"
 			class="contentbox ui-corner-ll">
@@ -111,7 +131,7 @@
 		<p style="font-family: verdana; font-size: 16px;">You must be
 			logged in to write a review</p>
 	</c:otherwise>
-</c:choose>	
+</c:choose>
 <input type="hidden" id="numberOfPagesValue" value="${numOfPages * 3}" />
 <script src="javascripts/reviewbook.js" type="text/javascript"></script>
 <script src="javascripts/reviewCycle.js" type="text/javascript"></script>

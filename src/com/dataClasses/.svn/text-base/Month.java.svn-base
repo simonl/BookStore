@@ -1,5 +1,8 @@
 package com.dataClasses;
 
+/**
+ * @author Simon Langlois
+ */
 public enum Month {
 	January,
 	February,

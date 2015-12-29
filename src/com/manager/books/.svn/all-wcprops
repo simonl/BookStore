@@ -7,17 +7,17 @@ DeleteBookServlet.java
 K 25
 svn:wc:ra_dav:version-url
 V 82
-/svn/g2w12/!svn/ver/410/SeedBookStore/src/com/manager/books/DeleteBookServlet.java
+/svn/g2w12/!svn/ver/454/SeedBookStore/src/com/manager/books/DeleteBookServlet.java
 END
 PublicizeBookServlet.java
 K 25
 svn:wc:ra_dav:version-url
 V 85
-/svn/g2w12/!svn/ver/410/SeedBookStore/src/com/manager/books/PublicizeBookServlet.java
+/svn/g2w12/!svn/ver/454/SeedBookStore/src/com/manager/books/PublicizeBookServlet.java
 END
 DiscontinuedBooksServlet.java
 K 25
 svn:wc:ra_dav:version-url
 V 89
-/svn/g2w12/!svn/ver/410/SeedBookStore/src/com/manager/books/DiscontinuedBooksServlet.java
+/svn/g2w12/!svn/ver/454/SeedBookStore/src/com/manager/books/DiscontinuedBooksServlet.java
 END

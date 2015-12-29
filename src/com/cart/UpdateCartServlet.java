@@ -9,7 +9,6 @@ import javax.servlet.ServletException;
 import com.dataAccess.tables.Book;
 import com.dataClasses.Database;
 import com.dataClasses.Item;
-import com.dataClasses.Maybe;
 import com.dataClasses.Nat;
 import com.servlets.Closures;
 import com.servlets.Conts;
@@ -19,6 +18,8 @@ import com.servlets.Parameters;
 import com.servlets.Session;
 
 /**
+ * @author David Preseault
+ * 
  * Servlet implementation class UpdateCartServlet
  */
 public class UpdateCartServlet extends MainPageServlet {

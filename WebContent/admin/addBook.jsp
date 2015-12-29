@@ -1,3 +1,7 @@
+<%-- Author Evgeniy Li --%>
+<%-- this page allows to add a new book on the database for manager --%>
+
+
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
     
@@ -5,6 +9,8 @@
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <script src="javascripts/addEBookFormats.js" type="text/javascript"></script>
+
+<%--Script used to display an input box of genre is other --%>
 <script type="text/javascript">
 function check_other(option_selected) {
   if(option_selected == 'other') {
@@ -18,6 +24,8 @@ window.onload = function() {
 }
 </script>
 
+
+<%--Form to add a book --%>
 <div class="contentbox ui-corner-ll">		
 
 	<div class="contentheaders ui-corner-ll">Add Book</div>

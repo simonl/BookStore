@@ -18,7 +18,7 @@ import com.servlets.ProcessingError;
 import com.servlets.Session;
 
 /**
- * Servlet implementation class CreateNewSurveyServlet
+ * @author Simon Langlois
  */
 public final class CreateNewFeedServlet extends ManagerPageServlet {
 	private static final long serialVersionUID = 1L;

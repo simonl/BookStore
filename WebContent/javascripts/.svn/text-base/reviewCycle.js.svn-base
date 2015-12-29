@@ -1,5 +1,7 @@
 /**
  * Author: David Preseault
+ * 
+ * Javascript that handles pagination of reviews.
  */
 var div1;
 var div2;
@@ -7,6 +9,9 @@ var div3;
 var currentDivNum;
 var totalReviews;
 
+/**
+ * Shows the user the next set of reviews.
+ */
 function nextDiv()
 {
 	if ((currentDivNum+3) <= totalReviews)
@@ -22,6 +27,9 @@ function nextDiv()
 	}
 }
 
+/**
+ * Shows the user the previous set of reviews.
+ */
 function prevDiv()
 {
 	if (currentDivNum>3)
@@ -36,6 +44,10 @@ function prevDiv()
 		if (document.getElementById("review" + currentDivNum)) { div3.style.display = "none"; div3 = document.getElementById("review" + currentDivNum); div3.style.display = "block"; }
 	}
 }
+
+/**
+ * Shows the user the selected page of reviews.
+ */
 function goToPage(num)
 {
 	document.getElementById("numOfPage" + (currentDivNum/3)).style.fontWeight = "normal";
@@ -48,15 +60,23 @@ function goToPage(num)
 	if (document.getElementById("review" + (fetchDivNum-1))) { div2.style.display = "none"; div2 = document.getElementById("review" + (fetchDivNum-1)); div2.style.display = "block"; }
 	if (document.getElementById("review" + fetchDivNum)) { div3.style.display = "none"; div3 = document.getElementById("review" + fetchDivNum); div3.style.display = "block"; }
 }
+
+/**
+ * Shows the user the last set of reviews.
+ */
 function lastDiv()
 {
 	goToPage(totalReviews);
 }
 
+/**
+ * Shows the user the first set of reviews.
+ */
 function firstDiv()
 {
 	goToPage(1);
 }
+
 function init()
 {
 	div1 = document.getElementById("review1");

@@ -20,6 +20,7 @@ import com.servlets.Session;
 
 /**
  * Servlet implementation class SearchBookServlet
+ * @author Evgeniy Li
  */
 public class SearchBookServlet extends ManagerPageServlet {
 	private static final long serialVersionUID = 1L;
@@ -32,10 +33,13 @@ public class SearchBookServlet extends ManagerPageServlet {
 			final Parameters parameters)
 			throws ServletException, IOException, SQLException {
 		
+		//get parameter ok from searchBook.jsp in purpose to not to show books before clicking on search button 
 		String ok = parameters.get("ok").or((String) null);
 		
+		//get parameters from the search book form
 		final SearchInput input = SearchResultServlet.read(parameters);
-				
+		
+		//search for the books on the database 
 		final Set<Book.Id> books = db.search(input);
 		if(books.size() == 1) {
 			for(final Book.Id id : books) {				
@@ -44,6 +48,7 @@ public class SearchBookServlet extends ManagerPageServlet {
 			}
 		}
 		
+		//set attributes 
 		final Attributes attributes = new Attributes();
 		attributes.set("books", db.getBooks(books));
 		attributes.set("ok", ok);		

@@ -4,6 +4,9 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
+/**
+ * @author Simon Langlois
+ */
 public enum Tables {
 	
 	ADDRESS("address", new String[] {

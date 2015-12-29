@@ -1,3 +1,7 @@
+<%-- Author Evgeniy Li --%>
+<%--form to search for a book --%>
+<%--display for searched books after clicking on the search button the first time--%>
+
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
     
@@ -8,6 +12,7 @@
 	<div class="contentheaders ui-corner-ll">Search Book</div>
 
 	<div style="text-align:center" id="surveyManagement"  >
+
 
 		<div>
 			<form action="<c:url  value="/SearchBookServlet" />" method="get">
@@ -28,7 +33,9 @@
 			</form>
 		</div>
 		<br/><br/>
-			<c:if test="${!empty ok}">
+	
+	
+			<c:if test="${!empty ok}"> <%--test if the search button was clicked the first time --%>
 					<div id="booksDisplay">	
 						<div id="pager" ><!-- Top -->
 						<c:forEach var="row" items="${books}" varStatus="status" >

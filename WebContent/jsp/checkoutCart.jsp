@@ -1,3 +1,13 @@
+<%-- ************************************************************************ --%>
+<%-- *                                     			 						* --%>
+<%-- * Author: David Préseault		        								* --%>
+<%-- *                                      								* --%>
+<%-- * This JSP page displays the cart contents and sub total, taxes and	* --%>
+<%-- * total price. This also presents the user a form to fill out for		* --%>
+<%-- * credit card information.	Once completed, user presses Confirm button.* --%>
+<%-- *                                      								* --%>
+<%-- ************************************************************************ --%>
+
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -13,6 +23,8 @@
 			<div>
 		</c:otherwise>
 	</c:choose>
+
+<%-- Display the cart items --%>
 	<TABLE cellspacing="0" width="98%"
 				style="text-align: center; margin: 0px auto;">
 				<TR>
@@ -25,7 +37,6 @@
 				<tr>
 					<td>&nbsp;</td>
 				</tr>
-				
 				<c:set var="counter" value="0"></c:set>
 				<c:forEach var="entry" items="${ cartEntries }" varStatus="status">
 					<c:choose>
@@ -72,6 +83,7 @@
 				</c:forEach>
 			</TABLE>
     </div>
+<%-- Display the subtotal, tax, and total price. --%>
     	<p style="text-align:right;">Total: ${ cost } <br /> 
     	+ Taxes (${ taxRate }%): ${ total } <br />
     	<c:if test="${ !(empty secondTaxRate) }">
@@ -82,6 +94,7 @@
     	<c:if test="${ !(empty checkoutError) }">
     	<p><span style="color:yellow;margin-left:10px;">*** ${ checkoutError }</span></p><br />
     	</c:if>
+<%-- Display the credit card information form --%>
     	<form method="post" action="<c:url  value="/ConfirmCheckoutServlet" />">
     	<table style="margin-left:10px;">
 				<tr>

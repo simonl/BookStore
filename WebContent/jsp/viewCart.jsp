@@ -1,3 +1,14 @@
+<%-- ************************************************************************ --%>
+<%-- *                                     			 						* --%>
+<%-- *	Author: David Préseault												* --%>
+<%-- *                                      								* --%>
+<%-- *	This JSP page displays the contents of the user's cart.				* --%>
+<%-- *	If no entries present, displays no items.							* --%>
+<%-- *	Cart is available to non-registered and registered users.			* --%>
+<%-- *	Has the possibility of updating requested quantities.				* --%>
+<%-- *	Has a checkout button only if user is logged in.					* --%>
+<%-- *                                      								* --%>
+<%-- ************************************************************************ --%>
 
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
@@ -28,7 +39,7 @@
 				<tr>
 					<td>&nbsp;</td>
 				</tr>
-				
+<%-- Display the Cart --%>
 				<c:set var="counter" value="0"></c:set>
 				<c:forEach var="entry" items="${ cartEntries }" varStatus="status">
 					<c:choose>
@@ -39,7 +50,7 @@
 							<c:set var="bgcolor" value="#2A4480"></c:set>
 						</c:otherwise>
 					</c:choose>
-					
+<%-- If EBOOK, display 1 quantity and price + total --%>
 					<c:if test="${ cart.value[entry.key].electronic }">
 						<TR style="background-color:${bgcolor};" height="40px">
 							<TD><input type="button" value="X" onClick="document.location.href = '<c:url value="/RemoveFromCartServlet"><c:param name="isbn" value="${entry.value.isbn13}" /><c:param name="electronic" value="true" /></c:url>'" title="Remove" /></TD>
@@ -61,7 +72,7 @@
 							<c:set var="bgcolor" value="#2A4480"></c:set>
 						</c:otherwise>
 					</c:choose>					
-						
+<%-- If Paper, display Quantities and price + total --%>						
 					<c:if test="${ cart.value[entry.key].numberOfCopies.value > 0 }">
 						<TR style="background-color:${bgcolor};" height="40px">
 							<TD><input type="button" value="X" onClick="document.location.href = '<c:url value="/RemoveFromCartServlet"><c:param name="isbn" value="${entry.value.isbn13}" /><c:param name="electronic" value="false" /></c:url>'" title="Remove" /></TD>
@@ -78,6 +89,7 @@
 			</TABLE>
 			</form>
 			<c:choose>
+<%-- Check if user is logged in or not to display checkout button. --%>
 				<c:when test="${ session.loggedOnUser.isNull }">
 				<p style="text-align: center;">
 					<a href="javascript:void(0)">

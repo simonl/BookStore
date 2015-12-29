@@ -5,25 +5,20 @@ import java.sql.SQLException;
 import java.util.Set;
 
 import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 import com.dataAccess.tables.Book;
 import com.dataClasses.Database;
 import com.dataClasses.SearchInput;
 import com.search.SearchResultServlet;
-import com.servlets.Conts.Cont;
 import com.servlets.Attributes;
-import com.servlets.Closures;
 import com.servlets.Conts;
-import com.servlets.MainPageServlet;
 import com.servlets.PageServlet;
 import com.servlets.Parameters;
 import com.servlets.Session;
 
 /**
  * Servlet implementation class ShowBooksMobileServlet
+ * @author Edward Gagnon
  */
 public class ShowBooksMobileServlet extends PageServlet {
 	private static final long serialVersionUID = 1L;

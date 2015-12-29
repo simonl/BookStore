@@ -18,7 +18,7 @@ import com.servlets.Parameters;
 import com.servlets.Session;
 
 /**
- * Servlet implementation class WelcomeServlet
+ * @author Edward Gagnon
  */
 public class WelcomeServlet extends MainPageServlet {
 	private static final long serialVersionUID = 1L;

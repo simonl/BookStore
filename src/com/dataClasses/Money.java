@@ -2,6 +2,9 @@ package com.dataClasses;
 
 import java.math.BigDecimal;
 
+/**
+ * @author Simon Langlois
+ */
 public class Money extends Wrapper<BigDecimal> {
 	private Money(final BigDecimal value) {
 		super(value);

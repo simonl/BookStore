@@ -7,8 +7,8 @@ import javax.servlet.ServletException;
 
 import com.dataAccess.tables.Book;
 import com.dataClasses.Database;
-import com.dataClasses.Maybe;
 import com.dataClasses.Database.Manager;
+import com.dataClasses.Maybe;
 import com.servlets.Attributes;
 import com.servlets.Conts;
 import com.servlets.ManagerPageServlet;

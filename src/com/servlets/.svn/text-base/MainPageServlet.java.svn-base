@@ -17,6 +17,9 @@ import com.dataClasses.Maybe;
 import com.mobile.ShowBooksMobileServlet;
 import com.survey.SurveyResultServlet;
 
+/**
+ * @author Simon Langlois
+ */
 public abstract class MainPageServlet extends PageServlet {
 	private static final long serialVersionUID = 1L;
 	

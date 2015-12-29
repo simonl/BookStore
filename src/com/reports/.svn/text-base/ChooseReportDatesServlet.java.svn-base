@@ -9,17 +9,15 @@ import javax.servlet.ServletException;
 
 import com.dataClasses.Database;
 import com.dataClasses.Maybe;
-import com.dataClasses.Database.Manager;
 import com.servlets.ClosedServlet;
 import com.servlets.Conts;
 import com.servlets.Conts.Cont;
 import com.servlets.MainPageServlet;
 import com.servlets.Parameters;
-import com.servlets.ReportPageServlet;
 import com.servlets.Session;
 
 /**
- * Servlet implementation class SalesByAuthorDateChooser
+ * @author Simon Langlois
  */
 public class ChooseReportDatesServlet extends MainPageServlet {
 	private static final long serialVersionUID = 1L;

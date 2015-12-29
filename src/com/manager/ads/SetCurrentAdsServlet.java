@@ -9,16 +9,15 @@ import javax.servlet.ServletException;
 
 import com.dataAccess.tables.SmallAd;
 import com.dataClasses.Database;
-import com.dataClasses.Database.Manager;
 import com.dataClasses.Nat;
-import com.servlets.Conts;
-import com.servlets.ManagerPageServlet;
 import com.servlets.ManagerProcessingServlet;
 import com.servlets.Parameters;
 import com.servlets.ProcessingError;
-import com.servlets.ProcessingServlet;
 import com.servlets.Session;
 
+/**
+ * @author Simon Langlois
+ */
 public class SetCurrentAdsServlet extends ManagerProcessingServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -35,7 +34,7 @@ public class SetCurrentAdsServlet extends ManagerProcessingServlet {
 		if(adsInput.length == 0)
 			throw new ProcessingError("AdManagementError", "There must be at least 1 small ad");
 		
-		final Set<SmallAd.Id> ads = new HashSet<SmallAd.Id>(3);
+		final Set<SmallAd.Id> ads = new HashSet<SmallAd.Id>(adsInput.length);
 		outer: for(final String adInput : adsInput) {
 			for(final Nat numId : Nat.parse(adInput))
 			for(final SmallAd.Id id : db.referToSmallAd(token, numId.value))

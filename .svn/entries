@@ -1,15 +1,15 @@
 10
 
 dir
-439
-https://waldo.dawsoncollege.qc.ca/svn/g2w12/g2w12
+453
+https://waldo.dawsoncollege.qc.ca/svn/g2w12/SeedBookStore
 https://waldo.dawsoncollege.qc.ca/svn/g2w12
 
 
 
-2012-04-05T00:12:23.524543Z
-439
-0933125
+2012-04-06T02:41:41.796500Z
+453
+9731965
 
 
 
@@ -25,6 +25,21 @@ https://waldo.dawsoncollege.qc.ca/svn/g2w12
 
 
 ee2c230c-ad30-744f-87f2-c992cd35797a
+
+build
+dir
+
+.classpath
+file
+
+
+
+
+2012-03-29T03:22:00.778173Z
+8e41acbf738f1c91e3a36241ecf5b41f
+2012-03-29T03:18:28.520908Z
+401
+9731965
 
 
 
@@ -32,5 +47,65 @@ ee2c230c-ad30-744f-87f2-c992cd35797a
 
 
 
-immediates
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+674
+
+database
+dir
+
+.project
+file
+
+
+
+
+2012-02-12T21:58:11.600516Z
+db5e9ddf568803a44acb225426c5b52b
+2012-01-23T17:48:23.562500Z
+3
+0933125
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+1047
+
+src
+dir
+
+WebContent
+dir
+
+.settings
+dir
 

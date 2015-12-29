@@ -8,16 +8,16 @@ import javax.servlet.ServletException;
 import com.dataAccess.tables.User;
 import com.dataClasses.Database;
 import com.dataClasses.Maybe;
-import com.servlets.Conts;
-import com.servlets.MainPageServlet;
 import com.servlets.Parameters;
 import com.servlets.ProcessingError;
 import com.servlets.ProcessingServlet;
 import com.servlets.Session;
 
 /**
+ * @author David Preseault
  * Servlet implementation class Login
  */
+
 public class LoginServlet extends ProcessingServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -29,7 +29,7 @@ public class LoginServlet extends ProcessingServlet {
 			throws ServletException, IOException, SQLException, ProcessingError {
 		
 		final String usernameInput = parameters.get("username").except(new ProcessingError("loginError", "Please provide a username"));
-		final String passwordInput = parameters.get("password").except(new ProcessingError("loginError", "Please provide a username"));
+		final String passwordInput = parameters.get("password").except(new ProcessingError("loginError", "Please provide a password"));
 
 		final User.Login username = User.Login.parse(usernameInput).except(new ProcessingError("loginError", "Please provide a valid username."));
 		final User.Password password = User.Password.parse(passwordInput).except(new ProcessingError("loginError", "Please provide a valid password."));

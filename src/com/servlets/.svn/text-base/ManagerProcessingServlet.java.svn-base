@@ -2,12 +2,16 @@ package com.servlets;
 
 import java.io.IOException;
 import java.sql.SQLException;
+
 import javax.servlet.ServletException;
 
 import com.dataAccess.tables.User;
 import com.dataClasses.Database;
 import com.dataClasses.Maybe;
 
+/**
+ * @author Simon Langlois
+ */
 public abstract class ManagerProcessingServlet extends ProcessingServlet {
 	private static final long serialVersionUID = 1L;
 

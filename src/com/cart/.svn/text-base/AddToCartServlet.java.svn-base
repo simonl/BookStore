@@ -7,7 +7,6 @@ import java.util.Map;
 import javax.servlet.ServletException;
 
 import com.dataAccess.tables.Book;
-import com.dataAccess.tables.Book.Data;
 import com.dataClasses.Database;
 import com.dataClasses.Item;
 import com.dataClasses.Maybe;
@@ -18,6 +17,12 @@ import com.servlets.MainPageServlet;
 import com.servlets.Parameters;
 import com.servlets.Session;
 
+/** 
+ * Adds a single book to the cart, 
+ * if the cart already contains this book, the new entry is merged with the existing one
+ * 
+ * @author Simon Langlois
+ */
 public class AddToCartServlet extends MainPageServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -61,6 +66,12 @@ public class AddToCartServlet extends MainPageServlet {
 		return Conts.redirect(Closures.viewCart);
 	}
 
+    /** 
+     * Adds a single book to the cart, 
+     * if the cart already contains this book, the new entry is merged with the existing one
+     * 
+     * @author Simon Langlois
+     */
 	public static final void addToCart(
 			final Database db, 
 			final Session session,
@@ -74,7 +85,16 @@ public class AddToCartServlet extends MainPageServlet {
 		
 		setCartItem(db, session, id, Item.merge(previous, newItem));
 	}
-	
+
+	/** 
+	 * Sets a book's entry in the cart, after checking for some conditions
+	 *   that might be of interest to the user:
+	 *     - Not putting useless/empty entries in the cart
+	 *     - Asking for more books than there are available
+	 *     - Asking for a book in formats that are not available
+	 * 
+	 * @author Simon Langlois
+	 */
 	public static final void setCartItem(
 			final Database db, 
 			final Session session,
@@ -97,7 +117,12 @@ public class AddToCartServlet extends MainPageServlet {
 		
 		cart.put(id, newItem);
 	}
-    
+
+	/** 
+	 * Parses booleans
+	 * 
+	 * @author Simon Langlois
+	 */
 	public static final Maybe<Boolean> parseBoolean(final String input) {
 		if(input.equalsIgnoreCase("true")) return Maybe.just(true);
 		if(input.equalsIgnoreCase("false")) return Maybe.just(false);

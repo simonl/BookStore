@@ -7,6 +7,13 @@ import com.dataClasses.Key;
 import com.dataClasses.Money;
 import com.dataClasses.Nat;
 
+/**  
+ * Defines types and classes related to the database table with the same name
+ * There is a separation between the ID, which refers to a row, and the other fields in a row
+ * Each database field get its own abstract data type and parsing/validating constructor
+ * 
+ * @author Simon Langlois
+ */
 public final class Purchase {
 	private Purchase() { }
 	

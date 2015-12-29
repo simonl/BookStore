@@ -2,13 +2,11 @@ package com.reports;
 
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.Map;
 import java.util.Set;
 
 import javax.servlet.ServletException;
 
 import com.dataAccess.tables.Book;
-import com.dataAccess.tables.Book.Data;
 import com.dataClasses.Database;
 import com.dataClasses.Database.Manager;
 import com.dataClasses.Funcs;
@@ -21,7 +19,7 @@ import com.servlets.ReportPageServlet;
 import com.servlets.Session;
 
 /**
- * Servlet implementation class ShowReorderReport
+ * @author Edward Gagnon, edited by Simon Langlois
  */
 public class ShowReorderReport extends ReportPageServlet {
 	private static final long serialVersionUID = 1L;

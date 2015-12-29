@@ -23,6 +23,7 @@ import com.dataClasses.Maybe;
  * Contains the parameters to a servlet and, unlike HttpRequests,
  *   they can be created
  * 
+ * @author Simon Langlois
  */
 public final class Parameters {
 	public final Map<String, String[]> parameters;

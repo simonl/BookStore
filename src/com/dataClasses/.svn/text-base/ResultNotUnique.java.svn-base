@@ -1,5 +1,8 @@
 package com.dataClasses;
 
+/**
+ * @author Simon Langlois
+ */
 public final class ResultNotUnique extends Exception {
 	public ResultNotUnique() {
 		

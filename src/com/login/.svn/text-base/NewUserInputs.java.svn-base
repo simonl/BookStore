@@ -4,6 +4,9 @@ import com.dataAccess.tables.Address;
 import com.dataAccess.tables.Client;
 import com.dataAccess.tables.User;
 
+/** 
+ * @author Simon Langlois
+ */
 public final class NewUserInputs {
 	public final User.Input user;
 	public final Client.Input client;

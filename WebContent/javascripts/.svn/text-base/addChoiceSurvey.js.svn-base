@@ -1,5 +1,7 @@
 /**
  * Author: David Preseault
+ * 
+ * Used in dynamically adding or removing choices in manage survey jsp
  */
 
 function addChoice()

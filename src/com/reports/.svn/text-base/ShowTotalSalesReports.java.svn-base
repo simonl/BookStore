@@ -3,25 +3,21 @@ package com.reports;
 import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+
 import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.jsp.jstl.sql.ResultSupport;
 
 import com.dataClasses.Database;
 import com.dataClasses.Database.Manager;
-import com.dataClasses.Maybe;
 import com.dataClasses.ResultNotUnique;
-import com.manager.DefaultReportResults;
 import com.servlets.Attributes;
 import com.servlets.Conts;
 import com.servlets.Conts.Cont;
-import com.servlets.ManagerPageServlet;
 import com.servlets.Parameters;
 import com.servlets.ReportPageServlet;
 import com.servlets.Session;
 
 /**
- * Servlet implementation class ShowTotalSalesReports
  * @author Edward Gagnon
  * @version March 22nd, 2012
  */

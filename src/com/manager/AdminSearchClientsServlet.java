@@ -20,6 +20,7 @@ import com.servlets.Session;
 
 /**
  * Servlet implementation class AdminSearchClientsServlet
+ * @author Edward Gagnon
  */
 public class AdminSearchClientsServlet extends ManagerPageServlet {
 	private static final long serialVersionUID = 1L;

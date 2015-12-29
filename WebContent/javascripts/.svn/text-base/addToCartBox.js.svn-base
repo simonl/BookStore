@@ -1,11 +1,24 @@
 /**
- * Author: David Preseault
+ * @author David Preseault
+ * 
+ * This javascript is responsible for adding functionality to viewbook
+ * purchasing section (Add to cart). This js will handle all client-side
+ * validation when adding a book, and will also handle information to
+ * display such as if book is available in paper, ebook, or both with
+ * their respective checkboxes and text boxes.
+ * 
+ * This javascript file is purely for display and functionality purposes.
+ * Adding to cart is not processed here, but form submitted when validated.
  */
 
 var qtyLeft;
 var divObj;
 
-
+/**
+ * This function is called when user clicks on Add To Cart button.
+ * Will handle validation and return errors on screen if present, if not
+ * it will submit the form.
+ */
 function purchaseBook()
 {
 	var purchaseForm = document.getElementById('purchaseForm');
@@ -85,7 +98,16 @@ function purchaseBook()
 
 	purchaseForm.submit();
 }
-
+/**
+ * This function will display to the user if book is available as
+ * an ebook, paper or both, and will prepare the form to be written
+ * to the HTML. (Form depends on what book type is).
+ * 
+ * @param isbn Book ISBN
+ * @param isElectronic
+ * @param isPaper
+ * @param qty Quantity Left In Stock
+ */
 function addToCart(isbn, isElectronic, isPaper, qty)
 {
 	divObj = document.getElementById('addToCartBox');
@@ -129,6 +151,10 @@ function addToCart(isbn, isElectronic, isPaper, qty)
 	'</form>';
 	divObj.innerHTML = finalBoxLayout;
 } 
+
+/**
+ * When called, will check the paper checkbox
+ */
 function checkPaperCheckbox()
 {
 	document.getElementById('chkPaper').checked = true;

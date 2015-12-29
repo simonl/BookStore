@@ -1,5 +1,17 @@
 K 25
 svn:wc:ra_dav:version-url
-V 29
-/svn/g2w12/!svn/ver/439/g2w12
+V 37
+/svn/g2w12/!svn/ver/453/SeedBookStore
+END
+.classpath
+K 25
+svn:wc:ra_dav:version-url
+V 48
+/svn/g2w12/!svn/ver/401/SeedBookStore/.classpath
+END
+.project
+K 25
+svn:wc:ra_dav:version-url
+V 44
+/svn/g2w12/!svn/ver/3/SeedBookStore/.project
 END

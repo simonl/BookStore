@@ -5,17 +5,18 @@ import java.sql.SQLException;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
+
 import com.dataClasses.Database;
 import com.dataClasses.Database.Manager;
-import com.servlets.Conts.Cont;
 import com.servlets.Attributes;
 import com.servlets.Conts;
+import com.servlets.Conts.Cont;
 import com.servlets.ManagerPageServlet;
 import com.servlets.Parameters;
 import com.servlets.Session;
 
 /**
- * Servlet implementation class ZeroSalesDateChooser
+ * @author Edward Gagnon
  */
 public class ZeroSalesDateChooser extends ManagerPageServlet {
 	private static final long serialVersionUID = 1L;

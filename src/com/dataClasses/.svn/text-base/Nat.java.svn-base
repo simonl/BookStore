@@ -1,5 +1,10 @@
 package com.dataClasses;
 
+/**
+ * Nat stands for Natural Number in the same way that Int stands for Integer
+ * 
+ * @author Simon Langlois
+ */
 public final class Nat extends Wrapper<Integer> {
 	private Nat(final Integer value) {
 		super(value);

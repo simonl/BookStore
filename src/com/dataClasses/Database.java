@@ -33,49 +33,19 @@ import com.dataAccess.tables.Survey;
 import com.dataAccess.tables.User;
 
 /**
- * To use a Database, there are two methods:
- *   1. Database db = Database.connect(); Value value = doSomething(db); db.close(); ...
- *   2. Value value = Database.using(..boilerplate.. doSomething); ...
- *
- * The database contains the following tables:
- *   Address, Book, Client, EBook, Purchase, Review, Survey
- * Each of them has its corresponding class in dataAccess.tables
+ * RECOMMENDED: set folding to collapse all before browsing the file
  * 
- * The Database object contains the following methods:
- *   get = Convert an ID into the corresponding table row
- *   fromISBN = Get the internal ID corresponding to a book's ISBN
- *   getAllGenres
- *   getAllEFormats
- *   put = Insert new row in the database
- *   
- *   allBooks
- *   getClientReviews
- *   getBookReviews
- *   getTextReviews
- *   getClientPurchases
- *   getBookPurchases
- *   
- *   Client actions:
- *   login = Convert a username and password into a capability to act on a user's behalf
- *   currentSurvey = Get the survey selected by the manager to be displayed on the front page
- *   lastBooks = Get the books that were most recently added to the database
- *   booksOnSale = Get the books whose sale price is lower than usual
- *   booksWhere = Retrieve the set of books satisfying a condition
- *   vote = Increment the count of the survey option being voted for
- *   review = make a review that will have to be approved by a manager
- *   checkout = Commit the purchase of a whole set of books in whatever formats
- *   
- *   Manager side:
- *   restricted = Get a capability to act as a manager, from a client capability
- *   promote = Grant manager privileges to a client account
- *   approve = Makes a book review visible on the book's page
- *   setCurrentSurvey = Change the survey being displayed on the main page
- *   
- * Also, since the class is still in development and not all features are currently implemented,
- *   methods are available to query the database yourself using any SQL statement (query, command).
- *   If you do so, it should only be temporary, and you should also tell me to make 
- *   a specialized method for it, so that we don't end up with SQL all over the codebase.
- *    
+ * Database makes use of the Backend class and exports most of its members
+ * In addition, it defines MANY high level operations having to do 
+ *   with managing and modifying the application's data
+ * 
+ * Examples of invariants, over the basic Backend:
+ *   Some functionality is only accessible by managers (modules who possess a Manager value)
+ *   There is only 1 row in the GlobalData table
+ * 
+ * I am ignoring the query(String) and similar methods, which might have arbitrary effects
+ * 
+ * @author Simon Langlois, some edits by Edward Gagnon
  */
 public final class Database {
 	
@@ -136,7 +106,13 @@ public final class Database {
 	
 	
 	
-	
+
+	/**
+	 * Only Database has access to a value of class Authority/Manager,
+	 *   so a method can require this type as an argument,
+	 *   and only Database, or a module that received such a value from Database,
+	 *   is capable of calling that method
+	 */
 	// Abstract types
 	public static final class Authority {
 		private Authority() {}
@@ -153,7 +129,8 @@ public final class Database {
 	
 	
 	
-
+	// Useful functions
+	
 	public final Set<Address.Data> getAddresses(final Set<Address.Id> ids) throws SQLException {
 		return Funcs.map(ids, backend.getAddress);
 	}
@@ -266,17 +243,6 @@ public final class Database {
 		return new User.Authority(Authority.token, backend.put(data));
 	}
 	
-	
-	
-	public final ResultSet queryUnique(final String queryString) throws SQLException, ResultNotUnique {
-		return backend.queryUniqueUnsafe(queryString);
-	}
-	public final ResultSet query(final String queryString) throws SQLException {
-		return backend.queryUnsafe(queryString);
-	}
-	public final void command(final String commandString) throws SQLException {
-		backend.commandUnsafe(commandString);
-	}
 	public final int insert(String command) throws SQLException {
 		Statement statement = backend.connection.createStatement();
 		
@@ -288,25 +254,6 @@ public final class Database {
 	}
 
 
-	public final PreparedStatement prepare(final String queryString, final Preparer preparer) throws SQLException {
-		return backend.prepare(queryString, preparer);
-	}
-	public final <A> Set<A> query(final PreparedStatement statement, final Loader<A> loader) throws SQLException {
-		return backend.query(statement, loader);
-	}
-	public final <A> List<A> queryOrdered(final PreparedStatement statement, final Loader<A> loader) throws SQLException {
-		return backend.queryOrdered(statement, loader);
-	}
-	public final <A> A queryUnique(final PreparedStatement statement, final Loader<A> loader) throws ResultNotUnique, SQLException {
-		return backend.queryUnique(statement, loader);
-	}
-	public final void command(final PreparedStatement statement) throws SQLException {
-		backend.command(statement);
-	}
-	public final Integer create(final PreparedStatement statement) throws SQLException {
-		return backend.create(statement);
-	}
-	
 
 	
 
@@ -922,10 +869,39 @@ public final class Database {
 	
 	
 	
+
 	
+	/* Duplicates from Backend */
+
+	public final ResultSet queryUnique(final String queryString) throws SQLException, ResultNotUnique {
+		return backend.queryUniqueUnsafe(queryString);
+	}
+	public final ResultSet query(final String queryString) throws SQLException {
+		return backend.queryUnsafe(queryString);
+	}
+	public final void command(final String commandString) throws SQLException {
+		backend.commandUnsafe(commandString);
+	}
 	
+	public final PreparedStatement prepare(final String queryString, final Preparer preparer) throws SQLException {
+		return backend.prepare(queryString, preparer);
+	}
+	public final <A> Set<A> query(final PreparedStatement statement, final Loader<A> loader) throws SQLException {
+		return backend.query(statement, loader);
+	}
+	public final <A> List<A> queryOrdered(final PreparedStatement statement, final Loader<A> loader) throws SQLException {
+		return backend.queryOrdered(statement, loader);
+	}
+	public final <A> A queryUnique(final PreparedStatement statement, final Loader<A> loader) throws ResultNotUnique, SQLException {
+		return backend.queryUnique(statement, loader);
+	}
+	public final void command(final PreparedStatement statement) throws SQLException {
+		backend.command(statement);
+	}
+	public final Integer create(final PreparedStatement statement) throws SQLException {
+		return backend.create(statement);
+	}
 	
-	/** Duplicates from backend */
 	
 	public final Address.Data get(final Address.Id id) throws SQLException { 
 		return backend.get(id);

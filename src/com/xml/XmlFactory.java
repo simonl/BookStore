@@ -2,7 +2,6 @@ package com.xml;
 
 import java.io.StringWriter;
 import java.util.HashMap;
-import java.util.Map;
 import java.util.Set;
 
 import javax.xml.parsers.DocumentBuilder;

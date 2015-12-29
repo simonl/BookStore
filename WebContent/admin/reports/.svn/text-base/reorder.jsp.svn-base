@@ -3,6 +3,12 @@
  <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
  <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
+<%-- **************************************** --%>
+<%-- *                                      * --%>
+<%-- * Author: Simon Langlois               * --%>
+<%-- *                                      * --%>
+<%-- **************************************** --%>
+
 	<H3 style="text-align:center">Low Inventory (&lt; ${ minimum })</H3>	
 	<P>Number of books: ${ differentBooks }</P>
 	<P>Missing stock: ${ missingBooks }</P>				

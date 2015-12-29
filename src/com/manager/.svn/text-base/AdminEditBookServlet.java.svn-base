@@ -1,7 +1,6 @@
 package com.manager;
 
 import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.HashSet;
@@ -11,14 +10,12 @@ import javax.servlet.ServletException;
 
 import org.apache.commons.fileupload.FileItem;
 
-import com.cart.AddToCartServlet;
 import com.dataAccess.tables.Book;
 import com.dataClasses.Database;
 import com.dataClasses.Database.Manager;
 import com.dataClasses.Maybe;
 import com.dataClasses.Money;
 import com.dataClasses.Nat;
-import com.servlets.Attributes;
 import com.servlets.Conts;
 import com.servlets.ManagerPageServlet;
 import com.servlets.Parameters;
@@ -28,6 +25,7 @@ import com.servlets.Session;
 
 /**
  * Servlet implementation class AdminEditBookServlet
+ * @author Evgeniy Li
  */
 public class AdminEditBookServlet extends ManagerPageServlet{
 	private static final long serialVersionUID = 1L;
@@ -117,15 +115,16 @@ public class AdminEditBookServlet extends ManagerPageServlet{
 		*/
 		
 		try {
-	
+			
+			// set book data with parseBook method
 			final Book.Data data = parseBook(db, parameters);
-			System.out.println(data);
+			//get book's id and update book data on the database
 			for(final String input : parameters.get("isbn13"))
 		    for(final Book.Isbn13 isbn : Book.Isbn13.parse(input))
 		    for(final Book.Id book : db.fromIsbn(token, isbn))
 		    {			
 				db.update(token, book, data);
-	
+				//returns on the edit book page (adminEditBook.jsp) 
 				return Conts.redirect(session.lastPage);
 			}
 			
@@ -142,6 +141,7 @@ public class AdminEditBookServlet extends ManagerPageServlet{
 			throws SQLException, ProcessingError {
 		String uploadDir = "bookImages";
 		
+		//get book's information from the adminEditBook.jsp page and convert to book's data
 		final Maybe<String> inputTitle = parameters.get("title");
 		final Maybe<Book.Title> title = inputTitle.isNull() ? Maybe.<Book.Title>nothing() : Book.Title.parse(inputTitle.value());
 		
@@ -307,6 +307,7 @@ public class AdminEditBookServlet extends ManagerPageServlet{
 			eBookFormatSet.add(eFormat);
 		}
 		
+		//set book data 
 		final Book.Data data = new Book.Data(
 				db.get(bookId.value()).getDateEntered(), 
 				title.value(), 
@@ -326,7 +327,7 @@ public class AdminEditBookServlet extends ManagerPageServlet{
 				wholesalePrice.value(), 
 				numberOfBooks.value(),
 				eBookFormatSet);
-		System.out.println(db.get(bookId.value()).getDateEntered());
+		
 		return data;
 	}
 	    
@@ -357,6 +358,7 @@ public class AdminEditBookServlet extends ManagerPageServlet{
 		return Maybe.just(set);
 	}
 	
+	//convert string to double, used to convert dimensions
 	public static final Maybe<Double> parseDouble(final String input) {
 		try {
 			return Maybe.just(Double.parseDouble(input));

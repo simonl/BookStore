@@ -1,5 +1,8 @@
 package com.dataClasses;
 
+/**
+ * @author Simon Langlois
+ */
 public final class SearchInput {
 	public final String description;
 	public final String title;

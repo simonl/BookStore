@@ -7,14 +7,14 @@ import javax.servlet.ServletException;
 
 import com.dataClasses.Database;
 import com.dataClasses.Maybe;
-import com.servlets.Conts;
-import com.servlets.MainPageServlet;
 import com.servlets.Parameters;
 import com.servlets.ProcessingError;
 import com.servlets.ProcessingServlet;
 import com.servlets.Session;
 
 /**
+ * @author David Preseault
+ * 
  * Servlet implementation class logoutServlet
  */
 public class LogoutServlet extends ProcessingServlet {

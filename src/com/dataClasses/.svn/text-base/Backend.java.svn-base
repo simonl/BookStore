@@ -41,6 +41,29 @@ import com.dataAccess.tables.Tables;
 import com.dataAccess.tables.User;
 import com.manager.orders.OrderManagementServlet;
 
+/**
+ * RECOMMENDED: I suggest to collapse the folding of every declaration, it makes the patterns easier to see
+ * 
+ * Provides very basic functionality to interact with our application's database
+ * Each of these methods is defined for each table:
+ *   Data get(Id)				Read the row associated with the id
+ *   Id put(Data)				Insert new data and get the resulting row's id
+ *   void update(Id, Data)		Modifies the data in the row referred to by the id
+ *   void delete(Id)			Removes the row associated with id from the database
+ *   Maybe<Id> referToX(int)	Convert an integer into an Id that is guaranteed to refer to a row in the database
+ *   getX(Query)				Gets the single X that matches the query
+ *   getXs(Query)				Gets all the X's that match the query
+ *   getOrderedXs(Query)		Gets all the X's that match the query, maintaining the order they come in
+ * Also included are functions to perform arbitrary queries/commands
+ *   
+ * Some of the bean classes contain more information than their underlying database row,
+ *   so that explains any extra work not inferrable from the table description
+ *
+ * Most importantly, this class doesn't preserve any of our application's invariants,
+ *   for that see the Database class
+ *   
+ * @author Simon Langlois
+ */
 public final class Backend {
 	
 	public final Connection connection;
@@ -97,74 +120,78 @@ public final class Backend {
 	}
 	
 
-
+	/**
+	 * Only Backend has access to a value of class Authority,
+	 *   so a method can require this type as an argument,
+	 *   and only Backend is capable of calling that method
+	 */
 	public static final class Authority {
 		private Authority() {}
 		
 		private static final Authority token = new Authority();
 	}
 
-	private static final Func<Integer, Address.Id> address = new Func<Integer, Address.Id>() {
+	private static final Func<Integer, Address.Id> referToAddress = new Func<Integer, Address.Id>() {
 		public final Address.Id apply(final Integer value) {
 			return new Address.Id(Authority.token, value);
 		}
 	};
-	private static final Func<Integer, Client.Id> client = new Func<Integer, Client.Id>() {
+	private static final Func<Integer, Client.Id> referToClient = new Func<Integer, Client.Id>() {
 		public final Client.Id apply(final Integer value) {
 			return new Client.Id(Authority.token, value);
 		}
 	};
-	private static final Func<Integer, User.Id> user = new Func<Integer, User.Id>() {
+	private static final Func<Integer, User.Id> referToUser = new Func<Integer, User.Id>() {
 		public final User.Id apply(final Integer value) {
 			return new User.Id(Authority.token, value);
 		}
 	};
-	private static final Func<Integer, Book.Id> book = new Func<Integer, Book.Id>() {
+	private static final Func<Integer, Book.Id> referToBook = new Func<Integer, Book.Id>() {
 		public final Book.Id apply(final Integer value) {
 			return new Book.Id(Authority.token, value);
 		}
 	};
-	private static final Func<Integer, Review.Id> review = new Func<Integer, Review.Id>() {
+	private static final Func<Integer, Review.Id> referToReview = new Func<Integer, Review.Id>() {
 		public final Review.Id apply(final Integer value) {
 			return new Review.Id(Authority.token, value);
 		}
 	};
-	private static final Func<Integer, Survey.Id> survey = new Func<Integer, Survey.Id>() {
+	private static final Func<Integer, Survey.Id> referToSurvey = new Func<Integer, Survey.Id>() {
 		public final Survey.Id apply(final Integer value) {
 			return new Survey.Id(Authority.token, value);
 		}
 	};
-	private static final Func<Integer, Purchase.Id> purchase = new Func<Integer, Purchase.Id>() {
+	private static final Func<Integer, Purchase.Id> referToPurchase = new Func<Integer, Purchase.Id>() {
 		public final Purchase.Id apply(final Integer value) {
 			return new Purchase.Id(Authority.token, value);
 		}
 	};
-	private static final Func<Integer, RssFeed.Id> rssFeed = new Func<Integer, RssFeed.Id>() {
+	private static final Func<Integer, RssFeed.Id> referToRssFeed = new Func<Integer, RssFeed.Id>() {
 		public final RssFeed.Id apply(final Integer value) {
 			return new RssFeed.Id(Authority.token, value);
 		}
 	};
-	private static final Func<Integer, Order.Id> order = new Func<Integer, Order.Id>() {
+	private static final Func<Integer, Order.Id> referToOrder = new Func<Integer, Order.Id>() {
 		public final Order.Id apply(final Integer value) {
 			return new Order.Id(Authority.token, value);
 		}
 	};
-	private static final Func<Integer, Global.Id> global = new Func<Integer, Global.Id>() {
+	private static final Func<Integer, Global.Id> referToGlobal = new Func<Integer, Global.Id>() {
 		public final Global.Id apply(final Integer value) {
 			return new Global.Id(Authority.token, value);
 		}
 	};
-	private static final Func<Integer, Province.Id> province = new Func<Integer, Province.Id>() {
+	private static final Func<Integer, Province.Id> referToProvince = new Func<Integer, Province.Id>() {
 		public Province.Id apply(final Integer value) {
 			return new Province.Id(Authority.token, value);
 		} 
 	};
-	private static final Func<Integer, BannerAd.Id> bannerAd = new Func<Integer, BannerAd.Id>() {
+	private static final Func<Integer, BannerAd.Id> referToBannerAd = new Func<Integer, BannerAd.Id>() {
 		public BannerAd.Id apply(final Integer value) {
 			return new BannerAd.Id(Authority.token, value);
 		} 
 	};
-	private static final Func<Integer, SmallAd.Id> smallAd = new Func<Integer, SmallAd.Id>() {
+	private static final Func<Integer, SmallAd.Id> referToSmallAd = new Func<Integer, SmallAd.Id>() {
 		public SmallAd.Id apply(final Integer value) {
 			return new SmallAd.Id(Authority.token, value);
 		} 
@@ -416,7 +443,7 @@ public final class Backend {
 		);
 	}
 	private static final SmallAd.Id loadCurrentSmallAd(final ResultSet row) throws SQLException {
-		return smallAd.apply(row.getInt("small_ad_id"));
+		return referToSmallAd.apply(row.getInt("small_ad_id"));
 	}
 	private static final Province.Data loadProvince(final ResultSet row) throws SQLException {
 		
@@ -705,55 +732,55 @@ public final class Backend {
 
 	
 	public Address.Id put(final Address.Data data) throws SQLException {
-		return usingPreparedInsert(Tables.ADDRESS, prepare(data), address);
+		return usingPreparedInsert(Tables.ADDRESS, prepare(data), referToAddress);
 	}
 	public Client.Id put(final Client.Data data) throws SQLException {
-		return usingPreparedInsert(Tables.CLIENT, prepare(data), client);
+		return usingPreparedInsert(Tables.CLIENT, prepare(data), referToClient);
 	}
 	public User.Id put(final User.Data data) throws SQLException {
-		return usingPreparedInsert(Tables.USER, prepare(data), user);
+		return usingPreparedInsert(Tables.USER, prepare(data), referToUser);
 	}
 	public Book.Id put(final Book.Data data) throws SQLException {
-		final Book.Id id = usingPreparedInsert(Tables.BOOK, prepare(data), book);
+		final Book.Id id = usingPreparedInsert(Tables.BOOK, prepare(data), referToBook);
 		
 		for(final Book.EFormat eformat : data.eformats) {
-			usingPreparedInsert(Tables.EBOOK, prepare(eformat, id), book);
+			usingPreparedInsert(Tables.EBOOK, prepare(eformat, id), referToBook);
 		}
 		
 		return id;
 	}
 	public Purchase.Id put(final Purchase.Data data) throws SQLException {
-		return usingPreparedInsert(Tables.PURCHASE, prepare(data), purchase);
+		return usingPreparedInsert(Tables.PURCHASE, prepare(data), referToPurchase);
 	}
 	public Review.Id put(final Review.Data data) throws SQLException {
-		return usingPreparedInsert(Tables.REVIEW, prepare(data), review);
+		return usingPreparedInsert(Tables.REVIEW, prepare(data), referToReview);
 	}
 	public Survey.Id put(final Survey.Data data) throws SQLException {
-		final Survey.Id id = usingPreparedInsert(Tables.SURVEY, prepare(data), survey);
+		final Survey.Id id = usingPreparedInsert(Tables.SURVEY, prepare(data), referToSurvey);
 		
 		for(final Survey.Choice choice : data.choices.value) {
-			usingPreparedInsert(Tables.SURVEY_CHOICE, prepare(choice, id), survey /* ignored */);
+			usingPreparedInsert(Tables.SURVEY_CHOICE, prepare(choice, id), referToSurvey /* ignored */);
 		}
 		
 		return id;
 	}
 	public RssFeed.Id put(final RssFeed.Data data) throws SQLException {
-		return usingPreparedInsert(Tables.RSS_FEED, prepare(data), rssFeed);
+		return usingPreparedInsert(Tables.RSS_FEED, prepare(data), referToRssFeed);
 	}
 	public Order.Id put(final Order.Data data) throws SQLException {
-		return usingPreparedInsert(Tables.ORDER, prepare(data), order);
+		return usingPreparedInsert(Tables.ORDER, prepare(data), referToOrder);
 	}
 	public Global.Id put(final Global.Data data) throws SQLException {
-		return usingPreparedInsert(Tables.GLOBAL_DATA, prepare(data), global);
+		return usingPreparedInsert(Tables.GLOBAL_DATA, prepare(data), referToGlobal);
 	}
 	public Province.Id put(final Province.Data data) throws SQLException {
-		return usingPreparedInsert(Tables.PROVINCE, prepare(data), province);
+		return usingPreparedInsert(Tables.PROVINCE, prepare(data), referToProvince);
 	}
 	public BannerAd.Id put(final BannerAd.Data data) throws SQLException {
-		return usingPreparedInsert(Tables.BANNER_AD, prepare(data), bannerAd);
+		return usingPreparedInsert(Tables.BANNER_AD, prepare(data), referToBannerAd);
 	}
 	public SmallAd.Id put(final SmallAd.Data data) throws SQLException {
-		return usingPreparedInsert(Tables.SMALL_AD, prepare(data), smallAd);
+		return usingPreparedInsert(Tables.SMALL_AD, prepare(data), referToSmallAd);
 	}
 	
 	
@@ -800,7 +827,9 @@ public final class Backend {
 		return xs;
 	}
 	
-	
+	/*
+	 * Was thinking of deprecating those, but we don't have time
+	 */
 	public final ResultSet queryUniqueUnsafe(final String queryString) throws SQLException, ResultNotUnique {
 		final ResultSet result = queryUnsafe(queryString);
 		
@@ -881,43 +910,43 @@ public final class Backend {
 		return query(statement, loadId);
 	}
 	public final Set<Address.Id> getAddresses(final String query, final Preparer preparer) throws SQLException {
-		return Funcs.map(getRows(Tables.ADDRESS, query, preparer), address);
+		return Funcs.map(getRows(Tables.ADDRESS, query, preparer), referToAddress);
 	}
 	public final Set<Client.Id> getClients(final String query, final Preparer preparer) throws SQLException {
-		return Funcs.map(getRows(Tables.CLIENT, query, preparer), client);
+		return Funcs.map(getRows(Tables.CLIENT, query, preparer), referToClient);
 	}
 	public final Set<User.Id> getUsers(final String query, final Preparer preparer) throws SQLException {
-		return Funcs.map(getRows(Tables.USER, query, preparer), user);
+		return Funcs.map(getRows(Tables.USER, query, preparer), referToUser);
 	}
 	public final Set<Book.Id> getBooks(final String query, final Preparer preparer) throws SQLException {
-		return Funcs.map(getRows(Tables.BOOK, query, preparer), book);
+		return Funcs.map(getRows(Tables.BOOK, query, preparer), referToBook);
 	}
 	public final Set<Review.Id> getReviews(final String query, final Preparer preparer) throws SQLException {
-		return Funcs.map(getRows(Tables.REVIEW, query, preparer), review);
+		return Funcs.map(getRows(Tables.REVIEW, query, preparer), referToReview);
 	}
 	public final Set<Survey.Id> getSurveys(final String query, final Preparer preparer) throws SQLException {
-		return Funcs.map(getRows(Tables.SURVEY, query, preparer), survey);
+		return Funcs.map(getRows(Tables.SURVEY, query, preparer), referToSurvey);
 	}
 	public final Set<Purchase.Id> getPurchases(final String query, final Preparer preparer) throws SQLException {
-		return Funcs.map(getRows(Tables.PURCHASE, query, preparer), purchase);
+		return Funcs.map(getRows(Tables.PURCHASE, query, preparer), referToPurchase);
 	}
 	public final Set<RssFeed.Id> getFeeds(final String query, final Preparer preparer) throws SQLException {
-		return Funcs.map(getRows(Tables.RSS_FEED, query, preparer), rssFeed);
+		return Funcs.map(getRows(Tables.RSS_FEED, query, preparer), referToRssFeed);
 	}
 	public final Set<Order.Id> getOrders(final String query, final Preparer preparer) throws SQLException {
-		return Funcs.map(getRows(Tables.ORDER, query, preparer), order);
+		return Funcs.map(getRows(Tables.ORDER, query, preparer), referToOrder);
 	}
 	public final Set<Global.Id> getGlobals(final String query, final Preparer preparer) throws SQLException {
-		return Funcs.map(getRows(Tables.GLOBAL_DATA, query, preparer), global);
+		return Funcs.map(getRows(Tables.GLOBAL_DATA, query, preparer), referToGlobal);
 	}
 	public final Set<Province.Id> getProvinces(final String query, final Preparer preparer) throws SQLException {
-		return Funcs.map(getRows(Tables.PROVINCE, query, preparer), province);
+		return Funcs.map(getRows(Tables.PROVINCE, query, preparer), referToProvince);
 	}
 	public final Set<BannerAd.Id> getBannerAds(final String query, final Preparer preparer) throws SQLException {
-		return Funcs.map(getRows(Tables.BANNER_AD, query, preparer), bannerAd);
+		return Funcs.map(getRows(Tables.BANNER_AD, query, preparer), referToBannerAd);
 	}
 	public final Set<SmallAd.Id> getSmallAds(final String query, final Preparer preparer) throws SQLException {
-		return Funcs.map(getRows(Tables.SMALL_AD, query, preparer), smallAd);
+		return Funcs.map(getRows(Tables.SMALL_AD, query, preparer), referToSmallAd);
 	}
 	
 
@@ -928,43 +957,43 @@ public final class Backend {
 		return queryOrdered(statement, loadId);
 	}
 	public final List<Address.Id> getOrderedAddresses(final String query, final Preparer preparer) throws SQLException {
-		return Funcs.map(getOrderedRows(Tables.ADDRESS, query, preparer), address);
+		return Funcs.map(getOrderedRows(Tables.ADDRESS, query, preparer), referToAddress);
 	}
 	public final List<Client.Id> getOrderedClients(final String query, final Preparer preparer) throws SQLException {
-		return Funcs.map(getOrderedRows(Tables.CLIENT, query, preparer), client);
+		return Funcs.map(getOrderedRows(Tables.CLIENT, query, preparer), referToClient);
 	}
 	public final List<User.Id> getOrderedUsers(final String query, final Preparer preparer) throws SQLException {
-		return Funcs.map(getOrderedRows(Tables.USER, query, preparer), user);
+		return Funcs.map(getOrderedRows(Tables.USER, query, preparer), referToUser);
 	}
 	public final List<Book.Id> getOrderedBooks(final String query, final Preparer preparer) throws SQLException {
-		return Funcs.map(getOrderedRows(Tables.BOOK, query, preparer), book);
+		return Funcs.map(getOrderedRows(Tables.BOOK, query, preparer), referToBook);
 	}
 	public final List<Review.Id> getOrderedReviews(final String query, final Preparer preparer) throws SQLException {
-		return Funcs.map(getOrderedRows(Tables.REVIEW, query, preparer), review);
+		return Funcs.map(getOrderedRows(Tables.REVIEW, query, preparer), referToReview);
 	}
 	public final List<Survey.Id> getOrderedSurveys(final String query, final Preparer preparer) throws SQLException {
-		return Funcs.map(getOrderedRows(Tables.SURVEY, query, preparer), survey);
+		return Funcs.map(getOrderedRows(Tables.SURVEY, query, preparer), referToSurvey);
 	}
 	public final List<Purchase.Id> getOrderedPurchases(final String query, final Preparer preparer) throws SQLException {
-		return Funcs.map(getOrderedRows(Tables.PURCHASE, query, preparer), purchase);
+		return Funcs.map(getOrderedRows(Tables.PURCHASE, query, preparer), referToPurchase);
 	}
 	public final List<RssFeed.Id> getOrderedFeeds(final String query, final Preparer preparer) throws SQLException {
-		return Funcs.map(getOrderedRows(Tables.RSS_FEED, query, preparer), rssFeed);
+		return Funcs.map(getOrderedRows(Tables.RSS_FEED, query, preparer), referToRssFeed);
 	}
 	public final List<Order.Id> getOrderedOrders(final String query, final Preparer preparer) throws SQLException {
-		return Funcs.map(getOrderedRows(Tables.ORDER, query, preparer), order);
+		return Funcs.map(getOrderedRows(Tables.ORDER, query, preparer), referToOrder);
 	}
 	public final List<Global.Id> getOrderedGlobals(final String query, final Preparer preparer) throws SQLException {
-		return Funcs.map(getOrderedRows(Tables.GLOBAL_DATA, query, preparer), global);
+		return Funcs.map(getOrderedRows(Tables.GLOBAL_DATA, query, preparer), referToGlobal);
 	}
 	public final List<Province.Id> getOrderedProvinces(final String query, final Preparer preparer) throws SQLException {
-		return Funcs.map(getOrderedRows(Tables.PROVINCE, query, preparer), province);
+		return Funcs.map(getOrderedRows(Tables.PROVINCE, query, preparer), referToProvince);
 	}
 	public final List<BannerAd.Id> getOrderedBannerAds(final String query, final Preparer preparer) throws SQLException {
-		return Funcs.map(getOrderedRows(Tables.BANNER_AD, query, preparer), bannerAd);
+		return Funcs.map(getOrderedRows(Tables.BANNER_AD, query, preparer), referToBannerAd);
 	}
 	public final List<SmallAd.Id> getOrderedSmallAds(final String query, final Preparer preparer) throws SQLException {
-		return Funcs.map(getOrderedRows(Tables.SMALL_AD, query, preparer), smallAd);
+		return Funcs.map(getOrderedRows(Tables.SMALL_AD, query, preparer), referToSmallAd);
 	}
 	
 	
@@ -1153,7 +1182,7 @@ public final class Backend {
 		command(statement);
 		
 		for(final Book.EFormat eformat : data.eformats) {
-			usingPreparedInsert(Tables.EBOOK, prepare(eformat, id), book /* ignored */);
+			usingPreparedInsert(Tables.EBOOK, prepare(eformat, id), referToBook /* ignored */);
 		}
 	}
 	public final void update(final Purchase.Id id, Purchase.Data data) throws SQLException {
@@ -1169,7 +1198,7 @@ public final class Backend {
 		command(statement);
 		
 		for(final Survey.Choice choice : data.choices.value) {
-			usingPreparedInsert(Tables.SURVEY_CHOICE, prepare(choice, id), survey /* ignored */);
+			usingPreparedInsert(Tables.SURVEY_CHOICE, prepare(choice, id), referToSurvey /* ignored */);
 		}
 	}
 	public final void update(final RssFeed.Id id, RssFeed.Data data) throws SQLException {
@@ -1185,7 +1214,7 @@ public final class Backend {
 		command(statement);
 		
 		for(final SmallAd.Id ad : data.currentSmallAds) {
-			usingPreparedInsert(Tables.CURRENT_SMALL_AD, prepare(id, ad), smallAd /* ignored */);
+			usingPreparedInsert(Tables.CURRENT_SMALL_AD, prepare(id, ad), referToSmallAd /* ignored */);
 		}
 	}
 	public final void update(final Province.Id id, Province.Data data) throws SQLException {

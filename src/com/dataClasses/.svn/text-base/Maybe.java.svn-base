@@ -4,6 +4,32 @@ import java.util.Collections;
 import java.util.Iterator;
 
 /**
+ * One problem with null values is that their type doesn't reflect that they can be null,
+ *   so we have to say it in comments
+ *   Ex. String foo(Object o) // o can be null, return value is never null
+ * 
+ * The Maybe class solves this problem
+ *   Ex. String foo(Maybe<Object> o)
+ *   And then we just assume that the builtin null is never used
+ * 
+ * Also, it can prevent errors such as forgetting to check for null
+ *   Integer bar(String s);
+ *   String x; // x can be null
+ *   
+ *   Ex. foo(x) 
+ *     instead of 
+ *       if(x != null) foo(x);
+ * 
+ * With Maybe, this error is caught by the compiler
+ *   Integer bar(String s);
+ *   Maybe<String> x;
+ *   
+ *   Ex. foo(x) // Error: expected String, given Maybe<String>
+ *     instead of
+ *       if(!x.isNull()) foo(x.value())
+ *
+ * 
+ * The 2 constructors are called empty() and just(T)
  * 
  * Properties (could make them unit tests) = {
  *	forall T. forall x:Maybe<T>. x.isNull() -> (x.value() = throw NullPointerException())
@@ -34,30 +60,50 @@ import java.util.Iterator;
  *  	return <C>just(z.value());
  * }
  *  
+ * @author Simon Langlois
  */
 public abstract class Maybe<T> implements Iterable<T> {
 	
 	private Maybe() { }
 
-	public final boolean getIsNull() {
-		return isNull();
-	}
+	public abstract boolean isNull();
+	public abstract T value();
+
+	public final boolean getIsNull() { return isNull(); }
 	
-	public final T getValue() {
+	public final T getValue() { return value(); }
+	
+	public final T or(final T defaultValue) {
+		if(this.isNull()) return defaultValue;
+		
 		return value();
 	}
 	
-	public abstract boolean isNull();
-	public abstract T value();
-	public abstract T or(final T defaultValue);
-	public abstract Maybe<T> or(final Maybe<T> other);
-	public abstract <E extends Exception> T except(final E ex) throws E;
-	public final T except() throws MaybeNullException { 
-		return except(new MaybeNullException()); 
+	public final Maybe<T> or(final Maybe<T> other) {
+		if(this.isNull()) return other;
+		
+		return this;
+	}
+	
+	public final <E extends Exception> T except(final E ex) throws E {
+		if(this.isNull()) throw ex;
+		
+		return value();
+	}
+	
+	public final Iterator<T> iterator() {
+		if(this.isNull()) return Collections.<T>emptyList().iterator();
+
+		return Collections.singletonList(value()).iterator();		
+	}
+	
+	public final String toString() {
+		if(this.isNull()) return "Nothing";
+		
+		return "Just(" + value() + ")";
 	}
 
 	public static final <T> Maybe<T> nothing() {
-		
 		return new Maybe<T>() {
 
 			@Override
@@ -66,32 +112,10 @@ public abstract class Maybe<T> implements Iterable<T> {
 			@Override
 			public T value() { throw new NullPointerException(); }
 			
-			@Override
-			public T or(final T defaultValue) { return defaultValue; }
-
-			@Override
-			public Maybe<T> or(final Maybe<T> other) { return other; }
-			
-			@Override
-			public String toString() {
-				return "Nothing";
-			}
-
-			@Override
-			public <E extends Exception> T except(final E ex) throws E {
-				throw ex;
-			}
-
-			@Override
-			public Iterator<T> iterator() {
-				return Collections.<T>emptyList().iterator();
-			}
 		};
 	}
 	
 	public static final <T> Maybe<T> just(final T value) {
-		if(value == null) throw new NullPointerException();
-		
 		return new Maybe<T>() {
 	
 			@Override
@@ -100,29 +124,12 @@ public abstract class Maybe<T> implements Iterable<T> {
 			@Override
 			public T value() { return value; }
 
-			@Override
-			public T or(final T defaultValue) { return value(); }
-
-			@Override
-			public Maybe<T> or(final Maybe<T> other) { return this; }
-			
-			@Override
-			public String toString() {
-				return "Just(" + value() + ")";
-			}
-
-			@Override
-			public <E extends Exception> T except(final E ex) throws E {
-				return value();
-			}
-
-			@Override
-			public Iterator<T> iterator() {
-				return Collections.singletonList(value()).iterator();
-			}
 		};
 	}
 	
+	/**
+	 * Converts from references that can be null to a Maybe value
+	 */
 	public static final <T> Maybe<T> from(final T value) {
 		if(value == null)
 			return nothing();

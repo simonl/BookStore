@@ -4,22 +4,20 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
-import java.util.Enumeration;
 import java.util.Map.Entry;
-import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-
-import org.apache.commons.fileupload.FileItem;
 
 import com.dataClasses.Database;
 import com.servlets.Session.NewSession;
 
+/**
+ * @author Simon Langlois, edited by Edward Gagnon
+ */
 public abstract class PageServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
@@ -49,27 +47,6 @@ public abstract class PageServlet extends HttpServlet {
 			final HttpServletRequest request, 
 			final HttpServletResponse response) 
 			throws ServletException, IOException {
-		/*
-		 
-		Enumeration<String> x = request.getParameterNames();
-		Enumeration<String> y = request.getParameterNames();
-		System.out.println(this.getServletName() +  " has these parameters in the request..\n====================================================");
-		while(x.hasMoreElements()){
-			System.out.println(x.nextElement() + " = " + request.getParameter(y.nextElement()) );
-		}
-		System.out.println("====================================================\nEnd of parameter list\n\n");
-		
-		final HttpSession rSession = request.getSession();
-		
-		Enumeration sessionEnum = rSession.getAttributeNames();
-		Enumeration sessionEnum2 = rSession.getAttributeNames();
-		System.out.println(this.getServletName() +  " has these session attributes in the session object..\n====================================================");
-		while(sessionEnum.hasMoreElements()){
-			System.out.println(sessionEnum.nextElement() + " = " + rSession.getAttribute((String) sessionEnum2.nextElement()) );
-		}
-		System.out.println("====================================================\nEnd of session attributes list\n\n");
-
-		*/
 		
 		
 		if(request.getSession().getAttribute("session") == null) {
@@ -95,27 +72,6 @@ public abstract class PageServlet extends HttpServlet {
 		manager.load(request);
 
 		
-		/*
-
-		System.out.println(this.getServletName() +  " has these parameters in the Parameters..\n====================================================");
-		for(final String name : parameters.parameters.keySet()) {
-			System.out.print(name + " = ");
-			for(final String value : parameters.gets(name))
-				System.out.print(value + ", ");
-			System.out.println();
-		}
-		System.out.println("====================================================\nEnd of parameter list\n\n");
-
-		System.out.println(this.getServletName() +  " has these parameters in the Files..\n====================================================");
-		for(final String name : parameters.files.keySet()) {
-			System.out.print(name + " = ");
-			for(final FileItem value : parameters.file(name))
-				System.out.print(value + ", ");
-			System.out.println();
-		}
-		System.out.println("====================================================\nEnd of parameter list\n\n");
-		
-		*/
 		
 		
 		

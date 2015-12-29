@@ -1,3 +1,14 @@
+<%-- ************************************************************************ --%>
+<%-- *                                     			 						* --%>
+<%-- *	Author: David Préseault												* --%>
+<%-- *	This panel is responsible for displaying links and information to a	* --%>
+<%-- * 	registered and logged in client.									* --%>
+<%-- *	It will replace the Login Panel when visiting the site and not		* --%>
+<%-- *	logged in.															* --%>
+<%-- *	Shows View Cart Items, Checkout, and Logout links					* --%>
+<%-- *                                      								* --%>
+<%-- ************************************************************************ --%>
+
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 		<div id="memberpanel" class="box ui-corner-ll" >

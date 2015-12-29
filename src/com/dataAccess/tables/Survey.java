@@ -11,6 +11,16 @@ import com.dataClasses.Maybe;
 import com.dataClasses.Nat;
 import com.dataClasses.Wrapper;
 
+/**  
+ * Defines types and classes related to the database table with the same name
+ * There is a separation between the ID, which refers to a row, and the other fields in a row
+ * Each database field get its own abstract data type and parsing/validating constructor
+ * 
+ * The Survey.Data objects have a field that contains a set of answers, 
+ *   which differs from the database representation
+ *   
+ * @author Simon Langlois
+ */
 public final class Survey {
 	private Survey() { }
 	

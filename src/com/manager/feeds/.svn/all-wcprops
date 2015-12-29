@@ -7,17 +7,17 @@ ChangeCurrentFeedServlet.java
 K 25
 svn:wc:ra_dav:version-url
 V 89
-/svn/g2w12/!svn/ver/410/SeedBookStore/src/com/manager/feeds/ChangeCurrentFeedServlet.java
+/svn/g2w12/!svn/ver/454/SeedBookStore/src/com/manager/feeds/ChangeCurrentFeedServlet.java
 END
 FeedManagementServlet.java
 K 25
 svn:wc:ra_dav:version-url
 V 86
-/svn/g2w12/!svn/ver/303/SeedBookStore/src/com/manager/feeds/FeedManagementServlet.java
+/svn/g2w12/!svn/ver/454/SeedBookStore/src/com/manager/feeds/FeedManagementServlet.java
 END
 CreateNewFeedServlet.java
 K 25
 svn:wc:ra_dav:version-url
 V 85
-/svn/g2w12/!svn/ver/303/SeedBookStore/src/com/manager/feeds/CreateNewFeedServlet.java
+/svn/g2w12/!svn/ver/454/SeedBookStore/src/com/manager/feeds/CreateNewFeedServlet.java
 END

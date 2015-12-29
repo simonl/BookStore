@@ -1,19 +1,19 @@
 K 25
 svn:wc:ra_dav:version-url
 V 60
-/svn/g2w12/!svn/ver/430/SeedBookStore/WebContent/javascripts
+/svn/g2w12/!svn/ver/449/SeedBookStore/WebContent/javascripts
 END
 run.js
 K 25
 svn:wc:ra_dav:version-url
 V 67
-/svn/g2w12/!svn/ver/419/SeedBookStore/WebContent/javascripts/run.js
+/svn/g2w12/!svn/ver/442/SeedBookStore/WebContent/javascripts/run.js
 END
 addEBookFormats.js
 K 25
 svn:wc:ra_dav:version-url
 V 79
-/svn/g2w12/!svn/ver/420/SeedBookStore/WebContent/javascripts/addEBookFormats.js
+/svn/g2w12/!svn/ver/449/SeedBookStore/WebContent/javascripts/addEBookFormats.js
 END
 advancedSearch.js
 K 25
@@ -25,23 +25,23 @@ reviewbook.js
 K 25
 svn:wc:ra_dav:version-url
 V 74
-/svn/g2w12/!svn/ver/430/SeedBookStore/WebContent/javascripts/reviewbook.js
+/svn/g2w12/!svn/ver/449/SeedBookStore/WebContent/javascripts/reviewbook.js
 END
 addToCartBox.js
 K 25
 svn:wc:ra_dav:version-url
 V 76
-/svn/g2w12/!svn/ver/427/SeedBookStore/WebContent/javascripts/addToCartBox.js
+/svn/g2w12/!svn/ver/449/SeedBookStore/WebContent/javascripts/addToCartBox.js
 END
 reviewCycle.js
 K 25
 svn:wc:ra_dav:version-url
 V 75
-/svn/g2w12/!svn/ver/430/SeedBookStore/WebContent/javascripts/reviewCycle.js
+/svn/g2w12/!svn/ver/449/SeedBookStore/WebContent/javascripts/reviewCycle.js
 END
 addChoiceSurvey.js
 K 25
 svn:wc:ra_dav:version-url
 V 79
-/svn/g2w12/!svn/ver/420/SeedBookStore/WebContent/javascripts/addChoiceSurvey.js
+/svn/g2w12/!svn/ver/449/SeedBookStore/WebContent/javascripts/addChoiceSurvey.js
 END

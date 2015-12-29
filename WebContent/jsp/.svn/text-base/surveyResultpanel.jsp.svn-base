@@ -1,3 +1,6 @@
+<%-- Author Evgeniy Li --%>
+<%-- this page displays survey choices and the percentage of the votes and total number of votes --%>
+
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
     

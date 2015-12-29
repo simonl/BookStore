@@ -1,3 +1,14 @@
+<%-- ************************************************************************ --%>
+<%-- *                                     			 						* --%>
+<%-- * Author: David Préseault		        								* --%>
+<%-- *                                      								* --%>
+<%-- * This JSP page displays the invoice of recent purchase from user.		* --%>
+<%-- * User is notified that an email version has also been sent.			* --%>
+<%-- * Information displayed consists of items that were purchased, qty, 	* --%>
+<%-- * prices, totals, taxes, billing information and shipping information.	* --%>
+<%-- *                                      								* --%>
+<%-- ************************************************************************ --%>
+
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -15,7 +26,7 @@
 			<div>
 		</c:otherwise>
 	</c:choose>
-
+<%-- Display the cart items --%>
 	<TABLE cellspacing="0" width="98%"
 		style="text-align: center; margin: 0px auto;">
 		<TR>
@@ -84,6 +95,7 @@
 	<br />
 	<br />
 	</div>
+<%-- Display the subtotal, taxes, and final price --%>
 <table
 	style="float: right; text-align: right; margin-right: 7px;">
 	<tr>
@@ -123,6 +135,8 @@
 	<div style="clear: both;"></div>
 	</div>
 	<br />
+
+<%-- Display the user's Billing Information --%>
 	<div id="viewbook" class="contentbox ui-corner-all">
 		<div id="viewbookHeader" class="contentheaders ui-corner-ll">
 			Billed To</div>
@@ -152,6 +166,8 @@
 		<br />
 	</div>
 	<br />
+	
+<%-- Display the user's Shipping Information --%>
 	<div id="viewbook" class="contentbox ui-corner-all">
 		<div id="viewbookHeader" class="contentheaders ui-corner-ll">
 			Shipping To</div>

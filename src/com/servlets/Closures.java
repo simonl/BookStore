@@ -12,6 +12,8 @@ import com.welcome.WelcomeServlet;
 
 /**
  * A bunch of ClosedServlets
+ * 
+ * @author Simon Langlois
  */
 public abstract class Closures {
 

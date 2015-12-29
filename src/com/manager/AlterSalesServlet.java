@@ -38,6 +38,7 @@ import com.servlets.Session;
 
 /**
  * Servlet implementation class SetSalesServlet
+ * @author Edward Gagnon
  */
 public class AlterSalesServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;

@@ -7,23 +7,23 @@ ReceiveOrderServlet.java
 K 25
 svn:wc:ra_dav:version-url
 V 85
-/svn/g2w12/!svn/ver/303/SeedBookStore/src/com/manager/orders/ReceiveOrderServlet.java
+/svn/g2w12/!svn/ver/454/SeedBookStore/src/com/manager/orders/ReceiveOrderServlet.java
 END
 ChangeMinimumBooksServlet.java
 K 25
 svn:wc:ra_dav:version-url
 V 91
-/svn/g2w12/!svn/ver/303/SeedBookStore/src/com/manager/orders/ChangeMinimumBooksServlet.java
+/svn/g2w12/!svn/ver/454/SeedBookStore/src/com/manager/orders/ChangeMinimumBooksServlet.java
 END
 OrderManagementServlet.java
 K 25
 svn:wc:ra_dav:version-url
 V 88
-/svn/g2w12/!svn/ver/371/SeedBookStore/src/com/manager/orders/OrderManagementServlet.java
+/svn/g2w12/!svn/ver/454/SeedBookStore/src/com/manager/orders/OrderManagementServlet.java
 END
 CreateNewOrderServlet.java
 K 25
 svn:wc:ra_dav:version-url
 V 87
-/svn/g2w12/!svn/ver/303/SeedBookStore/src/com/manager/orders/CreateNewOrderServlet.java
+/svn/g2w12/!svn/ver/454/SeedBookStore/src/com/manager/orders/CreateNewOrderServlet.java
 END

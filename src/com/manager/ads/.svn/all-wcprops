@@ -7,17 +7,17 @@ AdsManagementServlet.java
 K 25
 svn:wc:ra_dav:version-url
 V 83
-/svn/g2w12/!svn/ver/340/SeedBookStore/src/com/manager/ads/AdsManagementServlet.java
+/svn/g2w12/!svn/ver/454/SeedBookStore/src/com/manager/ads/AdsManagementServlet.java
 END
 SetCurrentBannerServlet.java
 K 25
 svn:wc:ra_dav:version-url
 V 86
-/svn/g2w12/!svn/ver/410/SeedBookStore/src/com/manager/ads/SetCurrentBannerServlet.java
+/svn/g2w12/!svn/ver/454/SeedBookStore/src/com/manager/ads/SetCurrentBannerServlet.java
 END
 SetCurrentAdsServlet.java
 K 25
 svn:wc:ra_dav:version-url
 V 83
-/svn/g2w12/!svn/ver/410/SeedBookStore/src/com/manager/ads/SetCurrentAdsServlet.java
+/svn/g2w12/!svn/ver/454/SeedBookStore/src/com/manager/ads/SetCurrentAdsServlet.java
 END

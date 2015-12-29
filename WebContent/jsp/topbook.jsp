@@ -1,3 +1,12 @@
+<%-- ************************************************************************ --%>
+<%-- *                                     			 						* --%>
+<%-- *	Author: David Préseault, Simon Langlois, Edward Gagnon				* --%>
+<%-- *	This panel is responsible for displaying the new books on the side.	* --%>
+<%-- * 	The user can click any one of these books and will be redirected	* --%>
+<%-- *	to the view book page displaying information. 						* --%>
+<%-- *                                      								* --%>
+<%-- ************************************************************************ --%>
+
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
     
@@ -8,7 +17,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 	<div id="topbookspanel" class="box ui-corner-ll">
 			<div id="topbookspanelHeader" class="boxheaders ui-corner-ll">
-				<img src="<%= response.encodeURL(request.getContextPath() + "/imgs/topbooksheader.png")%>" class="ui-corner-ll"  />
+				<img src="<c:url value="/imgs/topbooksheader.png" />" class="ui-corner-ll"  />
 			</div>
 			
 			<c:forEach var="recentBook" items="${recentBooks}">

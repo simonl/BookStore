@@ -2,22 +2,22 @@ package com.cart;
 
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.Arrays;
-import java.util.HashMap;
 import java.util.Map;
 
 import javax.servlet.ServletException;
 
 import com.dataAccess.tables.Book;
-import com.dataClasses.CreditCardType;
 import com.dataClasses.Database;
-import com.dataClasses.Month;
+import com.dataClasses.Funcs;
 import com.servlets.Attributes;
 import com.servlets.Conts;
 import com.servlets.MainPageServlet;
 import com.servlets.Parameters;
 import com.servlets.Session;
 
+/**  
+ * @author Simon Langlois
+ */
 public class ViewCartServlet extends MainPageServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -28,11 +28,7 @@ public class ViewCartServlet extends MainPageServlet {
 			final Parameters parameters) 
 			throws ServletException, IOException, SQLException {
 				
-		final Map<Book.Id, Book.Data> books = new HashMap<Book.Id, Book.Data>();
-		
-		for(final Book.Id id : session.cart.value.keySet()) { 
-			books.put(id, db.get(id));
-		}
+		final Map<Book.Id, Book.Data> books = Funcs.maps(session.cart.value.keySet(), db.getBook);
 		
 		final Attributes attributes = new Attributes();
 

@@ -20,6 +20,9 @@ import com.servlets.Session;
 
 /**
  * Servlet implementation class RemoveFromCart
+ * 
+ * @author David Preseault
+ * @author Simon Langlois
  */
 public class RemoveFromCartServlet extends MainPageServlet {
 
@@ -36,7 +39,7 @@ public class RemoveFromCartServlet extends MainPageServlet {
 		final Maybe<Book.Isbn13> isbn = Book.Isbn13.parse(isbnInput.value());
 		
 		final Maybe<String> electronicInput = parameters.get("electronic");
-		final Maybe<Boolean> electronic = electronicInput.isNull() ? Maybe.just(false) : parseBoolean(electronicInput.value());
+		final Maybe<Boolean> electronic = electronicInput.isNull() ? Maybe.just(false) : AddToCartServlet.parseBoolean(electronicInput.value());
 		
 		if(electronic.isNull())
 			return Conts.error("removeFromCartError", "Invalid boolean specifying to remove ebook");
@@ -83,12 +86,5 @@ public class RemoveFromCartServlet extends MainPageServlet {
 
 		if(!newItem.equals(Item.empty))
 			cart.put(book, newItem);
-	}
-	
-	private Maybe<Boolean> parseBoolean(final String input) {
-		if(input.equalsIgnoreCase("true")) return Maybe.just(true);
-		if(input.equalsIgnoreCase("false")) return Maybe.just(false);
-
-		return Maybe.nothing();
 	}
 }

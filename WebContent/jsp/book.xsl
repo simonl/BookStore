@@ -4,6 +4,15 @@
    xmlns="http://www.w3.org/TR/REC-html40">
 <xsl:output method="html"/>   
 <xsl:template match="/">
+<!-- ************************************************************************ -->
+<!-- *                                     			 						* -->
+<!-- * Author: David Préseault		        								* -->
+<!-- *                                      								* -->
+<!-- * This is the book information template that will be used when			* -->
+<!-- * generating book information into XML-to-JSP							* -->
+<!-- *                                      								* -->
+<!-- ************************************************************************ -->
+
 <html>
   <body>
   <xsl:for-each select="books/book">

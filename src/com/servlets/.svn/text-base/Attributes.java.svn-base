@@ -8,8 +8,9 @@ import java.util.Map.Entry;
 /**
  * 
  * A servlet returns the path to the JSP that will be displayed,
- *   along with the Attributes the will be in its environment during execution
+ *   along with the Attributes that will be in its environment during execution
  * 
+ * @author Simon Langlois
  */
 public final class Attributes implements Iterable<Entry<String, Object>> {
 	private final Map<String, Object> values;

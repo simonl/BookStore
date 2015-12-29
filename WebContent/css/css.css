@@ -1,3 +1,7 @@
+/*
+*	Author: David Préseault, Edward Gagnon
+*/
+
 @font-face {
 	font-family: minecraft;
 	src: url('minecraft.ttf');
@@ -848,6 +852,13 @@ div.buttonWrapper {
 }
 
 /*      booksOfInterestDisplay and bestSellersDisplay        */
+/***************************************
+*                                      *
+*   Date: Claimed on April 5th 2012    *
+*                                      *
+* Author: Edward Gagnon                *
+*                                      *
+****************************************/
 
 #booksofInterestDisplay, #bestSellersDisplay, #relatedBooksDisplay{
 	text-align: center;
@@ -951,6 +962,14 @@ div.buttonWrapper {
 
 /* ==================  mobile css ========================== */
 
+/***************************************
+*                                      *
+*   Date: Claimed on April 5th 2012    *
+*                                      *
+* Author: Edward Gagnon                *
+*                                      *
+****************************************/
+
 #thumbContainerMobile{
 }
 
@@ -1021,6 +1040,13 @@ div.buttonWrapper {
 }
 
 /* ==================  help css ========================== */
+/***************************************
+*                                      *
+*   Date: Claimed on April 5th 2012    *
+*                                      *
+* Author: Edward Gagnon                *
+*                                      *
+****************************************/
 
 
 
@@ -1048,6 +1074,15 @@ text-shadow:0px 0px 0 rgb(187,187,187),1px 1px 0 rgb(145,145,145),2px 2px 0 rgb(
 .rightSubmit{font-size: 130%; float: right;}
 
 /* ============== header image ===================== */
+
+/***************************************
+*                                      *
+*   Date: Claimed on April 5th 2012    *
+*                                      *
+* Author: Edward Gagnon                *
+*                                      *
+****************************************/
+
 #header{
 	text-align: center;	
 	height: 160px;

@@ -1,3 +1,6 @@
+<%-- Author Evgeniy Li --%>
+<%-- display book information in purpose to edit it --%>
+
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -23,6 +26,7 @@ window.onload = function() {
     Manager > Book Management 
     </div><br>
     
+ 
     <form action="<c:url  value="/AdminEditBookServlet" />" method="post" enctype="multipart/form-data">
     <p><span class="viewbookFields">Thumnail:</span><input type="file" name="thumbnail" value="${book.thumbnail}"></p>
     <p><span class="viewbookFields">Cover:</span><input type="file" name="cover" value="${book.cover}"></p> 

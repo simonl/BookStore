@@ -1,5 +1,14 @@
 package com.dataClasses;
 
+/**
+ * When you want a type that is basically like another one,
+ *   but you want to control how it's constructed
+ *  
+ *  Ex. email address
+ *      Instead of storing it as a string, use a Wrapper<String> that validates the string value
+ *      
+ * @author Simon Langlois
+ */
 public abstract class Wrapper<T> {
 	public final T value;
 	

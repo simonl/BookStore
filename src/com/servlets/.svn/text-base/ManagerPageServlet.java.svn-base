@@ -9,6 +9,9 @@ import com.dataAccess.tables.User;
 import com.dataClasses.Database;
 import com.dataClasses.Maybe;
 
+/**
+ * @author Simon Langlois
+ */
 public abstract class ManagerPageServlet extends MainPageServlet {
 	private static final long serialVersionUID = 1L;
 

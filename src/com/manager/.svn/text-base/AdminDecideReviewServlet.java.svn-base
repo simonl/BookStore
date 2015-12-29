@@ -22,6 +22,7 @@ import com.xml.XmlFactory;
 
 /**
  * Servlet implementation class AdminDecideReviewServlet
+ * @author Edward Gagnon
  */
 public class AdminDecideReviewServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;

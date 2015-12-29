@@ -2,6 +2,13 @@
     pageEncoding="ISO-8859-1"%>
  <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
  <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+ 
+<%-- **************************************** --%>
+<%-- *                                      * --%>
+<%-- * Author: Simon Langlois               * --%>
+<%-- *                                      * --%>
+<%-- **************************************** --%>
+ 
 <div class="contentbox ui-corner-ll">
     <div class="contentheaders ui-corner-ll">
         ${displayString}

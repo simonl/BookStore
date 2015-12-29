@@ -9,6 +9,11 @@ import java.util.Map;
 import java.util.Set;
 
 
+/**
+ * Methods that take operators on values (A, B), and produce operators on collections (C<A>, C<B>)
+ *  
+ * @author Simon Langlois
+ */
 public final class Funcs {
 	private Funcs() { }
 
@@ -43,13 +48,13 @@ public final class Funcs {
 	}
 	
 	public static final <A, B, E extends Exception> Map<A, B> maps(final Set<A> set, final Throws<A, B, E> func) throws E {
-		final Map<A, B> map = new HashMap<A, B>(set.size());
+		final Map<A, B> result = new HashMap<A, B>(set.size());
 		
-		for(final A value : set) {
-			map.put(value, func.apply(value));
+		for(final A key : set) {
+			result.put(key, func.apply(key));
 		}
 		
-		return map;
+		return result;
 	}
 	
 

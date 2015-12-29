@@ -2,12 +2,9 @@ package com.reports;
 
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.jar.Attributes;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 import com.dataClasses.Database;
 import com.dataClasses.Database.Manager;
@@ -18,7 +15,6 @@ import com.servlets.Parameters;
 import com.servlets.Session;
 
 /**
- * Servlet implementation class ShowReportMenuServlet
  * @author Edward Gagnon
  * @version March 22nd, 2012
  */

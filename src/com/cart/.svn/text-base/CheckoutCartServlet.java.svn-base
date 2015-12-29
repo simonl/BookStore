@@ -4,21 +4,15 @@ import java.io.IOException;
 import java.math.BigDecimal;
 import java.sql.SQLException;
 import java.util.Arrays;
-import java.util.Collection;
-import java.util.HashMap;
 import java.util.Map;
-import java.util.Set;
 
 import javax.servlet.ServletException;
 
 import com.dataAccess.tables.Address;
 import com.dataAccess.tables.Book;
-import com.dataAccess.tables.Book.Id;
 import com.dataAccess.tables.Client;
 import com.dataAccess.tables.Province;
-import com.dataAccess.tables.Purchase;
 import com.dataAccess.tables.User;
-import com.dataAccess.tables.User.Data;
 import com.dataClasses.CreditCardType;
 import com.dataClasses.Database;
 import com.dataClasses.Func;
@@ -33,6 +27,13 @@ import com.servlets.MainPageServlet;
 import com.servlets.Parameters;
 import com.servlets.Session;
 
+/**
+ * Checkout Cart Servlet - Occurs when logged-in user clicks checkout button.
+ * Sends cart information, quantity, price, totals, taxes, and creditcard types. 
+ * 
+ * @author David Preseault
+ * @author Simon Langlois
+ */
 public class CheckoutCartServlet extends MainPageServlet {
 	private static final long serialVersionUID = 1L;
 

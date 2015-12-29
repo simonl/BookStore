@@ -9,8 +9,6 @@ import javax.servlet.ServletException;
 import com.dataAccess.tables.Book;
 import com.dataClasses.Database;
 import com.dataClasses.Database.Manager;
-import com.dataClasses.SearchInput;
-import com.search.SearchResultServlet;
 import com.servlets.Attributes;
 import com.servlets.Closures;
 import com.servlets.Conts;
@@ -19,7 +17,7 @@ import com.servlets.Parameters;
 import com.servlets.Session;
 
 /**
- * Servlet implementation class SearchBookServlet
+ * @author Simon Langlois
  */
 public class DiscontinuedBooksServlet extends ManagerPageServlet {
 	private static final long serialVersionUID = 1L;

@@ -17,7 +17,7 @@ import com.servlets.Parameters;
 import com.servlets.Session;
 
 /**
- * Servlet implementation class Login
+ * @author Simon Langlois
  */
 public class SearchResultServlet extends MainPageServlet {
 	private static final long serialVersionUID = 1L;

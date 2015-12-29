@@ -4,6 +4,11 @@ import com.dataAccess.tables.Book;
 import com.dataClasses.Money;
 import com.dataClasses.Nat;
 
+/** 
+ * Similar to a Purchase.Data except it contains Book.Data instead of Book.Id
+ * 
+ * @author Simon Langlois
+ */
 public final class InvoiceRecord {
 	public final Book.Data book;
 	public final Money price;

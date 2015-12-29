@@ -6,47 +6,31 @@ import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.util.Date;
 import java.util.HashSet;
-import java.util.Iterator;
-import java.util.List;
 import java.util.Set;
 
-import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 
 import org.apache.commons.fileupload.FileItem;
-import org.apache.commons.fileupload.FileItemFactory;
-import org.apache.commons.fileupload.FileUploadException;
-import org.apache.commons.fileupload.disk.DiskFileItemFactory;
-import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
+import com.dataAccess.tables.Book;
 import com.dataClasses.Database;
 import com.dataClasses.Database.Manager;
+import com.dataClasses.Maybe;
+import com.dataClasses.Money;
+import com.dataClasses.Nat;
 import com.servlets.Attributes;
 import com.servlets.Conts;
 import com.servlets.ManagerPageServlet;
 import com.servlets.Parameters;
-import com.servlets.Session;
-import com.dataAccess.tables.Book;
-import com.dataClasses.Maybe;
-import com.dataClasses.Money;
-import com.dataClasses.Nat;
-
 import com.servlets.ProcessingError;
+import com.servlets.Session;
 import com.view.book.ViewBookServlet;
-
-import org.apache.commons.fileupload.servlet.ServletFileUpload;
-import org.apache.commons.fileupload.FileItemFactory;
-import org.apache.commons.fileupload.FileUploadException;
-import org.apache.commons.fileupload.FileItem;
-import org.apache.commons.fileupload.disk.DiskFileItemFactory;
-
-import javax.servlet.*;
-import javax.servlet.http.*;
 
 
 
 /**
  * Servlet implementation class AddBookServlet
+ * @author Evgeniy Li
  */
 public class AddBookServlet extends ManagerPageServlet {
 	private static final long serialVersionUID = 1L;
@@ -64,6 +48,7 @@ public class AddBookServlet extends ManagerPageServlet {
 		boolean DEBUG = true;
 		boolean formCompleted = true;
 		
+		//get data from the addBook.jsp form
 		final Maybe<String> fileTitle = parameters.get("title");
 		final Maybe<String> fileAuthor = parameters.get("author");
 		final Maybe<String> filePublisher = parameters.get("publisher");
@@ -80,6 +65,7 @@ public class AddBookServlet extends ManagerPageServlet {
 		final Maybe<String> fileWholesalePrice = parameters.get("wholesaleprice");
 		final Maybe<String> fileNumberOfBooks = parameters.get("numberofbooks");
 		
+		//initialization of book data
 		Maybe<Book.Title> bookTitle = null;
 		Maybe<Book.Author> bookAuthor = null;
 		Maybe<Book.Publisher> bookPublisher = null;
@@ -94,9 +80,10 @@ public class AddBookServlet extends ManagerPageServlet {
 		Maybe<Money> bookWholesalePrice = null;
 		Maybe<Nat> bookNumberOfBooks = null;
 		
-		
+		//initialization of attributes
 		Attributes attributes = new Attributes(); 
 		
+		//validation of data from the form and set book data 
 		String inputTitle = fileTitle.getValue(); 
 		if(inputTitle.length() == 0){
 			String messageTitle = "Please fill out the title box";
@@ -158,13 +145,13 @@ public class AddBookServlet extends ManagerPageServlet {
 		else{
 			bookIsbn13 = Book.Isbn13.parse(inputIsbn13);
 			//System.out.println("Book isbn13 =" + bookIsbn13);
+			//Verification if isbn13 already exists in purpose to not to upload files and to not to add a new book
 			final Maybe<Book.Id> bookId = bookIsbn13.isNull() ? Maybe.<Book.Id>nothing() : db.fromIsbn(bookIsbn13.value());
 			if(!bookId.isNull()) {
 				DEBUG = false;
 				String messageIsbn13 = "Isbn13 already exists";
 				attributes.set("messageIsbn13", messageIsbn13);
 				formCompleted = false;
-				System.out.println("isbn13 already exists");
 			}
 			else 
 				DEBUG = true;
@@ -228,13 +215,6 @@ public class AddBookServlet extends ManagerPageServlet {
 			//System.out.println("Book Weight =" + bookWeight);		
 		}
 		
-		
-		/*
-		Maybe<String> fileDimensions = parameters.get("dimensions");
-		String inputDimensions = fileDimensions.getValue(); 
-		Maybe<Book.Dimensions> bookDimensions = Book.Dimensions.parse(inputDimensions);
-		//System.out.println("Book Dimensions =" + bookDimensions);
-		*/
 		
 		if(inputLength.value().length() == 0 || inputWidth.value().length() == 0 || inputHeight.value().length() == 0){
 			String messageDimensions = "Please fill out all dimensions";
@@ -405,11 +385,12 @@ public class AddBookServlet extends ManagerPageServlet {
 			eBookFormatSet.add(eFormat);
 		}
 		
-		
+		//if data fill in the form isn't valid redirect to the same page to display message where box is empty of data 
 		if(!formCompleted){
 			return Conts.display("/admin/addBook.jsp", attributes);
 		}
 		
+		//creating book data
 		final Book.Data data = new Book.Data(
 				new Timestamp(new Date().getTime()), 
 				bookTitle.value(), 
@@ -430,15 +411,17 @@ public class AddBookServlet extends ManagerPageServlet {
 				bookNumberOfBooks,
 				eBookFormatSet);
 		
-		
+		//add book on the database
 		final Book.Id book = db.put(token, data);	
 		
+		//set book's information in attributes and then display the new book on adminViewBook.jsp
 		final Attributes bookAttributes = ViewBookServlet.known(db, session, book);
 		return Conts.display("/admin/adminViewBook.jsp", bookAttributes);
 
 		
 	}
 	
+	//convert string to double, used to convert dimensions   
 	public static final Maybe<Double> parseDouble(final String input) {
 		try {
 			return Maybe.just(Double.parseDouble(input));

@@ -1,5 +1,8 @@
 package com.dataClasses;
 
+/**
+ * @author Simon Langlois
+ */
 public final class Item { 
 	public final Nat numberOfCopies;
 	public final boolean electronic;

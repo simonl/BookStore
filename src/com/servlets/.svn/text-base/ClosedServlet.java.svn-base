@@ -10,7 +10,8 @@ import com.dataClasses.Database;
 
 /**
  * Like a servlet, but with the parameters fixed
- *
+ * 
+ * @author Simon Langlois
  */
 public final class ClosedServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;

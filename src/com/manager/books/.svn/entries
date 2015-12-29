@@ -1,7 +1,7 @@
 10
 
 dir
-438
+453
 https://waldo.dawsoncollege.qc.ca/svn/g2w12/SeedBookStore/src/com/manager/books
 https://waldo.dawsoncollege.qc.ca/svn/g2w12
 
@@ -28,14 +28,14 @@ ee2c230c-ad30-744f-87f2-c992cd35797a
 
 DeleteBookServlet.java
 file
+454
 
 
 
-
-2012-03-29T05:26:20.851865Z
-8bbd2c8341df77bfad3de7c8c372218d
-2012-03-29T05:40:16.300234Z
-410
+2012-04-06T08:48:03.426709Z
+988ce819f2937a0e1fbc9963d408d86b
+2012-04-06T09:11:42.780875Z
+454
 0933125
 
 
@@ -58,18 +58,18 @@ file
 
 
 
-2108
+1011
 
 PublicizeBookServlet.java
 file
+454
 
 
 
-
-2012-03-29T05:26:47.586394Z
-884772145af3cec585728e36456da452
-2012-03-29T05:40:16.300234Z
-410
+2012-04-06T08:48:43.879022Z
+559599a85bb96dcdeade15b4c7a53d76
+2012-04-06T09:11:42.780875Z
+454
 0933125
 
 
@@ -92,18 +92,18 @@ file
 
 
 
-2106
+1011
 
 DiscontinuedBooksServlet.java
 file
+454
 
 
 
-
-2012-03-29T05:05:30.774365Z
-b30f70548acacc6e8d181aff672786fc
-2012-03-29T05:40:16.300234Z
-410
+2012-04-06T08:48:57.082778Z
+73bcfb8ef0b6e066e3770e42d1d78533
+2012-04-06T09:11:42.780875Z
+454
 0933125
 
 
@@ -126,5 +126,5 @@ b30f70548acacc6e8d181aff672786fc
 
 
 
-1394
+1293
 

@@ -1,25 +1,25 @@
 package com.mail.invoice;
 
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.OutputStream;
 import java.util.Properties;
 
-import javax.annotation.Resource;
 import javax.swing.JOptionPane;
-
-import org.eclipse.jdt.internal.compiler.ast.ThisReference;
 
 import com.mail.invoice.data.MailConfigData;
 
 /**
  * Read or write mail properties
  * 
- * @author neon
+ * @author neon = Original Author
+ * 
+ * Note: This version of code has been modified by David Preseault to work with
+ * TomCat web-apps fetching properties files in web-inf/classes using a stream
+ * instead of File.
+ * 
  */
 public class MailProperties {
 
@@ -43,6 +43,7 @@ public class MailProperties {
 
 	/**
 	 * Load the properties into the MailConfig object
+	 * Modified from Original code by Neon
 	 * 
 	 * @return if successful or not
 	 */
@@ -52,7 +53,7 @@ public class MailProperties {
 
 		InputStream propFileStream = this.getClass().getClassLoader().getResourceAsStream(propFileName);
 
-		// File must exist
+		// FileStream must exist
 		if (propFileStream != null) {
 			try {
 				prop.load(propFileStream);

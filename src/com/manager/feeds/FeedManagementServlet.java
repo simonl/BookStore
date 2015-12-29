@@ -18,6 +18,9 @@ import com.servlets.ManagerPageServlet;
 import com.servlets.Parameters;
 import com.servlets.Session;
 
+/**
+ * @author Simon Langlois
+ */
 public class FeedManagementServlet extends ManagerPageServlet {
 	private static final long serialVersionUID = 1L;
 

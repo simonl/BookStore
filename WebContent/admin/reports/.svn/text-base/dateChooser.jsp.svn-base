@@ -2,6 +2,12 @@
     pageEncoding="ISO-8859-1"%>
      <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
+<%-- **************************************** --%>
+<%-- *                                      * --%>
+<%-- * Author: Simon Langlois               * --%>
+<%-- *                                      * --%>
+<%-- **************************************** --%>
+
 <div style="margin-botom:5%; text-align:center">
 	<fieldset>
 		<legend>Choose a Date:</legend>

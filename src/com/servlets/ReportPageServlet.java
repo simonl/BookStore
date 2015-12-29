@@ -6,11 +6,13 @@ import java.sql.SQLException;
 import javax.servlet.ServletException;
 
 import com.dataClasses.Database;
-import com.dataClasses.Maybe;
 import com.dataClasses.ResultNotUnique;
 import com.manager.DefaultReportResults;
 import com.reports.ReportDate;
 
+/**
+ * @author Simon Langlois
+ */
 public abstract class ReportPageServlet extends ManagerPageServlet {
 	private static final long serialVersionUID = 1L;
 

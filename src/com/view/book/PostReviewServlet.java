@@ -10,14 +10,14 @@ import com.dataAccess.tables.Review;
 import com.dataAccess.tables.User;
 import com.dataClasses.Database;
 import com.dataClasses.Maybe;
-import com.servlets.Closures;
-import com.servlets.Conts;
-import com.servlets.MainPageServlet;
 import com.servlets.Parameters;
 import com.servlets.ProcessingError;
 import com.servlets.ProcessingServlet;
 import com.servlets.Session;
 
+/**
+ * @author Simon Langlois
+ */
 public class PostReviewServlet extends ProcessingServlet {
 	private static final long serialVersionUID = 1L;
 

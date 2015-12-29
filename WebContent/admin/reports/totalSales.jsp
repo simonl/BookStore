@@ -3,6 +3,12 @@
  <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
  <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
+<%-- **************************************** --%>
+<%-- *                                      * --%>
+<%-- * Author: Simon Langlois               * --%>
+<%-- *                                      * --%>
+<%-- **************************************** --%>
+
 	<h3>Total sales: <b>$<fmt:formatNumber value="${totalSalesWithinTimeLimitResult}" minFractionDigits="2" maxFractionDigits="2" /></b></h3>
 	<table border="1" style="width: 100%;" >
 		<tr>

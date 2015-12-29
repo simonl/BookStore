@@ -20,9 +20,12 @@ import com.dataClasses.Maybe;
  *   - logged on user
  *   - survey answered
  *   - cookies stored by the client
+ *   - if the user is on a mobile device
  * 
  * This class is complicated by the CookieManager that intercepts cookies that are added to the session.
  *   It is necessary to distinguish the new from the old cookies later.
+ * 
+ * @author Simon Langlois
  */
 public class Session {
 

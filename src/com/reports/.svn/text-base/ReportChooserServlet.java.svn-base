@@ -5,6 +5,7 @@ import java.sql.SQLException;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
+
 import com.dataClasses.Database;
 import com.dataClasses.Database.Manager;
 import com.dataClasses.Maybe;
@@ -16,7 +17,7 @@ import com.servlets.Parameters;
 import com.servlets.Session;
 
 /**
- * Servlet implementation class ReportChooserServlet
+ * @author Edward Gagnon
  */
 public class ReportChooserServlet extends ManagerPageServlet {
 	private static final long serialVersionUID = 1L;
